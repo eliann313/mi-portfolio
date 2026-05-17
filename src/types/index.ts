@@ -30,6 +30,7 @@ export interface Skill {
 export interface SkillCategory {
   category: Record<Locale, string>;
   skills: Skill[];
+  description?: Record<Locale, string>;
 }
 
 export interface EducationEntry {

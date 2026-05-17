@@ -2,7 +2,7 @@ import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
   {
-    category: { es: 'Stack Principal (Backend & Data) 🚀', en: 'Core Stack (Backend & Data) 🚀' },
+    category: { es: 'Stack Principal (Backend & Data)', en: 'Core Stack (Backend & Data)' },
     skills: [
       { name: 'Python',     icon: 'devicon-python-plain colored' },
       { name: 'FastAPI',    icon: 'devicon-fastapi-plain colored' },
@@ -13,7 +13,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    category: { es: 'Ecosistema & Frontend 💻', en: 'Ecosystem & Frontend 💻' },
+    category: { es: 'Ecosistema & Frontend', en: 'Ecosystem & Frontend' },
     skills: [
       { name: 'React',      icon: 'devicon-react-original colored' },
       { name: 'Angular',    icon: 'devicon-angularjs-plain colored' },
@@ -25,7 +25,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    category: { es: 'Herramientas, ORMs & DevOps 🛠️', en: 'Tools, ORMs & DevOps 🛠️' },
+    category: { es: 'Herramientas, DevOps & Fundamentos', en: 'Tools, DevOps & Fundamentals' },
     skills: [
       { name: 'Docker',     icon: 'devicon-docker-plain colored' },
       { name: 'Git',        icon: 'devicon-git-plain colored' },
@@ -38,5 +38,9 @@ export const skillCategories: SkillCategory[] = [
       { name: 'C#',         icon: 'devicon-csharp-plain colored' },
       { name: 'CI/CD',      icon: undefined },
     ],
+    description: {
+      es: 'C# enfocado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
+      en: 'C# focused on theoretical bases: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
+    }
   },
 ];

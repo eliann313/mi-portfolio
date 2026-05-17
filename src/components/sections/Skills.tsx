@@ -60,6 +60,11 @@ export function Skills() {
                   </span>
                 ))}
               </div>
+              {cat.description && (
+                <p className="text-[10px] mt-4 font-mono leading-relaxed" style={{ color: c.textMuted }}>
+                  * {cat.description[locale as Locale]}
+                </p>
+              )}
             </motion.div>
           ))}
         </div>
