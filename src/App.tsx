@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
@@ -25,6 +26,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <Analytics />
         <SpeedInsights />
       </LanguageProvider>
     </ThemeProvider>
