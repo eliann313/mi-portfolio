@@ -107,10 +107,10 @@ export function Projects() {
                 </div>
 
                 {/* Roles */}
-                {project.roles.length > 0 && (
+                {project.roles[locale as Locale] && project.roles[locale as Locale].length > 0 && (
                   <p className="text-xs mb-4" style={{ color: c.textMuted }}>
                     <span className="font-medium">{t.projects.role}:</span>{' '}
-                    {project.roles.join(' · ')}
+                    {project.roles[locale as Locale].join(' · ')}
                   </p>
                 )}
 

@@ -14,7 +14,7 @@ export interface Project {
   description: Record<Locale, string>;
   contributions: Record<Locale, string[]>;
   stack: string[];
-  roles: string[];
+  roles: Record<Locale, string[]>;
   links: {
     demo?: string;
     repo?: string;

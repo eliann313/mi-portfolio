@@ -27,7 +27,10 @@ export const projects: Project[] = [
       ],
     },
     stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'React', 'TypeScript', 'SQLite'],
-    roles: ['Backend', 'Architecture', 'Frontend'],
+    roles: {
+      es: ['Backend', 'Arquitectura', 'Frontend'],
+      en: ['Backend', 'Architecture', 'Frontend'],
+    },
     links: {
       repo: '#', // TODO: agregar URL de repo
     },
@@ -58,7 +61,10 @@ export const projects: Project[] = [
       ],
     },
     stack: ['JavaScript', 'TypeScript', 'Angular', 'Node.js', 'Express', 'MongoDB', 'Gemini API'],
-    roles: ['Backend', 'Frontend', 'AI Integration'],
+    roles: {
+      es: ['Backend', 'Frontend', 'Integración de IA'],
+      en: ['Backend', 'Frontend', 'AI Integration'],
+    },
     links: {
       demo: 'https://pochocleando.com',
     },
@@ -87,7 +93,10 @@ export const projects: Project[] = [
       ],
     },
     stack: ['TypeScript', 'Angular', 'Ionic', 'Firebase', 'HTML', 'CSS'],
-    roles: ['Frontend', 'Mobile', 'API Integration'],
+    roles: {
+      es: ['Frontend', 'Mobile', 'Integración de APIs'],
+      en: ['Frontend', 'Mobile', 'API Integration'],
+    },
     links: {
       repo: '#', // TODO: agregar URL de repo
     },
