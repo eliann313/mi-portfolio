@@ -53,6 +53,6 @@ export const es: Translations = {
   },
   footer: {
     rights: 'Todos los derechos reservados.',
-    madeWith: 'Hecho con React & Tailwind',
+    madeWith: 'Construido con React, Vite y Tailwind CSS.',
   },
 };

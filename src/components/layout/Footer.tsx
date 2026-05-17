@@ -13,9 +13,14 @@ export function Footer() {
   return (
     <footer className="w-full py-8 px-6" style={{ borderTop: `1px solid ${c.border}` }}>
       <div className="section-container flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-xs" style={{ color: c.textMuted }}>
-          © {year} Elian Nahuel · {t.footer.rights}
-        </p>
+        <div className="flex flex-col gap-1.5">
+          <p className="text-xs" style={{ color: c.textMuted }}>
+            © {year} Elian Nahuel · {t.footer.rights}
+          </p>
+          <p className="text-[11px]" style={{ color: c.textMuted, opacity: 0.75 }}>
+            {t.footer.madeWith}
+          </p>
+        </div>
         <div className="flex items-center gap-3">
           {[
             { href: personal.github,   icon: <Github size={16} />,   label: 'GitHub' },
