@@ -26,42 +26,44 @@ export function Skills() {
           <div className="section-divider" />
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((cat, catIdx) => (
             <motion.div
               key={catIdx}
               initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }}
               variants={fadeUp} custom={catIdx * 0.07}
-              className="rounded-xl p-5 border"
+              className="rounded-xl p-6 border flex flex-col justify-between"
               style={{ backgroundColor: c.bgElevated, borderColor: c.border }}
             >
-              <h3 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: c.accent }}>
-                {cat.category[locale as Locale]}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <span
-                    key={skill.name}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-mono font-medium"
-                    style={{ backgroundColor: c.bgBase, borderColor: c.border, color: c.textSecondary }}
-                  >
-                    {skill.icon && (
-                      <i
-                        className={`${skill.icon} text-base leading-none`}
-                        aria-hidden="true"
-                        style={
-                          theme === 'dark' && (skill.name === 'SQLAlchemy' || skill.name === 'Linux')
-                            ? { filter: 'invert(1) brightness(1.6)' }
-                            : undefined
-                        }
-                      />
-                    )}
-                    {skill.name}
-                  </span>
-                ))}
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider mb-5" style={{ color: c.accent }}>
+                  {cat.category[locale as Locale]}
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {cat.skills.map((skill) => (
+                    <span
+                      key={skill.name}
+                      className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg border text-[13px] font-mono font-medium transition-transform duration-200 hover:scale-[1.03]"
+                      style={{ backgroundColor: c.bgBase, borderColor: c.border, color: c.textSecondary }}
+                    >
+                      {skill.icon && (
+                        <i
+                          className={`${skill.icon} text-[16px] leading-none`}
+                          aria-hidden="true"
+                          style={
+                            theme === 'dark' && (skill.name === 'SQLAlchemy' || skill.name === 'Linux')
+                              ? { filter: 'invert(1) brightness(1.6)' }
+                              : undefined
+                          }
+                        />
+                      )}
+                      {skill.name}
+                    </span>
+                  ))}
+                </div>
               </div>
               {cat.description && (
-                <p className="text-[10px] mt-4 font-mono leading-relaxed" style={{ color: c.textMuted }}>
+                <p className="text-[11px] mt-6 font-mono leading-relaxed opacity-80" style={{ color: c.textMuted }}>
                   * {cat.description[locale as Locale]}
                 </p>
               )}
