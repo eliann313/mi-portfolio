@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Navbar } from './components/layout/Navbar';
@@ -24,6 +25,7 @@ function App() {
           <Contact />
         </main>
         <Footer />
+        <SpeedInsights />
       </LanguageProvider>
     </ThemeProvider>
   );
