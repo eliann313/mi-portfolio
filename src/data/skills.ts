@@ -1,16 +1,21 @@
+import {
+  SiPython, SiFastapi, SiNodedotjs, SiPostgresql, SiMongodb, SiSqlite, SiSharp,
+  SiReact, SiAngular, SiIonic, SiTypescript, SiJavascript, SiHtml5, SiCss,
+  SiDocker, SiGit, SiGithub, SiLinux, SiSqlalchemy, SiMongoose, SiExpress
+} from 'react-icons/si';
 import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
   {
     category: { es: 'Stack Principal (Backend & Data)', en: 'Core Stack (Backend & Data)' },
     skills: [
-      { name: 'Python',     icon: 'devicon-python-plain colored' },
-      { name: 'FastAPI',    icon: 'devicon-fastapi-plain colored' },
-      { name: 'Node.js',    icon: 'devicon-nodejs-plain colored' },
-      { name: 'PostgreSQL', icon: 'devicon-postgresql-plain colored' },
-      { name: 'MongoDB',    icon: 'devicon-mongodb-plain colored' },
-      { name: 'SQLite',     icon: 'devicon-sqlite-plain colored' },
-      { name: 'C#',         icon: 'devicon-csharp-plain colored' },
+      { name: 'Python',     icon: SiPython },
+      { name: 'FastAPI',    icon: SiFastapi },
+      { name: 'Node.js',    icon: SiNodedotjs },
+      { name: 'PostgreSQL', icon: SiPostgresql },
+      { name: 'MongoDB',    icon: SiMongodb },
+      { name: 'SQLite',     icon: SiSqlite },
+      { name: 'C#',         icon: SiSharp },
     ],
     description: {
       es: 'C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
@@ -20,26 +25,26 @@ export const skillCategories: SkillCategory[] = [
   {
     category: { es: 'Ecosistema & Frontend', en: 'Ecosystem & Frontend' },
     skills: [
-      { name: 'React',      icon: 'devicon-react-original colored' },
-      { name: 'Angular',    icon: 'devicon-angularjs-plain colored' },
-      { name: 'Ionic',      icon: 'devicon-ionic-original colored' },
-      { name: 'TypeScript', icon: 'devicon-typescript-plain colored' },
-      { name: 'JavaScript', icon: 'devicon-javascript-plain colored' },
-      { name: 'HTML',       icon: 'devicon-html5-plain colored' },
-      { name: 'CSS',        icon: 'devicon-css3-plain colored' },
+      { name: 'React',      icon: SiReact },
+      { name: 'Angular',    icon: SiAngular },
+      { name: 'Ionic',      icon: SiIonic },
+      { name: 'TypeScript', icon: SiTypescript },
+      { name: 'JavaScript', icon: SiJavascript },
+      { name: 'HTML',       icon: SiHtml5 },
+      { name: 'CSS',        icon: SiCss },
     ],
   },
   {
     category: { es: 'Herramientas & DevOps', en: 'Tools & DevOps' },
     skills: [
-      { name: 'Docker',     icon: 'devicon-docker-plain colored' },
-      { name: 'Git',        icon: 'devicon-git-plain colored' },
-      { name: 'GitHub',     icon: 'devicon-github-original' },
-      { name: 'Linux',      icon: 'devicon-linux-plain' },
-      { name: 'SQLAlchemy', icon: 'devicon-sqlalchemy-plain' },
+      { name: 'Docker',     icon: SiDocker },
+      { name: 'Git',        icon: SiGit },
+      { name: 'GitHub',     icon: SiGithub },
+      { name: 'Linux',      icon: SiLinux },
+      { name: 'SQLAlchemy', icon: SiSqlalchemy },
       { name: 'Alembic',    icon: undefined },
-      { name: 'Mongoose',   icon: 'devicon-mongoose-original colored' },
-      { name: 'Express',    icon: 'devicon-express-original' },
+      { name: 'Mongoose',   icon: SiMongoose },
+      { name: 'Express',    icon: SiExpress },
       { name: 'CI/CD',      icon: undefined },
     ],
   },

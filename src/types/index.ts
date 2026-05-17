@@ -22,9 +22,11 @@ export interface Project {
   isPlaceholder?: boolean;
 }
 
+import type React from 'react';
+
 export interface Skill {
   name: string;
-  icon?: string;
+  icon?: React.ElementType;
 }
 
 export interface SkillCategory {

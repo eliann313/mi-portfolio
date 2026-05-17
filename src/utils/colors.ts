@@ -3,8 +3,8 @@
 export const colors = {
   dark: {
     textPrimary:   '#fafafa',
-    textSecondary: '#a1a1aa',
-    textMuted:     '#71717a',
+    textSecondary: '#d4d4d8',
+    textMuted:     '#a1a1aa',
     bgBase:        '#09090b',
     bgSurface:     '#18181b',
     bgElevated:    '#27272a',

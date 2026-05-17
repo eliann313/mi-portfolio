@@ -47,11 +47,11 @@ export function Skills() {
                       style={{ backgroundColor: c.bgBase, borderColor: c.border, color: c.textSecondary }}
                     >
                       {skill.icon && (
-                        <i
-                          className={`${skill.icon} text-[16px] leading-none`}
+                        <skill.icon
+                          className="text-[16px] leading-none"
                           aria-hidden="true"
                           style={
-                            theme === 'dark' && (skill.name === 'SQLAlchemy' || skill.name === 'Linux')
+                            theme === 'dark' && (skill.name === 'SQLAlchemy' || skill.name === 'Linux' || skill.name === 'GitHub' || skill.name === 'Express')
                               ? { filter: 'invert(1) brightness(1.6)' }
                               : undefined
                           }

@@ -157,6 +157,7 @@ export function Hero() {
             style={{
               borderLeft: `1px solid ${c.border}`,
               paddingLeft: '2rem',
+              minHeight: '260px',
             }}
           >
             <h2 className="section-title mb-3" style={{ color: c.textPrimary }}>
