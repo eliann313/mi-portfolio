@@ -10,7 +10,12 @@ export const skillCategories: SkillCategory[] = [
       { name: 'PostgreSQL', icon: 'devicon-postgresql-plain colored' },
       { name: 'MongoDB',    icon: 'devicon-mongodb-plain colored' },
       { name: 'SQLite',     icon: 'devicon-sqlite-plain colored' },
+      { name: 'C#',         icon: 'devicon-csharp-plain colored' },
     ],
+    description: {
+      es: 'C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
+      en: 'C# applied to theoretical bases: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
+    }
   },
   {
     category: { es: 'Ecosistema & Frontend', en: 'Ecosystem & Frontend' },
@@ -25,7 +30,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    category: { es: 'Herramientas, DevOps & Fundamentos', en: 'Tools, DevOps & Fundamentals' },
+    category: { es: 'Herramientas & DevOps', en: 'Tools & DevOps' },
     skills: [
       { name: 'Docker',     icon: 'devicon-docker-plain colored' },
       { name: 'Git',        icon: 'devicon-git-plain colored' },
@@ -35,12 +40,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Alembic',    icon: undefined },
       { name: 'Mongoose',   icon: 'devicon-mongoose-original colored' },
       { name: 'Express',    icon: 'devicon-express-original' },
-      { name: 'C#',         icon: 'devicon-csharp-plain colored' },
       { name: 'CI/CD',      icon: undefined },
     ],
-    description: {
-      es: 'C# enfocado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
-      en: 'C# focused on theoretical bases: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
-    }
   },
 ];
