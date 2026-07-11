@@ -1,7 +1,8 @@
 import {
   SiPython, SiFastapi, SiNodedotjs, SiPostgresql, SiMongodb, SiSqlite, SiSharp,
   SiReact, SiAngular, SiIonic, SiTypescript, SiJavascript, SiHtml5, SiCss,
-  SiDocker, SiGit, SiGithub, SiLinux, SiSqlalchemy, SiMongoose, SiExpress
+  SiDocker, SiGit, SiGithub, SiLinux, SiSqlalchemy, SiMongoose, SiExpress,
+  SiNextdotjs, SiVercel, SiPrisma
 } from 'react-icons/si';
 import type { SkillCategory } from '../types';
 
@@ -13,6 +14,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'FastAPI',    icon: SiFastapi },
       { name: 'Node.js',    icon: SiNodedotjs },
       { name: 'PostgreSQL', icon: SiPostgresql },
+      { name: 'Neon',       icon: SiPostgresql },
       { name: 'MongoDB',    icon: SiMongodb },
       { name: 'SQLite',     icon: SiSqlite },
       { name: 'C#',         icon: SiSharp },
@@ -26,6 +28,7 @@ export const skillCategories: SkillCategory[] = [
     category: { es: 'Ecosistema & Frontend', en: 'Ecosystem & Frontend' },
     skills: [
       { name: 'React',      icon: SiReact },
+      { name: 'Next.js',    icon: SiNextdotjs },
       { name: 'Angular',    icon: SiAngular },
       { name: 'Ionic',      icon: SiIonic },
       { name: 'TypeScript', icon: SiTypescript },
@@ -38,6 +41,8 @@ export const skillCategories: SkillCategory[] = [
     category: { es: 'Herramientas & DevOps', en: 'Tools & DevOps' },
     skills: [
       { name: 'Docker',     icon: SiDocker },
+      { name: 'Vercel',     icon: SiVercel },
+      { name: 'Prisma',     icon: SiPrisma },
       { name: 'Git',        icon: SiGit },
       { name: 'GitHub',     icon: SiGithub },
       { name: 'Linux',      icon: SiLinux },

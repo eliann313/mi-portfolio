@@ -2,6 +2,43 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'skillradar',
+    title: 'SkillRadar',
+    type: 'group',
+    status: 'completed',
+    description: {
+      es: 'Plataforma dual-role (developer/recruiter) enfocada en la privacidad, con flujo narrativo integrado de análisis de CV, emparejamiento laboral y entrevistas simuladas asistidas por IA.',
+      en: 'Privacy-first, dual-role (developer/recruiter) platform featuring an integrated narrative flow of CV analysis, job matching, and AI-assisted mock interviews.',
+    },
+    contributions: {
+      es: [
+        'Creador del proyecto, liderando el diseño completo y la implementación de la plataforma.',
+        'Diseño e implementación del flujo narrativo guiado: CV Analysis → Job Match → Mock Interview.',
+        'Desarrollo de Career Copilot, un chatbot inteligente con comportamiento y acceso adaptado según el rol de recruiter o developer.',
+        'Implementación de enrutamiento de IA multi-provider (Gemini como motor primario, Groq para chat ultra-rápido en tiempo real y OpenRouter como fallback de emergencia).',
+        'Configuración de pruebas de extremo a extremo (E2E) con Playwright e integración de CI/CD con GitHub Actions.',
+        'Arquitectura privacy-first con perfiles de candidatos completamente anónimos para garantizar privacidad.'
+      ],
+      en: [
+        'Project creator, leading the overall design and full-stack implementation of the platform.',
+        'Designed and implemented the integrated narrative flow: CV Analysis → Job Match → Mock Interview.',
+        'Developed Career Copilot, an intelligent chatbot with behavior and access tailored to recruiter and developer roles.',
+        'Implemented multi-provider AI routing (Gemini as primary engine, Groq for ultra-fast real-time chat, and OpenRouter as emergency fallback).',
+        'Configured end-to-end (E2E) testing with Playwright and integrated CI/CD workflows using GitHub Actions.',
+        'Privacy-first architecture featuring completely anonymous candidate profiles to guarantee user privacy.'
+      ]
+    },
+    stack: ['Next.js', 'TypeScript', 'Prisma', 'Neon', 'Tailwind CSS', 'Playwright', 'GitHub Actions'],
+    roles: {
+      es: ['Creador', 'Arquitecto de Software', 'Desarrollador Full Stack'],
+      en: ['Creator', 'Software Architect', 'Full Stack Developer']
+    },
+    links: {
+      demo: 'https://skillradar-app.vercel.app',
+      repo: 'https://github.com/eliann313/SkillRadar'
+    }
+  },
+  {
     id: 'gridhub-wms',
     title: 'GridHub WMS',
     type: 'group',
@@ -12,27 +49,27 @@ export const projects: Project[] = [
     },
     contributions: {
       es: [
-        'Diseño de arquitectura backend multi-tenant con aislamiento de datos por cliente',
-        'Modelado relacional y gestión de migraciones con Alembic',
-        'Definición de arquitectura por capas (Onion Architecture)',
-        'Desarrollo de módulos frontend en React (TSX) integrados al backend vía API REST',
-        'Trabajo colaborativo con Trello y metodologías ágiles',
+        'Diseño de arquitectura backend multi-tenant con aislamiento de datos por cliente y modelo relacional con Alembic.',
+        'Diseño e implementación del flujo de partial pick fulfillment: creación de tareas residuales en la misma orden, from_location_id nullable, soporte de available_quantity negativo e idempotency keys en Task y StockMovement.',
+        'Diseño e implementación del sistema de sincronización offline con cola de peticiones local (IndexedDB) y reconciliación de conflictos.',
+        'Diseño e implementación de la modularización del frontend (React 19) basada en Feature-based architecture y lazy loading.',
+        'Definición de arquitectura por capas (Onion Architecture) del backend y optimización de consultas complejas con SQLAlchemy.'
       ],
       en: [
-        'Designed multi-tenant backend architecture with per-client data isolation',
-        'Relational data modeling and migration management with Alembic',
-        'Defined layered architecture (Onion Architecture)',
-        'Developed frontend modules in React (TSX) integrated with the backend via REST API',
-        'Collaborative work with Trello and agile methodologies',
+        'Designed multi-tenant backend architecture with per-client data isolation and relational data modeling with Alembic.',
+        'Designed and implemented the partial pick fulfillment flow: residual task creation within the same order, nullable from_location_id, negative available_quantity support, and idempotency keys in Task and StockMovement.',
+        'Designed and implemented the offline synchronization system using local request queues (IndexedDB) and conflict reconciliation.',
+        'Designed and implemented the frontend modularization (React 19) using Feature-based architecture and lazy loading.',
+        'Defined backend layered architecture (Onion Architecture) and optimized complex queries using SQLAlchemy.'
       ],
     },
-    stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'React', 'TypeScript', 'SQLite'],
+    stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'SQLite'],
     roles: {
       es: ['Backend', 'Arquitectura', 'Frontend'],
-      en: ['Backend', 'Architecture', 'Frontend'],
+      en: ['Backend & Architecture', 'Frontend'],
     },
     links: {
-      repo: '#', // TODO: agregar URL de repo
+      repo: '#',
     },
   },
   {

@@ -20,7 +20,7 @@ export const es: Translations = {
   about: {
     title: 'Perfil Profesional',
     bio: 'Técnico Superior en Desarrollo de Software y actual estudiante de Licenciatura en Ciencia de Datos, con orientación principal en backend y modelado de datos. Experiencia desarrollando aplicaciones web y sistemas multi-tenant utilizando tecnologías como Python (FastAPI), Node.js, React, Angular, TypeScript y MongoDB. Interés en arquitectura de software, diseño de APIs, resolución de problemas y desarrollo de soluciones escalables con buenas prácticas.',
-    badges: ['Desarrollo Backend', 'Arquitectura de Software', 'Diseño de APIs', 'Ciencia de Datos', 'Sistemas Multi-tenant'],
+    badges: ['Desarrollo Backend', 'Arquitectura de Software', 'Diseño de APIs', 'Sistemas Multi-tenant', 'Integraciones de IA (LLMs)'],
   },
   skills: {
     title: 'Tecnologías',
