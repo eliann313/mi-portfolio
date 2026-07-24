@@ -4,7 +4,7 @@ export const projects: Project[] = [
   {
     id: 'skillradar',
     title: 'SkillRadar',
-    type: 'group',
+    type: 'individual',
     status: 'completed',
     description: {
       es: 'Plataforma dual-role (developer/recruiter) enfocada en la privacidad, con flujo narrativo integrado de análisis de CV, emparejamiento laboral y entrevistas simuladas asistidas por IA.',
@@ -50,6 +50,7 @@ export const projects: Project[] = [
     contributions: {
       es: [
         'Diseño de arquitectura backend multi-tenant con aislamiento de datos por cliente y modelo relacional con Alembic.',
+        'Diseño e implementación del módulo de Notificaciones de Alto Valor WMS (5 alertas RBAC, consolidación de expiraciones en lote) y sistema de Reporte de Incidencias con resiliencia offline (IndexedDB).',
         'Diseño e implementación del flujo de partial pick fulfillment: creación de tareas residuales en la misma orden, from_location_id nullable, soporte de available_quantity negativo e idempotency keys en Task y StockMovement.',
         'Diseño e implementación del sistema de sincronización offline con cola de peticiones local (IndexedDB) y reconciliación de conflictos.',
         'Diseño e implementación de la modularización del frontend (React 19) basada en Feature-based architecture y lazy loading.',
@@ -57,13 +58,14 @@ export const projects: Project[] = [
       ],
       en: [
         'Designed multi-tenant backend architecture with per-client data isolation and relational data modeling with Alembic.',
+        'Designed and implemented the high-value WMS Notifications module (5 RBAC alert types, batch expiration consolidation) and Incident Reporting system with offline resilience (IndexedDB).',
         'Designed and implemented the partial pick fulfillment flow: residual task creation within the same order, nullable from_location_id, negative available_quantity support, and idempotency keys in Task and StockMovement.',
         'Designed and implemented the offline synchronization system using local request queues (IndexedDB) and conflict reconciliation.',
         'Designed and implemented the frontend modularization (React 19) using Feature-based architecture and lazy loading.',
         'Defined backend layered architecture (Onion Architecture) and optimized complex queries using SQLAlchemy.'
       ],
     },
-    stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'SQLite'],
+    stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'IndexedDB', 'SQLite'],
     roles: {
       es: ['Backend', 'Arquitectura', 'Frontend'],
       en: ['Backend & Architecture', 'Frontend'],
