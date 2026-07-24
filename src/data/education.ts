@@ -35,6 +35,7 @@ export const spokenLanguages: Language[] = [
   {
     language: { es: 'Inglés', en: 'English' },
     level: { es: 'Intermedio', en: 'Intermediate' },
+    cefr: 'A2-B1',
     detail: {
       es: 'Lectura técnica fluida y comunicación escrita básica',
       en: 'Fluent technical reading and basic written communication',

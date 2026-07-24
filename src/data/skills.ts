@@ -1,9 +1,10 @@
 import {
-  SiPython, SiFastapi, SiNodedotjs, SiPostgresql, SiMongodb, SiSqlite, SiSharp,
+  SiPython, SiFastapi, SiNodedotjs, SiPostgresql, SiMongodb, SiSqlite,
   SiReact, SiAngular, SiIonic, SiTypescript, SiJavascript, SiHtml5, SiCss,
   SiDocker, SiGit, SiGithub, SiLinux, SiSqlalchemy, SiMongoose, SiExpress,
-  SiNextdotjs, SiVercel, SiPrisma
+  SiNextdotjs, SiVercel, SiPrisma, SiGithubactions, SiPytest, SiVitest
 } from 'react-icons/si';
+import { TbBrandCSharp } from 'react-icons/tb';
 import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
@@ -17,7 +18,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Neon',       icon: SiPostgresql },
       { name: 'MongoDB',    icon: SiMongodb },
       { name: 'SQLite',     icon: SiSqlite },
-      { name: 'C#',         icon: SiSharp },
+      { name: 'C#',         icon: TbBrandCSharp },
     ],
     description: {
       es: 'C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
@@ -50,7 +51,10 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Alembic',    icon: undefined },
       { name: 'Mongoose',   icon: SiMongoose },
       { name: 'Express',    icon: SiExpress },
-      { name: 'CI/CD',      icon: undefined },
+      { name: 'Playwright', icon: undefined },
+      { name: 'Pytest',     icon: SiPytest },
+      { name: 'Vitest',     icon: SiVitest },
+      { name: 'CI/CD',      icon: SiGithubactions },
     ],
   },
 ];
