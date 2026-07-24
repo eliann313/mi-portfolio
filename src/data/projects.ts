@@ -15,7 +15,7 @@ export const projects: Project[] = [
         'Creador del proyecto, liderando el diseño completo y la implementación de la plataforma.',
         'Diseño e implementación del flujo narrativo guiado: CV Analysis → Job Match → Mock Interview.',
         'Desarrollo de Career Copilot, un chatbot inteligente con comportamiento y acceso adaptado según el rol de recruiter o developer.',
-        'Implementación de enrutamiento de IA multi-provider (Gemini como motor primario, Groq para chat ultra-rápido en tiempo real y OpenRouter como fallback de emergencia).',
+        'Implementación de enrutamiento de IA multi-provider (Gemini 2.5 Flash como motor primario del sistema y soporte BYOK para OpenAI, Anthropic Claude, Groq y OpenRouter con fallback automático en cascada).',
         'Configuración de pruebas de extremo a extremo (E2E) con Playwright e integración de CI/CD con GitHub Actions.',
         'Arquitectura privacy-first con perfiles de candidatos completamente anónimos para garantizar privacidad.'
       ],
@@ -23,7 +23,7 @@ export const projects: Project[] = [
         'Project creator, leading the overall design and full-stack implementation of the platform.',
         'Designed and implemented the integrated narrative flow: CV Analysis → Job Match → Mock Interview.',
         'Developed Career Copilot, an intelligent chatbot with behavior and access tailored to recruiter and developer roles.',
-        'Implemented multi-provider AI routing (Gemini as primary engine, Groq for ultra-fast real-time chat, and OpenRouter as emergency fallback).',
+        'Implemented multi-provider AI routing (Gemini 2.5 Flash as primary system engine, and BYOK support for OpenAI, Anthropic Claude, Groq, and OpenRouter with automatic cascading fallback).',
         'Configured end-to-end (E2E) testing with Playwright and integrated CI/CD workflows using GitHub Actions.',
         'Privacy-first architecture featuring completely anonymous candidate profiles to guarantee user privacy.'
       ]
