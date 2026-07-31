@@ -85,6 +85,58 @@ export const caseStudies: Record<string, CaseStudy> = {
         { from: 'auth', to: 'db', label: 'Prisma ORM Queries' },
       ],
     },
+    screenshots: [
+      {
+        url: '/projects/skillradar/1.png',
+        title: { es: 'Dashboard & Contacto Doble Ciego', en: 'Dashboard & Double-Blind Contact' },
+        caption: { es: 'Solicitudes de reclutadores con perfil anónimo y aceptación condicional.', en: 'Recruiter requests with anonymous profiles and conditional acceptance.' },
+      },
+      {
+        url: '/projects/skillradar/2.png',
+        title: { es: 'Métricas & Score ATS (100/100)', en: 'ATS Score & Metrics Dashboard' },
+        caption: { es: 'Analizador de puntuación ATS, afinidad de empleo y límites de cuota.', en: 'ATS score analyzer, job match affinity, and monthly quota limits.' },
+      },
+      {
+        url: '/projects/skillradar/3.png',
+        title: { es: 'Simulador de Entrevistas Asistidas por IA', en: 'AI Interview Simulator' },
+        caption: { es: 'Práctica interactiva en 3 modos: Estándar, Presión y Reclutador.', en: 'Interactive practice in 3 modes: Standard, Pressure, and Recruiter.' },
+      },
+      {
+        url: '/projects/skillradar/4.png',
+        title: { es: 'Career Copilot Conversacional', en: 'Career Copilot AI Chatbot' },
+        caption: { es: 'Chatbot de orientación profesional con selector de modelo LLM.', en: 'Career guidance chatbot featuring LLM model selection.' },
+      },
+      {
+        url: '/projects/skillradar/5.png',
+        title: { es: 'Auditoría & Análisis de GitHub', en: 'GitHub Profile & Code Auditor' },
+        caption: { es: 'Evaluación automatizada de fortalezas, áreas de mejora y lenguajes.', en: 'Automated evaluation of strengths, opportunities, and languages.' },
+      },
+      {
+        url: '/projects/skillradar/6.png',
+        title: { es: 'Creador de CV & Previsualizador ATS A4', en: 'CV Builder & ATS A4 Preview' },
+        caption: { es: 'Editor estructurado de currículum con análisis de verbos de impacto.', en: 'Structured resume editor with impact verb evaluation.' },
+      },
+      {
+        url: '/projects/skillradar/7.png',
+        title: { es: 'Auditor de Perfil de LinkedIn', en: 'LinkedIn Profile Auditor' },
+        caption: { es: 'Evaluación de SEO y visibilidad para reclutadores técnicos.', en: 'SEO and recruiter visibility evaluation for LinkedIn profiles.' },
+      },
+      {
+        url: '/projects/skillradar/8.png',
+        title: { es: 'Talent Pool & Búsqueda Semántica', en: 'Talent Pool & Semantic Sourcing' },
+        caption: { es: 'Herramienta de Reverse Job-Matching e IA sourcing para reclutadores.', en: 'Reverse Job-Matching tool and AI sourcing suite for recruiters.' },
+      },
+      {
+        url: '/projects/skillradar/9.png',
+        title: { es: 'Gestión de Vacantes de Empleo', en: 'Recruiter Jobs Dashboard' },
+        caption: { es: 'Panel para la publicación y administración de ofertas laborales.', en: 'Dashboard for creating and managing technical job postings.' },
+      },
+      {
+        url: '/projects/skillradar/10.png',
+        title: { es: 'Configuración de IA & BYOK (Cifrado AES-256)', en: 'AI BYOK Configuration (AES-256 Encryption)' },
+        caption: { es: 'Almacenamiento seguro de API keys personales y selección de inferencia.', en: 'Secure personal API key storage and preferred inference provider selection.' },
+      },
+    ],
   },
 
   'gridhub-wms': {
@@ -259,6 +311,33 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
       ],
     },
+    screenshots: [
+      {
+        url: '/projects/pochocleando/1.png',
+        title: { es: 'Versión Móvil & Flotante Pochi', en: 'Mobile Version & Floating Pochi' },
+        caption: { es: 'Diseño responsive adaptado a pantallas pequeñas con acceso rápido al bot.', en: 'Responsive design for mobile screens with floating bot access.' },
+      },
+      {
+        url: '/projects/pochocleando/2.png',
+        title: { es: 'Disponibilidad en Streaming', en: 'Streaming Platform Availability' },
+        caption: { es: 'Consulta de plataformas donde ver el título en Argentina (HBO Max).', en: 'Checking streaming availability in Argentina (HBO Max).' },
+      },
+      {
+        url: '/projects/pochocleando/3.png',
+        title: { es: 'Vista de Escritorio & Filtros', en: 'Desktop View & Category Filters' },
+        caption: { es: 'Navegación completa por categorías de películas y series.', en: 'Full navigation through movie and series categories.' },
+      },
+      {
+        url: '/projects/pochocleando/4.png',
+        title: { es: 'Perfil de Usuario & Favoritos', en: 'User Profile & Favorite Lists' },
+        caption: { es: 'Panel de control de listas guardadas e historial personal.', en: 'Control panel for saved lists and personal history.' },
+      },
+      {
+        url: '/projects/pochocleando/5.png',
+        title: { es: 'Footer Académico & Integración TMDB', en: 'Academic Footer & TMDB Integration' },
+        caption: { es: 'Créditos del desarrollo académico para el IFTS 11.', en: 'Academic development credits for IFTS N°11.' },
+      },
+    ],
   },
 
   pokeapp: {
@@ -316,5 +395,32 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
       ],
     },
+    screenshots: [
+      {
+        url: '/projects/pokeapp/1.png',
+        title: { es: 'Autenticación con Firebase Auth', en: 'Firebase Auth Flow' },
+        caption: { es: 'Vistas móviles de Iniciar Sesión, Registro y Recuperación de Contraseña.', en: 'Mobile views for Login, Registration, and Password Reset.' },
+      },
+      {
+        url: '/projects/pokeapp/2.png',
+        title: { es: 'Pokédex & Stats de Pikachu', en: 'Pokédex & Pikachu Base Stats' },
+        caption: { es: 'Estadísticas de combate, cálculo de debilidad ante Tierra y botón de descargar ficha.', en: 'Battle stats, Ground weakness calculation, and download card feature.' },
+      },
+      {
+        url: '/projects/pokeapp/3.png',
+        title: { es: 'Ficha de Entrenador Personalizable', en: 'Customizable Trainer Profile' },
+        caption: { es: 'Vista de perfil de Ash Ketchum con Nivel y Región Kanto.', en: 'Profile view for Ash Ketchum featuring Level and Kanto Region.' },
+      },
+      {
+        url: '/projects/pokeapp/4.png',
+        title: { es: 'Selector de Avatares / Sprites Clásicos', en: 'Classic Sprite Avatar Selector' },
+        caption: { es: 'Modal para seleccionar entrenadores clásicos (Brock, Misty, Blue, Oak).', en: 'Modal for selecting classic trainer avatars (Brock, Misty, Blue, Oak).' },
+      },
+      {
+        url: '/projects/pokeapp/5.png',
+        title: { es: 'Lista de Favoritos', en: 'User Favorite List' },
+        caption: { es: 'Gestión de Pokémon guardados en la cuenta de usuario.', en: 'Management of saved Pokémon under the user account.' },
+      },
+    ],
   },
 };

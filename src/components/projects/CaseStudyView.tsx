@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, CheckCircle2, AlertTriangle, Layers } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, ExternalLink, Github, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import { caseStudies } from '../../data/caseStudies';
@@ -15,6 +16,8 @@ export function CaseStudyView() {
   const { theme } = useTheme();
   const { locale, t } = useLanguage();
   const c = colors[theme];
+
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
   const study = slug ? caseStudies[slug] : undefined;
   const project = slug ? projects.find(p => p.id === slug) : undefined;
@@ -123,14 +126,92 @@ export function CaseStudyView() {
           </ul>
         </section>
 
-        {/* 3. Architecture C4 Diagram (if present) */}
+        {/* 3. Screenshots Gallery (if present) */}
+        {study.screenshots && study.screenshots.length > 0 && (
+          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+              <ImageIcon size={18} style={{ color: c.accent }} />
+              {t.caseStudy.galleryTitle}
+            </h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {study.screenshots.map((shot, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => setActiveImageIndex(idx)}
+                  className="rounded-lg overflow-hidden border cursor-pointer group flex flex-col justify-between transition-all hover:scale-[1.01]"
+                  style={{ backgroundColor: c.bgElevated, borderColor: c.border }}
+                >
+                  <div className="overflow-hidden bg-black flex items-center justify-center min-h-[180px] max-h-[240px]">
+                    <img
+                      src={shot.url}
+                      alt={shot.title[locale as Locale]}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-3">
+                    <h4 className="font-semibold text-xs mb-1" style={{ color: c.textPrimary }}>
+                      {shot.title[locale as Locale]}
+                    </h4>
+                    <p className="text-[11px] leading-tight" style={{ color: c.textMuted }}>
+                      {shot.caption[locale as Locale]}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Lightbox Modal */}
+        <AnimatePresence>
+          {activeImageIndex !== null && study.screenshots && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveImageIndex(null)}
+              className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm p-4 flex flex-col items-center justify-center cursor-pointer"
+            >
+              <button
+                onClick={() => setActiveImageIndex(null)}
+                className="absolute top-6 right-6 p-2 rounded-full border text-white hover:bg-white/10"
+                style={{ borderColor: 'rgba(255,255,255,0.2)' }}
+              >
+                <X size={20} />
+              </button>
+
+              <div
+                onClick={e => e.stopPropagation()}
+                className="max-w-4xl max-h-[85vh] flex flex-col items-center cursor-default"
+              >
+                <img
+                  src={study.screenshots[activeImageIndex].url}
+                  alt={study.screenshots[activeImageIndex].title[locale as Locale]}
+                  className="max-w-full max-h-[70vh] object-contain rounded-lg border shadow-2xl"
+                  style={{ borderColor: c.border }}
+                />
+                <div className="mt-4 text-center">
+                  <h4 className="text-base font-bold text-white mb-1">
+                    {study.screenshots[activeImageIndex].title[locale as Locale]}
+                  </h4>
+                  <p className="text-xs text-gray-300">
+                    {study.screenshots[activeImageIndex].caption[locale as Locale]}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* 4. Architecture C4 Diagram (if present) */}
         {study.c4Diagram && (
           <section className="mb-10">
             <ArchitectureDiagram diagram={study.c4Diagram} />
           </section>
         )}
 
-        {/* 4. Architecture Highlights */}
+        {/* 5. Architecture Highlights */}
         <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
           <h3 className="font-bold text-lg mb-4" style={{ color: c.textPrimary }}>
             {t.caseStudy.architectureTitle}
@@ -145,7 +226,7 @@ export function CaseStudyView() {
           </ul>
         </section>
 
-        {/* 5. Technical Challenges */}
+        {/* 6. Technical Challenges */}
         {challenges.length > 0 && (
           <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
@@ -173,7 +254,7 @@ export function CaseStudyView() {
           </section>
         )}
 
-        {/* 6. Video Demo (Pochocleando) */}
+        {/* 7. Video Demo (Pochocleando) */}
         {study.videoData && (
           <section className="mb-10">
             <VideoTimestampPlayer src={study.videoData.src} timestamps={study.videoData.timestamps} />
