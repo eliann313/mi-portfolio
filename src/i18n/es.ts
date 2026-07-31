@@ -10,7 +10,7 @@ export const es: Translations = {
     contact: 'Contacto',
   },
   hero: {
-    role: 'Desarrollador Full Stack · Backend y Arquitectura',
+    role: 'Desarrollador Full Stack · Backend',
     subtitle: 'Tec. Superior en Desarrollo de Software · Lic. en Ciencia de Datos (en curso)',
     location: 'Buenos Aires, Argentina',
     downloadCV: 'Descargar CV',
@@ -19,8 +19,8 @@ export const es: Translations = {
   },
   about: {
     title: 'Perfil Profesional',
-    bio: 'Técnico Superior en Desarrollo de Software y actual estudiante de Licenciatura en Ciencia de Datos, con orientación principal en backend y modelado de datos. Experiencia desarrollando aplicaciones web y sistemas multi-tenant utilizando tecnologías como Python (FastAPI), Node.js, React, Angular, TypeScript y MongoDB. Interés en arquitectura de software, diseño de APIs, resolución de problemas y desarrollo de soluciones escalables con buenas prácticas.',
-    badges: ['Desarrollo Backend', 'Arquitectura de Software', 'Diseño de APIs', 'Sistemas Multi-tenant', 'Integraciones de IA (LLMs)'],
+    bio: 'Técnico Superior en Desarrollo de Software y actual estudiante de Licenciatura en Ciencia de Datos, con orientación principal en backend y modelado de datos. Experiencia trabajando en sistemas multi-tenant, sincronización de datos y productos SaaS con integración de IA, utilizando Python (FastAPI), Node.js, Next.js, React y TypeScript. Con foco en diseño de APIs, resolución de problemas y desarrollo de soluciones escalables con buenas prácticas.',
+    badges: ['Desarrollo Backend', 'Modelado de Datos', 'Diseño de APIs', 'Sistemas Multi-tenant', 'Integraciones de IA (LLMs)'],
   },
   skills: {
     title: 'Tecnologías',
@@ -36,7 +36,20 @@ export const es: Translations = {
     comingSoonDesc: 'Proyecto individual en desarrollo. Pronto más detalles.',
     viewDemo: 'Ver demo',
     viewRepo: 'Repositorio',
+    viewCaseStudy: 'Ver Case Study & Detalles',
     role: 'Rol',
+  },
+  caseStudy: {
+    backToProjects: '← Volver a Proyectos',
+    overviewTitle: 'Resumen del Proyecto',
+    myRoleTitle: 'Mi Rol & Aportes Clave',
+    architectureTitle: 'Arquitectura & Diseño de Sistema',
+    technicalChallengesTitle: 'Desafíos Técnicos & Soluciones',
+    videoDemoTitle: 'Demo Interactiva de Video',
+    galleryTitle: 'Galería de Interfaz & Capturas',
+    timestampsTitle: 'Capítulos & Puntos Clave del Video',
+    problemLabel: 'Desafío / Problema:',
+    solutionLabel: 'Solución Técnica Implementada:',
   },
   education: {
     title: 'Educación',

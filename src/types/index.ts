@@ -22,6 +22,38 @@ export interface Project {
   isPlaceholder?: boolean;
 }
 
+export interface VideoTimestamp {
+  seconds: number;
+  timeLabel: string;
+  title: Record<Locale, string>;
+  description: Record<Locale, string>;
+}
+
+export interface CaseStudy {
+  id: string;
+  projectTitle: string;
+  badge: Record<Locale, string>;
+  subtitle: Record<Locale, string>;
+  overview: Record<Locale, string>;
+  architectureHighlights: Record<Locale, string[]>;
+  myRoleDetailed: Record<Locale, string[]>;
+  technicalChallenges: Record<Locale, { problem: string; solution: string }[]>;
+  c4Diagram?: {
+    title: Record<Locale, string>;
+    nodes: { id: string; label: string; desc: string; type: 'client' | 'api' | 'db' | 'service' }[];
+    connections: { from: string; to: string; label: string }[];
+  };
+  videoData?: {
+    src: string;
+    timestamps: VideoTimestamp[];
+  };
+  screenshots?: {
+    url: string;
+    title: Record<Locale, string>;
+    caption: Record<Locale, string>;
+  }[];
+}
+
 import type React from 'react';
 
 export interface Skill {
@@ -88,7 +120,20 @@ export interface Translations {
     comingSoonDesc: string;
     viewDemo: string;
     viewRepo: string;
+    viewCaseStudy: string;
     role: string;
+  };
+  caseStudy: {
+    backToProjects: string;
+    overviewTitle: string;
+    myRoleTitle: string;
+    architectureTitle: string;
+    technicalChallengesTitle: string;
+    videoDemoTitle: string;
+    galleryTitle: string;
+    timestampsTitle: string;
+    problemLabel: string;
+    solutionLabel: string;
   };
   education: {
     title: string;

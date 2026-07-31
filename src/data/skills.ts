@@ -14,47 +14,53 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Python',     icon: SiPython },
       { name: 'FastAPI',    icon: SiFastapi },
       { name: 'Node.js',    icon: SiNodedotjs },
+      { name: 'TypeScript', icon: SiTypescript },
       { name: 'PostgreSQL', icon: SiPostgresql },
       { name: 'Neon',       icon: SiPostgresql },
       { name: 'MongoDB',    icon: SiMongodb },
       { name: 'SQLite',     icon: SiSqlite },
-      { name: 'C#',         icon: TbBrandCSharp },
     ],
-    description: {
-      es: 'C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
-      en: 'C# applied to theoretical bases: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
-    }
   },
   {
-    category: { es: 'Ecosistema & Frontend', en: 'Ecosystem & Frontend' },
+    category: { es: 'Frontend & Mobile', en: 'Frontend & Mobile' },
     skills: [
       { name: 'React',      icon: SiReact },
       { name: 'Next.js',    icon: SiNextdotjs },
-      { name: 'Angular',    icon: SiAngular },
-      { name: 'Ionic',      icon: SiIonic },
       { name: 'TypeScript', icon: SiTypescript },
       { name: 'JavaScript', icon: SiJavascript },
-      { name: 'HTML',       icon: SiHtml5 },
-      { name: 'CSS',        icon: SiCss },
+      { name: 'Angular',    icon: SiAngular },
+      { name: 'Ionic',      icon: SiIonic },
+      { name: 'HTML5',      icon: SiHtml5 },
+      { name: 'CSS3',       icon: SiCss },
     ],
   },
   {
-    category: { es: 'Herramientas & DevOps', en: 'Tools & DevOps' },
+    category: { es: 'ORM, Testing & DevOps', en: 'ORM, Testing & DevOps' },
     skills: [
-      { name: 'Docker',     icon: SiDocker },
-      { name: 'Vercel',     icon: SiVercel },
       { name: 'Prisma',     icon: SiPrisma },
-      { name: 'Git',        icon: SiGit },
-      { name: 'GitHub',     icon: SiGithub },
-      { name: 'Linux',      icon: SiLinux },
       { name: 'SQLAlchemy', icon: SiSqlalchemy },
       { name: 'Alembic',    icon: undefined },
       { name: 'Mongoose',   icon: SiMongoose },
       { name: 'Express',    icon: SiExpress },
+      { name: 'Docker',     icon: SiDocker },
       { name: 'Playwright', icon: undefined },
-      { name: 'Pytest',     icon: SiPytest },
       { name: 'Vitest',     icon: SiVitest },
+      { name: 'Pytest',     icon: SiPytest },
+      { name: 'Git',        icon: SiGit },
+      { name: 'GitHub',     icon: SiGithub },
       { name: 'CI/CD',      icon: SiGithubactions },
+      { name: 'Vercel',     icon: SiVercel },
+      { name: 'Linux',      icon: SiLinux },
     ],
+  },
+  {
+    category: { es: 'Conocimientos Complementarios & Teoría', en: 'Complementary & Theoretical Skills' },
+    skills: [
+      { name: 'C#',         icon: TbBrandCSharp },
+    ],
+    description: {
+      es: 'C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
+      en: 'C# applied to theoretical foundations: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
+    }
   },
 ];

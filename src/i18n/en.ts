@@ -10,7 +10,7 @@ export const en: Translations = {
     contact: 'Contact',
   },
   hero: {
-    role: 'Full Stack Developer · Backend & Architecture',
+    role: 'Full Stack Developer · Backend',
     subtitle: 'Software Development Technician · B.Sc. Data Science (in progress)',
     location: 'Buenos Aires, Argentina',
     downloadCV: 'Download CV',
@@ -19,8 +19,8 @@ export const en: Translations = {
   },
   about: {
     title: 'Professional Profile',
-    bio: 'Software Development Technician and current B.Sc. Data Science student, with a primary focus on backend development and data modeling. Experienced in building web applications and multi-tenant systems using technologies such as Python (FastAPI), Node.js, React, Angular, TypeScript, and MongoDB. Passionate about software architecture, API design, problem-solving, and developing scalable solutions with best practices.',
-    badges: ['Backend Development', 'System Architecture', 'API Design', 'Multi-tenant Systems', 'AI & LLM Integrations'],
+    bio: 'Software Development Technician and current B.Sc. Data Science student, with a primary focus on backend development and data modeling. Experience working with multi-tenant systems, data synchronization, and AI-integrated SaaS products using Python (FastAPI), Node.js, Next.js, React, and TypeScript. Focused on API design, problem-solving, and building scalable solutions following software engineering best practices.',
+    badges: ['Backend Development', 'Data Modeling', 'API Design', 'Multi-tenant Systems', 'AI & LLM Integrations'],
   },
   skills: {
     title: 'Skills',
@@ -36,7 +36,20 @@ export const en: Translations = {
     comingSoonDesc: 'Individual project currently in development. More details soon.',
     viewDemo: 'View demo',
     viewRepo: 'Repository',
+    viewCaseStudy: 'View Case Study & Details',
     role: 'Role',
+  },
+  caseStudy: {
+    backToProjects: '← Back to Projects',
+    overviewTitle: 'Project Overview',
+    myRoleTitle: 'My Role & Key Contributions',
+    architectureTitle: 'Architecture & System Design',
+    technicalChallengesTitle: 'Technical Challenges & Solutions',
+    videoDemoTitle: 'Interactive Video Demo',
+    galleryTitle: 'Interface & Showcase Gallery',
+    timestampsTitle: 'Video Chapters & Highlights',
+    problemLabel: 'Challenge / Problem:',
+    solutionLabel: 'Implemented Technical Solution:',
   },
   education: {
     title: 'Education',
