@@ -384,14 +384,14 @@ export const caseStudies: Record<string, CaseStudy> = {
     technicalChallenges: {
       es: [
         {
-          problem: 'Mantener un rendimiento fluido de renderizado de sprites y listas dinámicas en dispositivos móviles con recursos limitados.',
-          solution: 'Apliqué lazy loading de componentes en Angular y almacenamiento en caché local de imágenes de PokeAPI, logrando animaciones suaves a 60 FPS.',
+          problem: 'Implementar autenticación de usuarios segura y gestión de sesión persistente en una arquitectura híbrida web/mobile.',
+          solution: 'Integré Firebase Auth con Ionic y Angular, implementando Guards de navegación para rutas protegidas y almacenamiento en tiempo real de favoritos del usuario.',
         },
       ],
       en: [
         {
-          problem: 'Maintaining smooth rendering performance for mobile devices with resource constraints.',
-          solution: 'Applied Angular lazy loading and local caching for PokeAPI images achieving 60 FPS animations.',
+          problem: 'Implementing secure user authentication and persistent session management within a hybrid web/mobile architecture.',
+          solution: 'Integrated Firebase Auth with Ionic and Angular, implementing navigation Guards for protected routes and real-time user favorites synchronization.',
         },
       ],
     },

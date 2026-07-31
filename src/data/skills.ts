@@ -4,7 +4,7 @@ import {
   SiDocker, SiGit, SiGithub, SiLinux, SiSqlalchemy, SiMongoose, SiExpress,
   SiNextdotjs, SiVercel, SiPrisma, SiGithubactions, SiPytest, SiVitest
 } from 'react-icons/si';
-import { TbBrandCSharp } from 'react-icons/tb';
+import { CSharpIcon, PlaywrightIcon, AlembicIcon } from '../components/icons/CustomTechIcons';
 import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
@@ -15,15 +15,15 @@ export const skillCategories: SkillCategory[] = [
       { name: 'FastAPI',    icon: SiFastapi },
       { name: 'Node.js',    icon: SiNodedotjs },
       { name: 'TypeScript', icon: SiTypescript },
-      { name: 'C#*',        icon: TbBrandCSharp },
+      { name: 'C#*',        icon: CSharpIcon },
       { name: 'PostgreSQL', icon: SiPostgresql },
       { name: 'Neon',       icon: SiPostgresql },
       { name: 'MongoDB',    icon: SiMongodb },
       { name: 'SQLite',     icon: SiSqlite },
     ],
     description: {
-      es: '* C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
-      en: '* C# applied to theoretical foundations: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
+      es: 'C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
+      en: 'C# applied to theoretical foundations: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
     }
   },
   {
@@ -44,11 +44,11 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       { name: 'Prisma',     icon: SiPrisma },
       { name: 'SQLAlchemy', icon: SiSqlalchemy },
-      { name: 'Alembic',    icon: undefined },
+      { name: 'Alembic',    icon: AlembicIcon },
       { name: 'Mongoose',   icon: SiMongoose },
       { name: 'Express',    icon: SiExpress },
       { name: 'Docker',     icon: SiDocker },
-      { name: 'Playwright', icon: undefined },
+      { name: 'Playwright', icon: PlaywrightIcon },
       { name: 'Vitest',     icon: SiVitest },
       { name: 'Pytest',     icon: SiPytest },
       { name: 'Git',        icon: SiGit },
