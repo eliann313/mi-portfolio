@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Download, Github, Linkedin, ArrowDown, Mail } from 'lucide-react';
+import { MapPin, Download, Github, Linkedin, Mail } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import { personal } from '../../data/personal';
@@ -132,17 +132,6 @@ export function Hero() {
                   )}
                 </AnimatePresence>
               </div>
-              <button
-                onClick={() => {
-                  const el = document.getElementById('contact');
-                  if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
-                }}
-                className="btn-secondary"
-                style={{ cursor: 'pointer' }}
-              >
-                <ArrowDown size={14} />
-                {t.hero.contactMe}
-              </button>
             </motion.div>
           </div>
 

@@ -13,13 +13,13 @@ export const projects: Project[] = [
     contributions: {
       es: [
         'Lideré el diseño e implementación full stack de la plataforma dual-role y su flujo guiado: CV Analysis → Job Match → Mock Interview.',
-        'Desarrollé Career Copilot (chatbot de orientación profesional) e implementé enrutamiento multi-proveedor de IA (Gemini 2.5 Flash como motor primario, soporte BYOK para OpenAI, Anthropic, Groq y OpenRouter con fallback automático).',
+        'Desarrollé Career Copilot (chatbot de orientación profesional) e implementé enrutamiento multi-proveedor de IA (Google Gemini como motor primario, soporte BYOK para OpenAI, Anthropic, Groq y OpenRouter con fallback automático).',
         'Implementé arquitectura privacy-first con perfiles anónimos, sanitización server-side de PII, URLs firmadas con expiración corta y cifrado de datos sensibles con AES-256-GCM.',
         'Configuré suite de pruebas unitarias (Vitest) y de extremo a extremo (Playwright) integradas en pipeline de CI/CD con GitHub Actions.',
       ],
       en: [
         'Led the end-to-end design and full-stack implementation of the dual-role platform and its guided workflow: CV Analysis → Job Match → Mock Interview.',
-        'Developed Career Copilot (career assistance chatbot) and built multi-provider AI routing (Gemini 2.5 Flash as primary engine, BYOK support for OpenAI, Anthropic, Groq, OpenRouter with automatic fallback).',
+        'Developed Career Copilot (career assistance chatbot) and built multi-provider AI routing (Google Gemini as primary engine, BYOK support for OpenAI, Anthropic, Groq, OpenRouter with automatic fallback).',
         'Implemented a privacy-first architecture with anonymous profiles, server-side PII sanitization, short-lived signed URLs, and AES-256-GCM sensitive data encryption.',
         'Configured unit (Vitest) and end-to-end (Playwright) test suites integrated into CI/CD pipelines via GitHub Actions.',
       ],

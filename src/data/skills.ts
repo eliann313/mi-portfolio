@@ -9,17 +9,22 @@ import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
   {
-    category: { es: 'Stack Principal (Backend & Data)', en: 'Core Stack (Backend & Data)' },
+    category: { es: 'Backend & Bases de Datos', en: 'Backend & Databases' },
     skills: [
       { name: 'Python',     icon: SiPython },
       { name: 'FastAPI',    icon: SiFastapi },
       { name: 'Node.js',    icon: SiNodedotjs },
       { name: 'TypeScript', icon: SiTypescript },
+      { name: 'C#*',        icon: TbBrandCSharp },
       { name: 'PostgreSQL', icon: SiPostgresql },
       { name: 'Neon',       icon: SiPostgresql },
       { name: 'MongoDB',    icon: SiMongodb },
       { name: 'SQLite',     icon: SiSqlite },
     ],
+    description: {
+      es: '* C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
+      en: '* C# applied to theoretical foundations: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
+    }
   },
   {
     category: { es: 'Frontend & Mobile', en: 'Frontend & Mobile' },
@@ -52,15 +57,5 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Vercel',     icon: SiVercel },
       { name: 'Linux',      icon: SiLinux },
     ],
-  },
-  {
-    category: { es: 'Conocimientos Complementarios & Teoría', en: 'Complementary & Theoretical Skills' },
-    skills: [
-      { name: 'C#',         icon: TbBrandCSharp },
-    ],
-    description: {
-      es: 'C# aplicado a bases teóricas: Programación Orientada a Objetos y Concurrencia (multihilos, semáforos y locks).',
-      en: 'C# applied to theoretical foundations: Object-Oriented Programming and Concurrency (multithreading, semaphores, and locks).'
-    }
   },
 ];
