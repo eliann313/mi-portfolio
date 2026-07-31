@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Plus } from 'lucide-react';
+import { ExternalLink, Github, Plus, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import { projects } from '../../data/projects';
@@ -57,7 +58,7 @@ export function Projects() {
               initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }}
               variants={fadeUp}
               whileHover={{ y: -3 }}
-              className="rounded-xl p-6 border flex flex-col"
+              className="rounded-xl p-6 border flex flex-col justify-between"
               style={{ backgroundColor: c.bgSurface, borderColor: c.border, transition: 'border-color 0.2s, box-shadow 0.2s' }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.borderColor = c.accent;
@@ -68,35 +69,37 @@ export function Projects() {
                 (e.currentTarget as HTMLElement).style.boxShadow = 'none';
               }}
             >
-              {/* Header */}
-              <div className="flex items-start justify-between gap-2 mb-3 flex-wrap">
-                <h3 className="font-semibold text-base" style={{ color: c.textPrimary }}>{project.title}</h3>
-                <div className="flex items-center gap-1.5">
-                  <span className="tag text-xs" style={{ color: c.textMuted, backgroundColor: c.bgElevated, borderColor: c.border }}>
-                    {project.type === 'group' ? t.projects.group : t.projects.individual}
-                  </span>
-                  <StatusBadge status={project.status} t={t.projects} c={c} />
+              <div>
+                {/* Header */}
+                <div className="flex items-start justify-between gap-2 mb-3 flex-wrap">
+                  <h3 className="font-semibold text-base" style={{ color: c.textPrimary }}>{project.title}</h3>
+                  <div className="flex items-center gap-1.5">
+                    <span className="tag text-xs" style={{ color: c.textMuted, backgroundColor: c.bgElevated, borderColor: c.border }}>
+                      {project.type === 'group' ? t.projects.group : t.projects.individual}
+                    </span>
+                    <StatusBadge status={project.status} t={t.projects} c={c} />
+                  </div>
                 </div>
+
+                {/* Description */}
+                <p className="text-sm leading-relaxed mb-4" style={{ color: c.textSecondary }}>
+                  {project.description[locale as Locale]}
+                </p>
+
+                {/* Contributions */}
+                {project.contributions[locale as Locale].length > 0 && (
+                  <ul className="mb-4 space-y-1.5">
+                    {project.contributions[locale as Locale].map((contribution, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm" style={{ color: c.textSecondary }}>
+                        <span className="mt-0.5 flex-shrink-0" style={{ color: c.accent }}>›</span>
+                        <span>{contribution}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
 
-              {/* Description */}
-              <p className="text-sm leading-relaxed mb-4" style={{ color: c.textSecondary }}>
-                {project.description[locale as Locale]}
-              </p>
-
-              {/* Contributions */}
-              {project.contributions[locale as Locale].length > 0 && (
-                <ul className="mb-4 space-y-1.5">
-                  {project.contributions[locale as Locale].map((contribution, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm" style={{ color: c.textSecondary }}>
-                      <span className="mt-0.5 flex-shrink-0" style={{ color: c.accent }}>›</span>
-                      <span>{contribution}</span>
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              <div className="mt-auto">
+              <div className="mt-auto pt-2">
                 {/* Stack */}
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {project.stack.map(tech => (
@@ -115,19 +118,25 @@ export function Projects() {
                 )}
 
                 {/* Links */}
-                <div className="flex gap-2 flex-wrap">
-                  {project.links.demo && (
-                    <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
-                      className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
-                      <ExternalLink size={12} />{t.projects.viewDemo}
-                    </a>
-                  )}
-                  {project.links.repo && project.links.repo !== '#' && (
-                    <a href={project.links.repo} target="_blank" rel="noopener noreferrer"
-                      className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
-                      <Github size={12} />{t.projects.viewRepo}
-                    </a>
-                  )}
+                <div className="flex items-center justify-between gap-2 flex-wrap pt-3 border-t" style={{ borderColor: c.border }}>
+                  <Link to={`/proyectos/${project.id}`} className="btn-primary !py-1.5 !px-3 !text-xs">
+                    <BookOpen size={13} /> {t.projects.viewCaseStudy}
+                  </Link>
+
+                  <div className="flex items-center gap-2">
+                    {project.links.demo && (
+                      <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
+                        className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
+                        <ExternalLink size={12} />{t.projects.viewDemo}
+                      </a>
+                    )}
+                    {project.links.repo && project.links.repo !== '#' && (
+                      <a href={project.links.repo} target="_blank" rel="noopener noreferrer"
+                        className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
+                        <Github size={12} />{t.projects.viewRepo}
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </motion.div>
