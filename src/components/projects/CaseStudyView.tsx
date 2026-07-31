@@ -126,7 +126,14 @@ export function CaseStudyView() {
           </ul>
         </section>
 
-        {/* 3. Screenshots Gallery (if present) */}
+        {/* 3. Architecture C4 Diagram (if present) */}
+        {study.c4Diagram && (
+          <section className="mb-10">
+            <ArchitectureDiagram diagram={study.c4Diagram} />
+          </section>
+        )}
+
+        {/* 4. Screenshots Gallery (if present) */}
         {study.screenshots && study.screenshots.length > 0 && (
           <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
@@ -203,13 +210,6 @@ export function CaseStudyView() {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* 4. Architecture C4 Diagram (if present) */}
-        {study.c4Diagram && (
-          <section className="mb-10">
-            <ArchitectureDiagram diagram={study.c4Diagram} />
-          </section>
-        )}
 
         {/* 5. Architecture Highlights */}
         <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>

@@ -223,6 +223,13 @@ export const caseStudies: Record<string, CaseStudy> = {
         { from: 'tenant', to: 'db', label: 'SQLAlchemy Scoped Queries' },
       ],
     },
+    screenshots: [
+      {
+        url: '/projects/gridhub/c4-architecture.png',
+        title: { es: 'Diagrama de Arquitectura de Capas C4 & Multi-Tenant', en: 'C4 Layered & Multi-Tenant Architecture Diagram' },
+        caption: { es: 'Desglose visual de capas (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).', en: 'Visual breakdown of architecture layers (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).' },
+      },
+    ],
   },
 
   pochocleando: {
