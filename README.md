@@ -1,9 +1,13 @@
 # 👨‍💻 Portfolio Profesional — Elian Nahuel
 
+[![Read in English](https://img.shields.io/badge/Language-English-blue.svg)](README.en.md)
 ![Dependabot Status](https://img.shields.io/badge/dependabot-enabled-brightgreen?logo=dependabot)
 ![CI Build](https://github.com/eliann313/mi-portfolio/actions/workflows/ci.yml/badge.svg)
 
-Bienvenido al repositorio de mi portfolio profesional. Soy **Elian Nahuel**, Desarrollador Full Stack orientado a **Backend y Modelado de Datos**, actualmente cursando la **Licenciatura en Ciencia de Datos** (UBA / Universidad de la Ciudad) y graduado como **Técnico Superior en Desarrollo de Software** (IFTS N°11).
+> [!NOTE]
+> **Read this README in English:** [README.en.md](README.en.md)
+
+Bienvenido al repositorio de mi portfolio profesional. Soy **Elian Nahuel**, Desarrollador Full Stack orientado a **Backend y Modelado de Datos**, actualmente cursando la **Licenciatura en Ciencia de Datos** (Universidad de la Ciudad de Buenos Aires - UDECI) y graduado como **Técnico Superior en Desarrollo de Software** (IFTS N°11).
 
 🌐 **Portfolio en vivo:** [elian-nahuel-portfolio.vercel.app](https://elian-nahuel-portfolio.vercel.app/)
 
@@ -32,7 +36,7 @@ Bienvenido al repositorio de mi portfolio profesional. Soy **Elian Nahuel**, Des
 
 ## ⚡ Rendimiento y Optimización (Lighthouse)
 
-El portfolio fue sometido a estrictas auditorías de rendimiento en producción mediante Google Lighthouse (desplegado en el CDN global de **Vercel**), logrando una calificación sobresaliente:
+El portfolio fue sometido a strictly auditorías de rendimiento en producción mediante Google Lighthouse (desplegado en el CDN global de **Vercel**), logrando una calificación sobresaliente:
 
 | Plataforma | Performance ⚡ | Accessibility ♿ | Best Practices 🛡️ | SEO 🔍 |
 | :--- | :---: | :---: | :---: | :---: |
