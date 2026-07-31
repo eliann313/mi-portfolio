@@ -7,36 +7,32 @@ export const projects: Project[] = [
     type: 'individual',
     status: 'completed',
     description: {
-      es: 'Plataforma dual-role (developer/recruiter) enfocada en la privacidad, con flujo narrativo integrado de análisis de CV, emparejamiento laboral y entrevistas simuladas asistidas por IA.',
-      en: 'Privacy-first, dual-role (developer/recruiter) platform featuring an integrated narrative flow of CV analysis, job matching, and AI-assisted mock interviews.',
+      es: 'Plataforma SaaS dual-role (developer/recruiter) enfocada en la privacidad, con flujo guiado de análisis de CV, emparejamiento laboral y entrevistas simuladas asistidas por IA.',
+      en: 'Privacy-first dual-role (developer/recruiter) SaaS platform featuring an integrated workflow of CV analysis, job matching, and AI-assisted mock interviews.',
     },
     contributions: {
       es: [
-        'Creador del proyecto, liderando el diseño completo y la implementación de la plataforma.',
-        'Diseño e implementación del flujo narrativo guiado: CV Analysis → Job Match → Mock Interview.',
-        'Desarrollo de Career Copilot, un chatbot inteligente con comportamiento y acceso adaptado según el rol de recruiter o developer.',
-        'Implementación de enrutamiento de IA multi-provider (Gemini 2.5 Flash como motor primario del sistema y soporte BYOK para OpenAI, Anthropic Claude, Groq y OpenRouter con fallback automático en cascada).',
-        'Configuración de pruebas de extremo a extremo (E2E) con Playwright e integración de CI/CD con GitHub Actions.',
-        'Arquitectura privacy-first con perfiles de candidatos completamente anónimos para garantizar privacidad.'
+        'Lideré el diseño e implementación full stack de la plataforma dual-role y su flujo guiado: CV Analysis → Job Match → Mock Interview.',
+        'Desarrollé Career Copilot (chatbot de orientación profesional) e implementé enrutamiento multi-proveedor de IA (Gemini 2.5 Flash como motor primario, soporte BYOK para OpenAI, Anthropic, Groq y OpenRouter con fallback automático).',
+        'Implementé arquitectura privacy-first con perfiles anónimos, sanitización server-side de PII, URLs firmadas con expiración corta y cifrado de datos sensibles con AES-256-GCM.',
+        'Configuré suite de pruebas unitarias (Vitest) y de extremo a extremo (Playwright) integradas en pipeline de CI/CD con GitHub Actions.',
       ],
       en: [
-        'Project creator, leading the overall design and full-stack implementation of the platform.',
-        'Designed and implemented the integrated narrative flow: CV Analysis → Job Match → Mock Interview.',
-        'Developed Career Copilot, an intelligent chatbot with behavior and access tailored to recruiter and developer roles.',
-        'Implemented multi-provider AI routing (Gemini 2.5 Flash as primary system engine, and BYOK support for OpenAI, Anthropic Claude, Groq, and OpenRouter with automatic cascading fallback).',
-        'Configured end-to-end (E2E) testing with Playwright and integrated CI/CD workflows using GitHub Actions.',
-        'Privacy-first architecture featuring completely anonymous candidate profiles to guarantee user privacy.'
-      ]
+        'Led the end-to-end design and full-stack implementation of the dual-role platform and its guided workflow: CV Analysis → Job Match → Mock Interview.',
+        'Developed Career Copilot (career assistance chatbot) and built multi-provider AI routing (Gemini 2.5 Flash as primary engine, BYOK support for OpenAI, Anthropic, Groq, OpenRouter with automatic fallback).',
+        'Implemented a privacy-first architecture with anonymous profiles, server-side PII sanitization, short-lived signed URLs, and AES-256-GCM sensitive data encryption.',
+        'Configured unit (Vitest) and end-to-end (Playwright) test suites integrated into CI/CD pipelines via GitHub Actions.',
+      ],
     },
-    stack: ['Next.js', 'TypeScript', 'Prisma', 'Neon', 'Tailwind CSS', 'Playwright', 'GitHub Actions'],
+    stack: ['Next.js 16', 'TypeScript', 'Prisma', 'Neon (PostgreSQL)', 'Tailwind CSS', 'Vercel AI SDK', 'Playwright', 'GitHub Actions'],
     roles: {
-      es: ['Creador', 'Arquitecto de Software', 'Desarrollador Full Stack'],
-      en: ['Creator', 'Software Architect', 'Full Stack Developer']
+      es: ['Creador', 'Desarrollador Full Stack'],
+      en: ['Creator', 'Full Stack Developer'],
     },
     links: {
       demo: 'https://skillradar-app.vercel.app',
-      repo: 'https://github.com/eliann313/SkillRadar'
-    }
+      repo: 'https://github.com/eliann313/SkillRadar',
+    },
   },
   {
     id: 'gridhub-wms',
@@ -44,35 +40,31 @@ export const projects: Project[] = [
     type: 'group',
     status: 'in-progress',
     description: {
-      es: 'Sistema multi-tenant de gestión logística empresarial con aislamiento de datos por cliente y arquitectura por capas.',
-      en: 'Multi-tenant enterprise logistics management system with per-client data isolation and layered architecture.',
+      es: 'Sistema logístico empresarial multi-tenant en desarrollo comercial con aislamiento de datos por cliente, resiliencia offline y arquitectura por capas.',
+      en: 'Enterprise multi-tenant logistics system currently under commercial development with client-level data isolation, offline resilience, and layered architecture.',
     },
     contributions: {
       es: [
-        'Diseño de arquitectura backend multi-tenant con aislamiento de datos por cliente y modelo relacional con Alembic.',
-        'Diseño e implementación del módulo de Notificaciones de Alto Valor WMS (5 alertas RBAC, consolidación de expiraciones en lote) y sistema de Reporte de Incidencias con resiliencia offline (IndexedDB).',
-        'Diseño e implementación del flujo de partial pick fulfillment: creación de tareas residuales en la misma orden, from_location_id nullable, soporte de available_quantity negativo e idempotency keys en Task y StockMovement.',
-        'Diseño e implementación del sistema de sincronización offline con cola de peticiones local (IndexedDB) y reconciliación de conflictos.',
-        'Diseño e implementación de la modularización del frontend (React 19) basada en Feature-based architecture y lazy loading.',
-        'Definición de arquitectura por capas (Onion Architecture) del backend y optimización de consultas complejas con SQLAlchemy.'
+        'Diseñé la arquitectura backend multi-tenant con aislamiento de datos por cliente a nivel de base de datos y modelado relacional gestionado con Alembic.',
+        'Diseñé e implementé la arquitectura por capas (Onion Architecture) del backend y optimicé consultas complejas con SQLAlchemy.',
+        'Desarrollé el motor de resiliencia y sincronización offline en el frontend (React 19 + IndexedDB) con cola de peticiones locales y reconciliación de conflictos.',
+        'Diseñé e implementé el flujo de partial pick fulfillment con creación de tareas residuales en la misma orden e idempotency keys en transacciones de stock.',
+        'Construí el módulo de notificaciones de alto valor WMS (5 alertas RBAC) y el sistema de reporte de incidencias.',
       ],
       en: [
-        'Designed multi-tenant backend architecture with per-client data isolation and relational data modeling with Alembic.',
-        'Designed and implemented the high-value WMS Notifications module (5 RBAC alert types, batch expiration consolidation) and Incident Reporting system with offline resilience (IndexedDB).',
-        'Designed and implemented the partial pick fulfillment flow: residual task creation within the same order, nullable from_location_id, negative available_quantity support, and idempotency keys in Task and StockMovement.',
-        'Designed and implemented the offline synchronization system using local request queues (IndexedDB) and conflict reconciliation.',
-        'Designed and implemented the frontend modularization (React 19) using Feature-based architecture and lazy loading.',
-        'Defined backend layered architecture (Onion Architecture) and optimized complex queries using SQLAlchemy.'
+        'Designed the multi-tenant backend architecture with client-level data isolation and relational data modeling managed via Alembic.',
+        'Designed and implemented the backend layered architecture (Onion Architecture) and optimized complex queries using SQLAlchemy.',
+        'Developed the frontend offline resilience and synchronization engine (React 19 + IndexedDB) featuring local request queues and conflict reconciliation.',
+        'Designed and implemented the partial pick fulfillment workflow with residual task creation within the same order and idempotency keys on stock transactions.',
+        'Built the high-value WMS notifications module (5 RBAC alert types) and the incident reporting system.',
       ],
     },
     stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'IndexedDB', 'SQLite'],
     roles: {
-      es: ['Backend', 'Arquitectura', 'Frontend'],
+      es: ['Backend & Arquitectura', 'Frontend'],
       en: ['Backend & Architecture', 'Frontend'],
     },
-    links: {
-      repo: '#',
-    },
+    links: {},
   },
   {
     id: 'pochocleando',
@@ -80,23 +72,21 @@ export const projects: Project[] = [
     type: 'group',
     status: 'completed',
     description: {
-      es: 'Aplicación web de reseñas de películas y series integrada con TMDB API, con asistente de IA incorporado.',
-      en: 'Movie and TV show review web app integrated with TMDB API, featuring a built-in AI assistant.',
+      es: 'Aplicación web de reseñas de películas y series integrada con la API multimedia de TMDB y asistente inteligente de IA.',
+      en: 'Movie and TV show review web app integrated with TMDB multimedia API featuring an intelligent AI assistant.',
     },
     contributions: {
       es: [
-        'Diseño e implementación de esquemas de datos con MongoDB y Mongoose (usuarios, reseñas, favoritos)',
-        'Implementación de autenticación y gestión de sesiones de usuario',
-        'Desarrollo frontend con Angular y TypeScript',
-        'Participación en Pochi, asistente de IA integrado usando Gemini Flash 2.5 API',
-        'Integración con TMDB API para datos de contenido multimedia',
+        'Diseñé e implementé los esquemas de datos con MongoDB y Mongoose (usuarios, reseñas, listas de favoritos).',
+        'Implementé la autenticación de usuarios y la gestión de sesiones en el backend con Node.js y Express.',
+        'Desarrollé la interfaz de usuario con Angular y TypeScript consumiendo la API multimedia de TMDB.',
+        'Participé en la integración de Pochi, el asistente de IA incorporado alimentado por Gemini API.',
       ],
       en: [
-        'Designed and implemented data schemas with MongoDB and Mongoose (users, reviews, favorites)',
-        'Implemented authentication and user session management',
-        'Frontend development with Angular and TypeScript',
-        'Participated in Pochi, an integrated AI assistant using Gemini Flash 2.5 API',
-        'Integrated with TMDB API for multimedia content data',
+        'Designed and implemented MongoDB & Mongoose data schemas for users, reviews, and favorite lists.',
+        'Implemented user authentication and session management on the backend using Node.js and Express.',
+        'Developed the frontend user interface with Angular and TypeScript consuming TMDB multimedia API.',
+        'Participated in integrating Pochi, the built-in AI assistant powered by Gemini API.',
       ],
     },
     stack: ['JavaScript', 'TypeScript', 'Angular', 'Node.js', 'Express', 'MongoDB', 'Gemini API'],
@@ -105,7 +95,7 @@ export const projects: Project[] = [
       en: ['Backend', 'Frontend', 'AI Integration'],
     },
     links: {
-      demo: 'https://pochocleando.com',
+      repo: 'https://github.com/Antonio-sharp-plus/Pochocleando',
     },
   },
   {
@@ -114,21 +104,19 @@ export const projects: Project[] = [
     type: 'group',
     status: 'completed',
     description: {
-      es: 'Aplicación híbrida web/mobile integrada con PokeAPI, con autenticación Firebase y experiencia nativa en móvil.',
-      en: 'Hybrid web/mobile application integrated with PokeAPI, featuring Firebase authentication and native mobile experience.',
+      es: 'Aplicación híbrida web/mobile integrada con PokeAPI, autenticación con Firebase y experiencia nativa.',
+      en: 'Hybrid web/mobile application integrated with PokeAPI, featuring Firebase authentication and native experience.',
     },
     contributions: {
       es: [
-        'Implementación de autenticación con Firebase',
-        'Consumo e integración de API externa (PokeAPI)',
-        'Desarrollo de interfaz híbrida con Ionic y Angular',
-        'Diseño de la experiencia de usuario para plataformas web y mobile',
+        'Implementé la autenticación de usuarios utilizando Firebase Auth.',
+        'Integré el consumo de la REST API externa (PokeAPI) para la consulta de información en tiempo real.',
+        'Desarrollé la experiencia de usuario e interfaz híbrida (Web / Mobile) utilizando Ionic y Angular.',
       ],
       en: [
-        'Implemented authentication with Firebase',
-        'Consumed and integrated external API (PokeAPI)',
-        'Developed hybrid interface with Ionic and Angular',
-        'Designed user experience for web and mobile platforms',
+        'Implemented user authentication using Firebase Auth.',
+        'Integrated external REST API (PokeAPI) consumption for real-time information retrieval.',
+        'Developed hybrid (Web / Mobile) user interface and experience using Ionic and Angular.',
       ],
     },
     stack: ['TypeScript', 'Angular', 'Ionic', 'Firebase', 'HTML', 'CSS'],
@@ -137,7 +125,7 @@ export const projects: Project[] = [
       en: ['Frontend', 'Mobile', 'API Integration'],
     },
     links: {
-      repo: '#', // TODO: agregar URL de repo
+      repo: 'https://github.com/Juamp1Sch/Proyect-Pokedex',
     },
   },
 ];
