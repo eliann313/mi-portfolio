@@ -36,7 +36,7 @@ export const es: Translations = {
     comingSoonDesc: 'Proyecto individual en desarrollo. Pronto más detalles.',
     viewDemo: 'Ver demo',
     viewRepo: 'Repositorio',
-    viewCaseStudy: 'Ver Case Study & Detalles',
+    viewCaseStudy: 'Ver Detalles',
     role: 'Rol',
   },
   caseStudy: {
