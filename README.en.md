@@ -7,7 +7,7 @@
 > [!NOTE]
 > **Leer este README en español:** [README.md](README.md)
 
-Welcome to my professional portfolio repository. I am **Elian Nahuel**, a Full Stack Developer focused on **Backend Development and Data Modeling**, currently pursuing a **Bachelor's Degree in Data Science** (Universidad de la Ciudad de Buenos Aires - UDECI) and holding a **Higher Technical Degree in Software Development** (IFTS N°11).
+Welcome to my professional portfolio repository. I am **Elian Nahuel**, a Full Stack Developer focused on **Backend Development and Data Modeling**, currently pursuing a **Bachelor's Degree in Data Science** (Universidad de la Ciudad de Buenos Aires - UDECI) and holding a **Higher Technical Degree in Software Development** (Instituto de Formación Técnica Superior N°11 - IFTS N°11).
 
 🌐 **Live Portfolio:** [elian-nahuel-portfolio.vercel.app](https://elian-nahuel-portfolio.vercel.app/)
 
