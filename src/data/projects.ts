@@ -61,7 +61,7 @@ export const projects: Project[] = [
     },
     stack: ['Python', 'FastAPI', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'IndexedDB', 'SQLite'],
     roles: {
-      es: ['Backend & Arquitectura', 'Frontend'],
+      es: ['Backend y Arquitectura', 'Frontend'],
       en: ['Backend & Architecture', 'Frontend'],
     },
     links: {},
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     },
     stack: ['Next.js 16', 'TypeScript', 'Prisma 7', 'Neon (PostgreSQL)', 'Auth.js v5', 'Zod', 'Upstash Redis', 'Cloudinary', 'Resend', 'Vitest'],
     roles: {
-      es: ['Backend & Arquitectura', 'Líder Técnico'],
+      es: ['Backend y Arquitectura', 'Líder Técnico'],
       en: ['Backend & Architecture', 'Technical Lead'],
     },
     links: {

@@ -9,7 +9,7 @@ import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
   {
-    category: { es: 'Backend & Bases de Datos', en: 'Backend & Databases' },
+    category: { es: 'Backend y Bases de Datos', en: 'Backend & Databases' },
     skills: [
       { name: 'Python',     icon: SiPython },
       { name: 'FastAPI',    icon: SiFastapi },
@@ -27,7 +27,7 @@ export const skillCategories: SkillCategory[] = [
     }
   },
   {
-    category: { es: 'Frontend & Mobile', en: 'Frontend & Mobile' },
+    category: { es: 'Frontend y Mobile', en: 'Frontend & Mobile' },
     skills: [
       { name: 'React',      icon: SiReact },
       { name: 'Next.js',    icon: SiNextdotjs },
@@ -40,7 +40,7 @@ export const skillCategories: SkillCategory[] = [
     ],
   },
   {
-    category: { es: 'ORM, Testing & DevOps', en: 'ORM, Testing & DevOps' },
+    category: { es: 'ORM, Testing y DevOps', en: 'ORM, Testing & DevOps' },
     skills: [
       { name: 'Prisma',     icon: SiPrisma },
       { name: 'SQLAlchemy', icon: SQLAlchemyIcon },

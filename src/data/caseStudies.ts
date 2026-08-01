@@ -88,12 +88,12 @@ export const caseStudies: Record<string, CaseStudy> = {
     screenshots: [
       {
         url: '/projects/skillradar/1.png',
-        title: { es: 'Dashboard & Contacto Doble Ciego', en: 'Dashboard & Double-Blind Contact' },
+        title: { es: 'Dashboard y Contacto Doble Ciego', en: 'Dashboard & Double-Blind Contact' },
         caption: { es: 'Solicitudes de reclutadores con perfil anónimo y aceptación condicional.', en: 'Recruiter requests with anonymous profiles and conditional acceptance.' },
       },
       {
         url: '/projects/skillradar/2.png',
-        title: { es: 'Métricas & Score ATS (100/100)', en: 'ATS Score & Metrics Dashboard' },
+        title: { es: 'Métricas y Score ATS (100/100)', en: 'ATS Score & Metrics Dashboard' },
         caption: { es: 'Analizador de puntuación ATS, afinidad de empleo y límites de cuota.', en: 'ATS score analyzer, job match affinity, and monthly quota limits.' },
       },
       {
@@ -108,12 +108,12 @@ export const caseStudies: Record<string, CaseStudy> = {
       },
       {
         url: '/projects/skillradar/5.png',
-        title: { es: 'Auditoría & Análisis de GitHub', en: 'GitHub Profile & Code Auditor' },
+        title: { es: 'Auditoría y Análisis de GitHub', en: 'GitHub Profile & Code Auditor' },
         caption: { es: 'Evaluación automatizada de fortalezas, áreas de mejora y lenguajes.', en: 'Automated evaluation of strengths, opportunities, and languages.' },
       },
       {
         url: '/projects/skillradar/6.png',
-        title: { es: 'Creador de CV & Previsualizador ATS A4', en: 'CV Builder & ATS A4 Preview' },
+        title: { es: 'Creador de CV y Previsualizador ATS A4', en: 'CV Builder & ATS A4 Preview' },
         caption: { es: 'Editor estructurado de currículum con análisis de verbos de impacto.', en: 'Structured resume editor with impact verb evaluation.' },
       },
       {
@@ -123,7 +123,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       },
       {
         url: '/projects/skillradar/8.png',
-        title: { es: 'Talent Pool & Búsqueda Semántica', en: 'Talent Pool & Semantic Sourcing' },
+        title: { es: 'Talent Pool y Búsqueda Semántica', en: 'Talent Pool & Semantic Sourcing' },
         caption: { es: 'Herramienta de Reverse Job-Matching e IA sourcing para reclutadores.', en: 'Reverse Job-Matching tool and AI sourcing suite for recruiters.' },
       },
       {
@@ -133,7 +133,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       },
       {
         url: '/projects/skillradar/10.png',
-        title: { es: 'Configuración de IA & BYOK (Cifrado AES-256)', en: 'AI BYOK Configuration (AES-256 Encryption)' },
+        title: { es: 'Configuración de IA y BYOK (Cifrado AES-256)', en: 'AI BYOK Configuration (AES-256 Encryption)' },
         caption: { es: 'Almacenamiento seguro de API keys personales y selección de inferencia.', en: 'Secure personal API key storage and preferred inference provider selection.' },
       },
     ],
@@ -316,13 +316,6 @@ export const caseStudies: Record<string, CaseStudy> = {
         { from: 'domain', to: 'infra', label: 'Prisma Repositories & Adapters' },
       ],
     },
-    screenshots: [
-      {
-        url: '/projects/prop2/c4-architecture.png',
-        title: { es: 'Diagrama de Arquitectura Hexagonal & Por Dominios', en: 'Hexagonal & Domain-Driven Architecture Diagram' },
-        caption: { es: 'Estructura por capas (App Router -> Server Actions Zod -> Services -> Repositories Prisma 7).', en: 'Layered structure (App Router -> Server Actions Zod -> Services -> Repositories Prisma 7).' },
-      },
-    ],
   },
 
   pochocleando: {
@@ -388,7 +381,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         {
           seconds: 0,
           timeLabel: '0:00',
-          title: { es: 'Inicio & Grilla Multimedia', en: 'Home & Multimedia Grid' },
+          title: { es: 'Inicio y Grilla Multimedia', en: 'Home & Multimedia Grid' },
           description: { es: 'Exploración del catálogo de películas y series populares.', en: 'Browsing trending movies and TV show catalogs.' },
         },
         {
@@ -400,13 +393,13 @@ export const caseStudies: Record<string, CaseStudy> = {
         {
           seconds: 140,
           timeLabel: '2:20',
-          title: { es: 'Buscador & Disponibilidad Streaming', en: 'Search & Streaming Availability' },
+          title: { es: 'Buscador y Disponibilidad Streaming', en: 'Search & Streaming Availability' },
           description: { es: 'Filtro en tiempo real y proveedores donde ver el contenido (HBO Max).', en: 'Live filtering and streaming availability in Argentina.' },
         },
         {
           seconds: 255,
           timeLabel: '4:15',
-          title: { es: 'Perfil, Favoritos & Créditos IFTS 11', en: 'Profile, Favorites & IFTS 11 Credits' },
+          title: { es: 'Perfil, Favoritos y Créditos IFTS 11', en: 'Profile, Favorites & IFTS 11 Credits' },
           description: { es: 'Gestión de listas personales de usuario y footer del proyecto.', en: 'User personal lists and academic project presentation footer.' },
         },
       ],
@@ -414,7 +407,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     screenshots: [
       {
         url: '/projects/pochocleando/1.png',
-        title: { es: 'Versión Móvil & Flotante Pochi', en: 'Mobile Version & Floating Pochi' },
+        title: { es: 'Versión Móvil y Flotante Pochi', en: 'Mobile Version & Floating Pochi' },
         caption: { es: 'Diseño responsive adaptado a pantallas pequeñas con acceso rápido al bot.', en: 'Responsive design for mobile screens with floating bot access.' },
       },
       {
@@ -424,17 +417,17 @@ export const caseStudies: Record<string, CaseStudy> = {
       },
       {
         url: '/projects/pochocleando/3.png',
-        title: { es: 'Vista de Escritorio & Filtros', en: 'Desktop View & Category Filters' },
+        title: { es: 'Vista de Escritorio y Filtros', en: 'Desktop View & Category Filters' },
         caption: { es: 'Navegación completa por categorías de películas y series.', en: 'Full navigation through movie and series categories.' },
       },
       {
         url: '/projects/pochocleando/4.png',
-        title: { es: 'Perfil de Usuario & Favoritos', en: 'User Profile & Favorite Lists' },
+        title: { es: 'Perfil de Usuario y Favoritos', en: 'User Profile & Favorite Lists' },
         caption: { es: 'Panel de control de listas guardadas e historial personal.', en: 'Control panel for saved lists and personal history.' },
       },
       {
         url: '/projects/pochocleando/5.png',
-        title: { es: 'Footer Académico & Integración TMDB', en: 'Academic Footer & TMDB Integration' },
+        title: { es: 'Footer Académico e Integración TMDB', en: 'Academic Footer & TMDB Integration' },
         caption: { es: 'Créditos del desarrollo académico para el IFTS 11.', en: 'Academic development credits for IFTS N°11.' },
       },
     ],
