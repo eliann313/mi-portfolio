@@ -232,6 +232,99 @@ export const caseStudies: Record<string, CaseStudy> = {
     ],
   },
 
+  prop2: {
+    id: 'prop2',
+    projectTitle: 'Prop²',
+    badge: {
+      es: 'Real Estate SaaS · Peer-to-Peer Backend Platform',
+      en: 'Real Estate SaaS · Peer-to-Peer Backend Platform',
+    },
+    subtitle: {
+      es: 'Plataforma inmobiliaria peer-to-peer para publicación, venta y alquiler directo de inmuebles en Argentina sin intermediarios, con arquitectura backend basada en dominios y seguridad avanzada.',
+      en: 'Peer-to-peer real estate platform for direct property sales and rentals in Argentina without agency fees, featuring domain-driven backend architecture and advanced security.',
+    },
+    overview: {
+      es: 'Prop² es una plataforma web full-stack concebida para conectar directamente a propietarios con compradores o inquilinos en Argentina, eliminando comisiones e intermediarios. Su enfoque técnico principal radica en una arquitectura backend robusta inspirada en Screaming Architecture y principios hexagonales, desacoplando los servicios de dominio de la infraestructura y el ORM.',
+      en: 'Prop² is a full-stack web platform built to directly connect property owners with buyers or tenants in Argentina, bypassing real estate agency fees. Its technical core is built on a domain-driven architecture separating business logic from infrastructure and ORM persistence.',
+    },
+    architectureHighlights: {
+      es: [
+        'Organización por dominios funcionales (Screaming Architecture) desacoplando la capa de servicios de Prisma y Next.js.',
+        'Persistencia relacional en PostgreSQL serverless (Neon) mediante Prisma 7 con driver adapter HTTP y migraciones versionadas.',
+        'Autenticación robusta con Auth.js v5 (Credenciales + Google OAuth), derivación optimista con proxy.ts en Next 16 y verificación por tokens temporales en Resend.',
+        'Subida directa firmada de imágenes desde el navegador a Cloudinary y control de abuso/rate-limiting con Upstash Redis.',
+        'Pruebas unitarias e integración aisladas con Vitest y validación de esquemas con Zod 4.',
+      ],
+      en: [
+        'Domain-driven folder organization (Screaming Architecture) decoupling business service layers from Prisma and Next.js.',
+        'Relational persistence on serverless PostgreSQL (Neon) using Prisma 7 HTTP driver adapters and versioned migrations.',
+        'Robust authentication via Auth.js v5 (Credentials + Google OAuth), Next 16 proxy.ts optimistic route protection, and temporary email tokens via Resend.',
+        'Signed direct browser-to-Cloudinary image uploads and adaptive rate-limiting powered by Upstash Redis.',
+        'Isolated unit and integration test suites built with Vitest and strict schema validation with Zod 4.',
+      ],
+    },
+    myRoleDetailed: {
+      es: [
+        'Líder del desarrollo técnico y diseño de la arquitectura backend por dominio.',
+        'Diseñé el modelo de datos relacional (User, Property, Image, Favorite, VerificationToken) en Prisma 7 y PostgreSQL.',
+        'Implementé el flujo completo de autenticación (Registro, Login, Email Verification, Reset Password).',
+        'Construí el wizard de publicación de inmuebles con geocoding dinámico y subida de imágenes Cloudinary.',
+      ],
+      en: [
+        'Technical lead driving backend architecture and domain-driven software design.',
+        'Designed the relational data model (User, Property, Image, Favorite, VerificationToken) in Prisma 7 & PostgreSQL.',
+        'Implemented the complete authentication pipeline (Register, Login, Email Verification, Password Reset).',
+        'Built the property creation wizard featuring dynamic geocoding and Cloudinary direct uploads.',
+      ],
+    },
+    technicalChallenges: {
+      es: [
+        {
+          problem: 'Evitar que la capa de negocio quede fuertemente acoplada al ORM y a los endpoints del framework web.',
+          solution: 'Establecí la regla de repositorios aislados (*Repository.ts) como único acceso a Prisma, permitiendo que la capa de servicios sea testeable de manera 100% aislada en Vitest.',
+        },
+        {
+          problem: 'Procesar imágenes pesadas de inmuebles sin saturar la memoria ni los tiempos de ejecución Serverless del backend.',
+          solution: 'Implementé subidas directas firmadas desde el cliente a Cloudinary mediante URLs efímeras generadas en el backend, desacoplando completamente el tráfico multimedia del servidor principal.',
+        },
+      ],
+      en: [
+        {
+          problem: 'Preventing core business logic from becoming tightly coupled to the ORM and framework API routes.',
+          solution: 'Established isolated repository modules (*Repository.ts) as the sole access point to Prisma, ensuring domain service logic remains 100% isolated and testable in Vitest.',
+        },
+        {
+          problem: 'Processing heavy property photos without overloading serverless function memory or execution timeouts.',
+          solution: 'Implemented direct signed browser-to-Cloudinary uploads via short-lived backend-generated URLs, fully decoupling media traffic from the core server.',
+        },
+      ],
+    },
+    c4Diagram: {
+      title: {
+        es: 'Diagrama de Arquitectura Hexagonal / Por Dominios (Prop²)',
+        en: 'Hexagonal / Domain-Driven Architecture Diagram (Prop²)',
+      },
+      nodes: [
+        { id: 'app', label: 'Next.js 16 App Router + proxy.ts', desc: 'Composición de rutas public, auth, vendedor y admin', type: 'client' },
+        { id: 'actions', label: 'Server Actions & Zod Validations', desc: 'Validación de entrada, orquestación y control RBAC', type: 'api' },
+        { id: 'domain', label: 'Domain Services (Pure Logic)', desc: 'Servicios aislados sin dependencias de HTTP ni ORM', type: 'service' },
+        { id: 'infra', label: 'Prisma 7 + Neon Postgres & Redis', desc: 'Repositories aislados, Neon driver adapter y Upstash', type: 'db' },
+      ],
+      connections: [
+        { from: 'app', to: 'actions', label: 'HTTPS Server Actions / Forms' },
+        { from: 'actions', to: 'domain', label: 'Invocación de Servicios de Dominio' },
+        { from: 'domain', to: 'infra', label: 'Prisma Repositories & Adapters' },
+      ],
+    },
+    screenshots: [
+      {
+        url: '/projects/prop2/c4-architecture.png',
+        title: { es: 'Diagrama de Arquitectura Hexagonal & Por Dominios', en: 'Hexagonal & Domain-Driven Architecture Diagram' },
+        caption: { es: 'Estructura por capas (App Router -> Server Actions Zod -> Services -> Repositories Prisma 7).', en: 'Layered structure (App Router -> Server Actions Zod -> Services -> Repositories Prisma 7).' },
+      },
+    ],
+  },
+
   pochocleando: {
     id: 'pochocleando',
     projectTitle: 'Pochocleando',

@@ -67,6 +67,38 @@ export const projects: Project[] = [
     links: {},
   },
   {
+    id: 'prop2',
+    title: 'Prop²',
+    type: 'group',
+    status: 'in-progress',
+    description: {
+      es: 'Plataforma inmobiliaria peer-to-peer en desarrollo (venta/alquiler directo sin intermediarios) con arquitectura backend por dominio y seguridad end-to-end.',
+      en: 'Peer-to-peer real estate platform under active development (direct sales/rentals without intermediaries) built with domain-driven backend architecture and end-to-end security.',
+    },
+    contributions: {
+      es: [
+        'Lideré el diseño e implementación de la arquitectura backend por dominio (Screaming Architecture / Hexagonal) con servicios puros desacoplados del ORM.',
+        'Diseñé el modelo relacional de datos en PostgreSQL con Prisma 7 (Neon driver adapter) y migraciones HTTP/CLI automatizadas.',
+        'Implementé el flujo completo de autenticación y seguridad con Auth.js v5 (Credenciales + Google OAuth), verificación por email y derivación optimista proxy.ts (Next 16).',
+        'Desarrollé el CRUD asistido de publicaciones (wizard), integración de geocoding, subida directa firmada a Cloudinary y rate-limiting con Upstash Redis.',
+      ],
+      en: [
+        'Led the design and implementation of domain-driven backend architecture (Screaming Architecture / Hexagonal) decoupling pure business logic from ORM persistence.',
+        'Designed the relational data model in PostgreSQL using Prisma 7 (Neon serverless driver adapter) and automated HTTP/CLI database migrations.',
+        'Implemented full authentication & security flows using Auth.js v5 (Credentials + Google OAuth), email verification tokens, and Next 16 proxy.ts optimistic routing.',
+        'Developed property listing CRUD wizards, dynamic geocoding integration, signed browser-to-Cloudinary image uploads, and Upstash Redis rate limiting.',
+      ],
+    },
+    stack: ['Next.js 16', 'TypeScript', 'Prisma 7', 'Neon (PostgreSQL)', 'Auth.js v5', 'Zod', 'Upstash Redis', 'Cloudinary', 'Resend', 'Vitest'],
+    roles: {
+      es: ['Backend & Arquitectura', 'Líder Técnico'],
+      en: ['Backend & Architecture', 'Technical Lead'],
+    },
+    links: {
+      repo: 'https://github.com/eliann313/Prop2',
+    },
+  },
+  {
     id: 'pochocleando',
     title: 'Pochocleando',
     type: 'group',
