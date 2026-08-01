@@ -40,7 +40,7 @@ export const es: Translations = {
     role: 'Rol',
   },
   caseStudy: {
-    backToProjects: '← Volver a Proyectos',
+    backToProjects: 'Volver a Proyectos',
     overviewTitle: 'Resumen del Proyecto',
     myRoleTitle: 'Mi Rol & Aportes Clave',
     architectureTitle: 'Arquitectura & Diseño de Sistema',
