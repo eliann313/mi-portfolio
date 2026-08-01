@@ -64,7 +64,7 @@ export function Skills() {
               </div>
               {cat.description && (
                 <p className="text-[11px] mt-6 font-mono leading-relaxed opacity-80" style={{ color: c.textMuted }}>
-                  * {cat.description[locale as Locale]}
+                  {cat.description[locale as Locale]}
                 </p>
               )}
             </motion.div>

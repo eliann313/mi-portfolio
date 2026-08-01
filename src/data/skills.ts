@@ -15,7 +15,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'FastAPI',    icon: SiFastapi },
       { name: 'Node.js',    icon: SiNodedotjs },
       { name: 'TypeScript', icon: SiTypescript },
-      { name: 'C#*',        icon: CSharpIcon },
+      { name: 'C#',         icon: CSharpIcon },
       { name: 'PostgreSQL', icon: SiPostgresql },
       { name: 'Neon',       icon: NeonIcon },
       { name: 'MongoDB',    icon: SiMongodb },
