@@ -51,7 +51,7 @@ export function Skills() {
                           className="text-[16px] leading-none"
                           aria-hidden="true"
                           style={
-                            theme === 'dark' && (skill.name === 'SQLAlchemy' || skill.name === 'Linux' || skill.name === 'GitHub' || skill.name === 'Express')
+                            theme === 'dark' && (skill.name === 'Linux' || skill.name === 'GitHub' || skill.name === 'Express')
                               ? { filter: 'invert(1) brightness(1.6)' }
                               : undefined
                           }

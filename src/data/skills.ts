@@ -1,10 +1,10 @@
 import {
   SiPython, SiFastapi, SiNodedotjs, SiPostgresql, SiMongodb, SiSqlite,
   SiReact, SiAngular, SiIonic, SiTypescript, SiJavascript, SiHtml5, SiCss,
-  SiDocker, SiGit, SiGithub, SiLinux, SiSqlalchemy, SiMongoose, SiExpress,
+  SiDocker, SiGit, SiGithub, SiLinux, SiMongoose, SiExpress,
   SiNextdotjs, SiVercel, SiPrisma, SiGithubactions, SiPytest, SiVitest
 } from 'react-icons/si';
-import { CSharpIcon, PlaywrightIcon, AlembicIcon } from '../components/icons/CustomTechIcons';
+import { CSharpIcon, PlaywrightIcon, AlembicIcon, NeonIcon, SQLAlchemyIcon } from '../components/icons/CustomTechIcons';
 import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
@@ -17,7 +17,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'TypeScript', icon: SiTypescript },
       { name: 'C#*',        icon: CSharpIcon },
       { name: 'PostgreSQL', icon: SiPostgresql },
-      { name: 'Neon',       icon: SiPostgresql },
+      { name: 'Neon',       icon: NeonIcon },
       { name: 'MongoDB',    icon: SiMongodb },
       { name: 'SQLite',     icon: SiSqlite },
     ],
@@ -43,7 +43,7 @@ export const skillCategories: SkillCategory[] = [
     category: { es: 'ORM, Testing & DevOps', en: 'ORM, Testing & DevOps' },
     skills: [
       { name: 'Prisma',     icon: SiPrisma },
-      { name: 'SQLAlchemy', icon: SiSqlalchemy },
+      { name: 'SQLAlchemy', icon: SQLAlchemyIcon },
       { name: 'Alembic',    icon: AlembicIcon },
       { name: 'Mongoose',   icon: SiMongoose },
       { name: 'Express',    icon: SiExpress },
