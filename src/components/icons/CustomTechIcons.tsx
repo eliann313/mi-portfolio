@@ -1,28 +1,56 @@
 import type { SVGProps } from 'react';
 
-/** Official Microsoft C# Hexagon Logo */
+/** Clean, High-Legibility Official C# Logo (C# in C# Purple #9B4F96) */
 export function CSharpIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 128 128" width="1em" height="1em" {...props}>
-      <path fill="#68217A" d="M117.5 33.5l-51-29.5c-1.5-.9-3.5-.9-5 0l-51 29.5c-1.5.9-2.5 2.6-2.5 4.3v59c0 1.7 1 3.4 2.5 4.3l51 29.5c.8.4 1.7.6 2.5.6s1.7-.2 2.5-.6l51-29.5c1.5-.9 2.5-2.6 2.5-4.3v-59c0-1.7-1-3.4-2.5-4.3z"/>
-      <path fill="#FFFFFF" d="M49.4 78.4c-6.8 0-12.7-5.5-12.7-14.4 0-8.8 5.9-14.4 12.7-14.4 4.7 0 8.7 2.4 10.7 6.4l-5.6 3.1c-1.1-2.2-3.1-3.4-5.1-3.4-3.5 0-6.2 3.1-6.2 8.3 0 5.2 2.7 8.3 6.2 8.3 2.1 0 4.1-1.2 5.1-3.4l5.6 3.1c-2 4-6 6.4-10.7 6.4zm22.4-1.2h-3.4l1.2-5.4h-5.2l-1.2 5.4h-3.4l1.2-5.4h-4.3l.7-3.2h4.3l1.2-5.3h-4.3l.7-3.2h4.3l1.2-5.4h3.4l-1.2 5.4h5.2l1.2-5.4h3.4l-1.2 5.4h4.3l-.7 3.2h-4.3l-1.2 5.3h4.3l-.7 3.2h-4.3l-1.2 5.4zm-2.2-8.6l1.2-5.3h-5.2l-1.2 5.3h5.2z"/>
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" {...props}>
+      {/* Background Rounded Tag / Hexagon in C# Purple */}
+      <rect x="1" y="2" width="22" height="20" rx="4" fill="#9B4F96" />
+      {/* Large, Sharp C# Text Mark */}
+      <path
+        fill="#FFFFFF"
+        d="M9.2 15.5c-2.4 0-4.2-1.8-4.2-4.5s1.8-4.5 4.2-4.5c1.6 0 3 .8 3.7 2.2l-1.9 1c-.4-.8-1.1-1.2-1.8-1.2-1.3 0-2.2 1.1-2.2 2.5s.9 2.5 2.2 2.5c.7 0 1.4-.4 1.8-1.2l1.9 1c-.7 1.4-2.1 2.2-3.7 2.2zm6-1.2h-1.1l.4-1.8h-1.6l-.4 1.8h-1.1l.4-1.8h-1.2l.2-1h1.2l.4-1.7h-1.2l.2-1h1.2l.4-1.8h1.1l-.4 1.8h1.6l.4-1.8h1.1l-.4 1.8h1.2l-.2 1h-1.2l-.4 1.7h1.2l-.2 1h-1.2l-.4 1.8zm-.7-2.8l.4-1.7h-1.6l-.4 1.7h1.6z"
+      />
     </svg>
   );
 }
 
-/** Official Playwright Green/Red Logo */
+/** Official Playwright Two-Masks (Green Comedy Mask + Red Drama Mask) Logo */
 export function PlaywrightIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" {...props}>
-      <path fill="#2EAD33" d="M12 2A10 10 0 0 0 2 12c0 4.5 3 8.3 7.1 9.5v-2.1C5.8 18.3 3.5 15.4 3.5 12c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5c0 1.9-.6 3.6-1.7 5l1.4 1.4A10.4 10.4 0 0 0 22 12A10 10 0 0 0 12 2z"/>
-      <path fill="#45BA4B" d="M12 6.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm0 9A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/>
-      <path fill="#E00000" d="M19.5 12c0-1.5-.4-2.9-1.2-4.1l-1.3 1.3c.5.8.8 1.8.8 2.8 0 3.3-2.7 6-6 6-1 0-2-.2-2.8-.8l-1.3 1.3C9.1 19.3 10.5 19.7 12 19.7c4.2 0 7.5-3.3 7.5-7.7z"/>
-      <circle cx="12" cy="12" r="1.8" fill="#2EAD33"/>
+    <svg viewBox="0 0 36 24" width="1.4em" height="1em" fill="none" {...props}>
+      {/* Left Mask: Green Comedy Mask */}
+      <g id="green-mask">
+        {/* Mask shape */}
+        <path
+          fill="#45BA4B"
+          d="M13 2C6.9 2 2 6.9 2 13c0 4.8 3.1 8.9 7.4 10.3l1.1-2.4C7 19.8 4.5 16.7 4.5 13c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5c0 1.8-.6 3.5-1.6 4.9l1.8 1.4c1.4-1.8 2.3-4 2.3-6.3 0-6.1-4.9-11-11-11z"
+        />
+        {/* Eyes */}
+        <circle cx="8.5" cy="11.5" r="1.5" fill="#2EAD33" />
+        <circle cx="15.5" cy="11.5" r="1.5" fill="#2EAD33" />
+        {/* Smile */}
+        <path d="M8.5 15.5c1.2 1.5 3.8 1.5 5 0" stroke="#2EAD33" strokeWidth="1.5" strokeLinecap="round" />
+      </g>
+
+      {/* Right Mask: Red Drama Mask */}
+      <g id="red-mask">
+        {/* Mask shape */}
+        <path
+          fill="#E00000"
+          d="M23 6c-4.8 0-8.9 3.1-10.3 7.4l2.4 1.1c1.1-3.5 4.2-6 7.9-6 4.7 0 8.5 3.8 8.5 8.5s-3.8 8.5-8.5 8.5c-1.8 0-3.5-.6-4.9-1.6l-1.4 1.8c1.8 1.4 4 2.3 6.3 2.3 6.1 0 11-4.9 11-11S29.1 6 23 6z"
+        />
+        {/* Eyes */}
+        <circle cx="19.5" cy="15.5" r="1.3" fill="#B30000" />
+        <circle cx="26.5" cy="15.5" r="1.3" fill="#B30000" />
+        {/* Expression */}
+        <path d="M20 20c1-.8 3-.8 4 0" stroke="#B30000" strokeWidth="1.2" strokeLinecap="round" />
+      </g>
     </svg>
   );
 }
 
-/** Official Alembic Database Migrations Logo */
+/** Official Alembic Database Migrations Green Distillation Flask Logo */
 export function AlembicIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" {...props}>
