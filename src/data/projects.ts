@@ -95,6 +95,7 @@ export const projects: Project[] = [
       en: ['Backend & Architecture', 'Technical Lead'],
     },
     links: {
+      demo: 'https://prop2inmuebles.vercel.app',
       repo: 'https://github.com/eliann313/Prop2',
     },
   },
