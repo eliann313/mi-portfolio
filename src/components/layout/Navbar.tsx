@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
@@ -11,9 +12,14 @@ const SECTION_IDS = ['hero', 'about', 'skills', 'projects', 'education', 'langua
 export function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { locale, toggleLocale, t } = useLanguage();
-  const activeSection = useActiveSection(SECTION_IDS);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const activeSectionHook = useActiveSection(SECTION_IDS);
   const [menuOpen, setMenuOpen] = useState(false);
   const c = colors[theme];
+
+  const isHomePage = location.pathname === '/';
+  const activeSection = isHomePage ? activeSectionHook : 'projects';
 
   const navLinks = [
     { id: 'about',     label: t.nav.about },
@@ -34,7 +40,11 @@ export function Navbar() {
 
   const handleLinkClick = (id: string) => {
     setMenuOpen(false);
-    scrollToSection(id);
+    if (!isHomePage) {
+      navigate(`/#${id}`);
+    } else {
+      scrollToSection(id);
+    }
   };
 
   const navBg = theme === 'dark' ? 'rgba(9,9,11,0.85)' : 'rgba(255,255,255,0.85)';
