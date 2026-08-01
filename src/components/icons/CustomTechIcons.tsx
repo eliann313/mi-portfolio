@@ -24,11 +24,12 @@ export function PlaywrightIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-/** Official Alembic Database Migrations Green Distillation Flask Logo */
+/** Official Alembic (Yin-Yang Wave Distillation Emblem Logo) */
 export function AlembicIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" {...props}>
-      <path fill="#6BA539" d="M6 22h12a1 1 0 0 0 .8-1.6l-5.3-7.1V6h1.5a1 1 0 0 0 0-2h-6a1 1 0 0 0 0 2H11.5v7.3L6.2 20.4A1 1 0 0 0 6 22zm5.5-14h1v5a1 1 0 0 0 .2.6l4 5.4H7.3l4-5.4a1 1 0 0 0 .2-.6V8z"/>
+    <svg viewBox="0 0 100 100" width="1em" height="1em" fill="currentColor" {...props}>
+      <path d="M50 4C24.6 4 4 24.6 4 50s20.6 46 46 46 46-20.6 46-46S75.4 4 50 4zm0 8c21 0 38 17 38 38 0 16-9.9 29.6-24 35.1C57.6 76.4 50 67.9 50 57.7c0-12.7 10.3-23 23-23 .8 0 1.6.1 2.4.2C71.9 22.6 62 14 50 12zM25 45c4.6-8.4 13.1-14.4 23.2-15.6-2.1 4.3-3.3 9.1-3.3 14.1 0 9 3.9 17.1 10 22.8-6.6-1.2-12.7-4.9-16.9-10.3 2.3 4.9 5.9 9 10.5 11.7-6.3.2-12.4-2.6-16.5-7.4 2.8 5.3 7.4 9.3 12.9 11.9-8.3 0-16.1-4-20.9-10.6 2.9 5.2 7.4 9.3 12.9 11.7C25.6 79.9 16 65.9 16 49.7c0-1.6.1-3.2.3-4.7 2.6 2.1 5.5 3.8 8.4 0z" />
+      <path d="M68.5 24.5c1.9 0 3.5 1.6 3.5 3.5s-1.6 3.5-3.5 3.5-3.5-1.6-3.5-3.5 1.6-3.5 3.5-3.5z" />
     </svg>
   );
 }
