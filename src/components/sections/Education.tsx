@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { GraduationCap, CheckCircle, Clock } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -6,11 +6,11 @@ import { educationEntries } from '../../data/education';
 import { colors } from '../../utils/colors';
 import type { Locale } from '../../types';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (delay: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.5, ease: 'easeOut', delay },
+    transition: { duration: 0.5, ease: 'easeOut' as const, delay },
   }),
 };
 

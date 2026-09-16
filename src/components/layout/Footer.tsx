@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import { personal } from '../../data/personal';
@@ -23,8 +24,8 @@ export function Footer() {
         </div>
         <div className="flex items-center gap-3">
           {[
-            { href: personal.github,   icon: <Github size={16} />,   label: 'GitHub' },
-            { href: personal.linkedin, icon: <Linkedin size={16} />, label: 'LinkedIn' },
+            { href: personal.github,   icon: <FiGithub size={16} />,   label: 'GitHub' },
+            { href: personal.linkedin, icon: <FiLinkedin size={16} />, label: 'LinkedIn' },
             { href: `mailto:${personal.email}`, icon: <Mail size={16} />, label: 'Email' },
           ].map(item => (
             <a key={item.label} href={item.href}

@@ -1,15 +1,16 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { Mail } from 'lucide-react';
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import { colors } from '../../utils/colors';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (delay: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.5, ease: 'easeOut', delay },
+    transition: { duration: 0.5, ease: 'easeOut' as const, delay },
   }),
 };
 
@@ -21,8 +22,8 @@ export function Contact() {
 
   const links = [
     { id: 'email',    label: t.contact.emailLabel, icon: <Mail size={18} />,     value: 'elian.nahuel0348@gmail.com' },
-    { id: 'linkedin', label: 'LinkedIn',           icon: <Linkedin size={18} />, value: 'linkedin.com/in/eliannahuel' },
-    { id: 'github',   label: 'GitHub',             icon: <Github size={18} />,   value: 'github.com/eliann313' },
+    { id: 'linkedin', label: 'LinkedIn',           icon: <FiLinkedin size={18} />, value: 'linkedin.com/in/eliannahuel' },
+    { id: 'github',   label: 'GitHub',             icon: <FiGithub size={18} />,   value: 'github.com/eliann313' },
   ] as const;
 
   const handleCardClick = (id: 'email' | 'linkedin' | 'github') => {
