@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Download, Github, Linkedin, Mail } from 'lucide-react';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
+import { MapPin, Download, Mail } from 'lucide-react';
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import { personal } from '../../data/personal';
 import { colors } from '../../utils/colors';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (delay: number) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.6, ease: 'easeOut', delay },
+    transition: { duration: 0.6, ease: 'easeOut' as const, delay },
   }),
 };
 
@@ -98,11 +99,11 @@ export function Hero() {
                 {t.hero.downloadCV}
               </a>
               <a href={personal.github} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ cursor: 'pointer' }}>
-                <Github size={14} />
+                <FiGithub size={14} />
                 GitHub
               </a>
               <a href={personal.linkedin} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ cursor: 'pointer' }}>
-                <Linkedin size={14} />
+                <FiLinkedin size={14} />
                 LinkedIn
               </a>
               <div className="relative">

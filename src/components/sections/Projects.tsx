@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, Plus, BookOpen } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+import { ExternalLink, Plus, BookOpen } from 'lucide-react';
+import { FiGithub } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -7,11 +8,11 @@ import { projects } from '../../data/projects';
 import { colors, type ColorMap } from '../../utils/colors';
 import type { Locale, Project } from '../../types';
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: (delay: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.5, ease: 'easeOut', delay },
+    transition: { duration: 0.5, ease: 'easeOut' as const, delay },
   }),
 };
 
@@ -133,7 +134,7 @@ export function Projects() {
                     {project.links.repo && project.links.repo !== '#' && (
                       <a href={project.links.repo} target="_blank" rel="noopener noreferrer"
                         className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
-                        <Github size={12} />{t.projects.viewRepo}
+                        <FiGithub size={12} />{t.projects.viewRepo}
                       </a>
                     )}
                   </div>

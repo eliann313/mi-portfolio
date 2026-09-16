@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, Github, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X } from 'lucide-react';
+import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X } from 'lucide-react';
+import { FiGithub } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
 import { caseStudies } from '../../data/caseStudies';
@@ -92,7 +93,7 @@ export function CaseStudyView() {
               )}
               {project.links.repo && project.links.repo !== '#' && (
                 <a href={project.links.repo} target="_blank" rel="noopener noreferrer" className="btn-secondary !py-1.5 !px-3.5 !text-xs">
-                  <Github size={13} /> {t.projects.viewRepo}
+                  <FiGithub size={13} /> {t.projects.viewRepo}
                 </a>
               )}
             </div>
