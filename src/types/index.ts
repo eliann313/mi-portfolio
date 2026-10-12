@@ -227,6 +227,8 @@ export interface Translations {
     architectureDiagramTitle?: string;
     tabArchitecture?: string;
     tabSchema?: string;
+    viewErdDiagram?: string;
+    viewTableInspector?: string;
     lightboxClose?: string;
     lightboxNext?: string;
     lightboxPrev?: string;

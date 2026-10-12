@@ -67,6 +67,8 @@ export const en: Translations = {
     architectureDiagramTitle: 'System Architecture & Data Flow',
     tabArchitecture: 'System Architecture',
     tabSchema: 'PostgreSQL Schema (ERD)',
+    viewErdDiagram: 'Visual ERD Graph',
+    viewTableInspector: 'Inspector & Dictionary',
     lightboxClose: 'Close preview',
     lightboxNext: 'Next image',
     lightboxPrev: 'Previous image',
