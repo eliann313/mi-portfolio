@@ -24,8 +24,8 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
     systemArchitecture ? 'architecture' : 'schema'
   );
 
-  // Sub-view mode for schema: visual diagram (default) or tabular inspector
-  const [schemaViewMode, setSchemaViewMode] = useState<'diagram' | 'inspector'>('diagram');
+  // Sub-view mode for schema: tabular inspector (default) or visual diagram
+  const [schemaViewMode, setSchemaViewMode] = useState<'inspector' | 'diagram'>('inspector');
 
   const [selectedTable, setSelectedTable] = useState<string | null>(
     dbSchema?.tables[0]?.name || null
@@ -138,6 +138,20 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
               {/* View Switcher Pills */}
               <div className="flex items-center gap-1 p-0.5 rounded-lg border" style={{ backgroundColor: c.bgBase, borderColor: c.border }}>
                 <button
+                  onClick={() => setSchemaViewMode('inspector')}
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${
+                    schemaViewMode === 'inspector' ? 'shadow-xs font-bold' : 'opacity-70 hover:opacity-100'
+                  }`}
+                  style={{
+                    backgroundColor: schemaViewMode === 'inspector' ? c.accent : 'transparent',
+                    color: schemaViewMode === 'inspector' ? '#ffffff' : c.textSecondary,
+                  }}
+                  title={t.caseStudy.viewTableInspector || (locale === 'es' ? 'Inspector y Diccionario' : 'Inspector & Dictionary')}
+                >
+                  <LayoutGrid size={13} />
+                  <span>{t.caseStudy.viewTableInspector || (locale === 'es' ? 'Inspector y Diccionario' : 'Inspector & Dictionary')}</span>
+                </button>
+                <button
                   onClick={() => setSchemaViewMode('diagram')}
                   className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${
                     schemaViewMode === 'diagram' ? 'shadow-xs font-bold' : 'opacity-70 hover:opacity-100'
@@ -150,20 +164,6 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
                 >
                   <Network size={13} />
                   <span>{t.caseStudy.viewErdDiagram || 'Grafo Visual ERD'}</span>
-                </button>
-                <button
-                  onClick={() => setSchemaViewMode('inspector')}
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${
-                    schemaViewMode === 'inspector' ? 'shadow-xs font-bold' : 'opacity-70 hover:opacity-100'
-                  }`}
-                  style={{
-                    backgroundColor: schemaViewMode === 'inspector' ? c.accent : 'transparent',
-                    color: schemaViewMode === 'inspector' ? '#ffffff' : c.textSecondary,
-                  }}
-                  title={t.caseStudy.viewTableInspector || 'Inspector Tabular'}
-                >
-                  <LayoutGrid size={13} />
-                  <span>{t.caseStudy.viewTableInspector || 'Inspector Tabular'}</span>
                 </button>
               </div>
             </div>

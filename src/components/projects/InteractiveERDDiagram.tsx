@@ -13,6 +13,7 @@ import {
   ArrowRight,
   HelpCircle,
   Move,
+  X,
 } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -31,43 +32,43 @@ const NODE_WIDTH = 230;
 
 // Curated layout positions for clean, non-crossing relational diagrams
 const defaultLayouts: Record<string, { x: number; y: number }> = {
-  // GridHub WMS
-  client: { x: 40, y: 220 },
-  warehouse: { x: 330, y: 70 },
-  location: { x: 620, y: 70 },
-  pickertable: { x: 620, y: 270 },
-  item: { x: 330, y: 470 },
-  lot: { x: 330, y: 670 },
-  stock: { x: 620, y: 470 },
-  stockmovement: { x: 620, y: 670 },
-  replenishmentrule: { x: 910, y: 70 },
-  order: { x: 910, y: 310 },
-  orderline: { x: 1200, y: 210 },
-  task: { x: 1200, y: 390 },
-  orderfulfillment: { x: 910, y: 550 },
-  erp_outbound_event: { x: 1200, y: 550 },
+  // GridHub WMS (Estructura topológica y operativa estrictamente planar)
+  client: { x: 50, y: 140 },
+  warehouse: { x: 360, y: 140 },
+  pickertable: { x: 680, y: 50 },
+  location: { x: 680, y: 240 },
+  replenishmentrule: { x: 1000, y: 240 },
+  item: { x: 360, y: 440 },
+  lot: { x: 360, y: 640 },
+  stock: { x: 680, y: 540 },
+  stockmovement: { x: 1000, y: 540 },
+  order: { x: 1320, y: 240 },
+  orderline: { x: 1640, y: 80 },
+  task: { x: 1640, y: 240 },
+  orderfulfillment: { x: 1640, y: 400 },
+  erp_outbound_event: { x: 1960, y: 400 },
 
-  // SkillRadar
-  User: { x: 40, y: 270 },
-  Resume: { x: 330, y: 70 },
-  JobMatch: { x: 620, y: 70 },
-  GithubAnalysis: { x: 330, y: 260 },
-  InterviewSession: { x: 330, y: 440 },
-  RoadmapTask: { x: 330, y: 630 },
-  JobPosting: { x: 620, y: 340 },
-  JobPostingApplication: { x: 910, y: 340 },
-  InterviewScorecard: { x: 1200, y: 340 },
-  ContactRequest: { x: 620, y: 530 },
+  // SkillRadar (User en columna 1; entidades directas en columna 2; flujos derivados a la derecha en 3 y 4)
+  User: { x: 50, y: 450 },
+  Resume: { x: 370, y: 50 },
+  JobMatch: { x: 690, y: 50 },
+  GithubAnalysis: { x: 370, y: 210 },
+  InterviewSession: { x: 370, y: 370 },
+  RoadmapTask: { x: 370, y: 530 },
+  JobPosting: { x: 370, y: 690 },
+  JobPostingApplication: { x: 690, y: 690 },
+  InterviewScorecard: { x: 1010, y: 690 },
+  ContactRequest: { x: 370, y: 850 },
 
-  // Prop²
-  usuario: { x: 40, y: 240 },
-  token_verificacion: { x: 40, y: 490 },
-  publicacion: { x: 340, y: 240 },
-  favorito: { x: 340, y: 490 },
-  imagen_publicacion: { x: 650, y: 70 },
-  publicacion_caracteristica: { x: 650, y: 280 },
-  caracteristica: { x: 960, y: 280 },
-  mensaje_contacto: { x: 650, y: 490 },
+  // Prop² (usuario a la izquierda; flujo directo a publicacion y sub-entidades)
+  usuario: { x: 60, y: 300 },
+  token_verificacion: { x: 60, y: 80 },
+  favorito: { x: 60, y: 520 },
+  publicacion: { x: 380, y: 300 },
+  imagen_publicacion: { x: 700, y: 80 },
+  publicacion_caracteristica: { x: 700, y: 300 },
+  caracteristica: { x: 1020, y: 300 },
+  mensaje_contacto: { x: 700, y: 520 },
 };
 
 const domainColors: Record<string, string> = {
@@ -117,10 +118,11 @@ export function InteractiveERDDiagram({
     return initial;
   });
 
-  const [scale, setScale] = useState<number>(0.68);
-  const [pan, setPan] = useState<{ x: number; y: number }>({ x: 25, y: 25 });
+  const [scale, setScale] = useState<number>(0.65);
+  const [pan, setPan] = useState<{ x: number; y: number }>({ x: 30, y: 30 });
   const [isPanning, setIsPanning] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [hoveredTable, setHoveredTable] = useState<string | null>(null);
   const [hoveredRelationship, setHoveredRelationship] = useState<string | null>(null);
   const [filterDomain, setFilterDomain] = useState<string>('all');
@@ -217,8 +219,8 @@ export function InteractiveERDDiagram({
   }, []);
 
   const handleResetView = () => {
-    setScale(0.68);
-    setPan({ x: 25, y: 25 });
+    setScale(0.65);
+    setPan({ x: 30, y: 30 });
     // Reset positions to defaults
     const reset: Record<string, { x: number; y: number }> = {};
     dbSchema.tables.forEach((t, idx) => {
@@ -236,19 +238,19 @@ export function InteractiveERDDiagram({
 
   // Calculate canvas dimensions
   const canvasWidth = useMemo(() => {
-    let max = 1450;
+    let max = 2400;
     Object.values(positions).forEach((p) => {
-      if (p.x + NODE_WIDTH + 100 > max) max = p.x + NODE_WIDTH + 100;
+      if (p.x + NODE_WIDTH + 200 > max) max = p.x + NODE_WIDTH + 200;
     });
     return max;
   }, [positions]);
 
   const canvasHeight = useMemo(() => {
-    let max = 950;
+    let max = 1150;
     Object.entries(positions).forEach(([name, p]) => {
       const table = dbSchema.tables.find((t) => t.name === name);
       const h = table ? getNodeHeight(table) : 150;
-      if (p.y + h + 150 > max) max = p.y + h + 150;
+      if (p.y + h + 200 > max) max = p.y + h + 200;
     });
     return max;
   }, [positions, dbSchema.tables]);
@@ -304,6 +306,21 @@ export function InteractiveERDDiagram({
 
         {/* Viewport Action Buttons */}
         <div className="flex items-center gap-1.5 ml-auto">
+          {activeTableObj && (
+            <button
+              onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+              className="p-1.5 px-2.5 rounded-lg border hover:opacity-100 transition-all text-xs flex items-center gap-1.5 font-medium"
+              style={{
+                backgroundColor: isDrawerOpen ? c.accent : c.bgBase,
+                borderColor: isDrawerOpen ? c.accent : c.border,
+                color: isDrawerOpen ? '#ffffff' : c.textPrimary,
+              }}
+              title={locale === 'es' ? `Ver ficha técnica de ${activeTableObj.name}` : `View details of ${activeTableObj.name}`}
+            >
+              <Box size={13} />
+              <span className="hidden sm:inline">{locale === 'es' ? 'Ficha Técnica' : 'Tech Sheet'}</span>
+            </button>
+          )}
           <button
             onClick={() => setScale((s) => Math.min(s + 0.15, 1.5))}
             className="p-1.5 rounded-lg border hover:opacity-100 opacity-80 transition-all text-xs flex items-center"
@@ -366,19 +383,15 @@ export function InteractiveERDDiagram({
           }}
         >
           <Move size={11} style={{ color: c.accent }} />
-          <span>{locale === 'es' ? 'Arrastra nodos o el lienzo · Clic para aislar' : 'Drag nodes or pan · Click to focus'}</span>
+          <span>{locale === 'es' ? 'Arrastra nodos o el lienzo · Clic en tabla para abrir ficha técnica' : 'Drag nodes or pan · Click table to inspect details'}</span>
         </div>
 
         {/* Scalable & Pannable SVG World */}
         <svg
           width="100%"
           height="100%"
-          className="w-full h-full"
-          style={{
-            transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
-            transformOrigin: '0 0',
-            transition: isPanning || draggingNode ? 'none' : 'transform 0.15s ease-out',
-          }}
+          className="w-full h-full block overflow-visible"
+          style={{ overflow: 'visible' }}
         >
           <defs>
             {/* Subtle Grid Pattern */}
@@ -413,8 +426,16 @@ export function InteractiveERDDiagram({
             </marker>
           </defs>
 
-          {/* Grid Background in World Space */}
-          <rect width={canvasWidth} height={canvasHeight} fill="url(#erd-grid-pattern)" />
+          {/* Pannable & Scalable World Container */}
+          <g
+            style={{
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
+              transformOrigin: '0 0',
+              transition: isPanning || draggingNode ? 'none' : 'transform 0.15s ease-out',
+            }}
+          >
+            {/* Grid Background in World Space */}
+            <rect width={canvasWidth} height={canvasHeight} fill="url(#erd-grid-pattern)" />
 
           {/* LAYER 1: Relational Bezier Edges */}
           <g className="edges-layer">
@@ -630,6 +651,7 @@ export function InteractiveERDDiagram({
                     onClick={(e) => {
                       e.stopPropagation();
                       onSelectTable(table.name);
+                      setIsDrawerOpen(true);
                     }}
                     onMouseEnter={() => setHoveredTable(table.name)}
                     onMouseLeave={() => setHoveredTable(null)}
@@ -662,6 +684,7 @@ export function InteractiveERDDiagram({
                     onClick={(e) => {
                       e.stopPropagation();
                       onSelectTable(table.name);
+                      setIsDrawerOpen(true);
                     }}
                   />
 
@@ -797,148 +820,169 @@ export function InteractiveERDDiagram({
               );
             })}
           </g>
+          </g>
         </svg>
-      </div>
 
-      {/* LAYER 3: Interview Insights & Architecture Deep Dive Card */}
-      <AnimatePresence mode="wait">
-        {activeTableObj && (
-          <motion.div
-            key={activeTableObj.name}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            className="rounded-xl border p-5 shadow-sm"
-            style={{ backgroundColor: c.bgElevated, borderColor: c.border }}
-          >
-            {/* Header with Table Name, Domain & Action */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b" style={{ borderColor: c.border }}>
-              <div className="flex items-center gap-2.5">
-                <span
-                  className="p-1.5 rounded-lg text-white"
-                  style={{ backgroundColor: domainColors[activeTableObj.domain || ''] || c.accent }}
-                >
-                  <Box size={16} />
-                </span>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h4 className="font-mono text-base font-bold" style={{ color: c.textPrimary }}>
-                      Tabla: {activeTableObj.name}
-                    </h4>
-                    {activeTableObj.domain && (
-                      <span
-                        className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-full"
-                        style={{
-                          backgroundColor: `${domainColors[activeTableObj.domain] || c.accent}20`,
-                          color: domainColors[activeTableObj.domain] || c.accent,
-                        }}
-                      >
-                        Dominio: {activeTableObj.domain}
-                      </span>
-                    )}
+          {/* Slide-over Drawer for Selected Table Details */}
+          <AnimatePresence>
+            {isDrawerOpen && activeTableObj && (
+              <motion.div
+                initial={{ x: '100%', opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: '100%', opacity: 0 }}
+                transition={{ type: 'spring', damping: 28, stiffness: 260 }}
+                className="absolute top-0 right-0 bottom-0 z-30 w-full sm:w-[460px] md:w-[490px] border-l shadow-2xl flex flex-col backdrop-blur-xl"
+                style={{
+                  backgroundColor: theme === 'dark' ? 'rgba(11, 17, 33, 0.96)' : 'rgba(255, 255, 255, 0.98)',
+                  borderColor: c.border,
+                }}
+              >
+                {/* Drawer Header */}
+                <div className="flex items-center justify-between p-4 border-b gap-3" style={{ borderColor: c.border }}>
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span
+                      className="p-1.5 rounded-lg text-white shrink-0"
+                      style={{ backgroundColor: domainColors[activeTableObj.domain || ''] || c.accent }}
+                    >
+                      <Box size={16} />
+                    </span>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-mono text-sm sm:text-base font-bold truncate" style={{ color: c.textPrimary }}>
+                          {activeTableObj.name}
+                        </h4>
+                        {activeTableObj.domain && (
+                          <span
+                            className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-full shrink-0"
+                            style={{
+                              backgroundColor: `${domainColors[activeTableObj.domain] || c.accent}20`,
+                              color: domainColors[activeTableObj.domain] || c.accent,
+                            }}
+                          >
+                            {activeTableObj.domain}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[11px] truncate" style={{ color: c.textMuted }}>
+                        {activeTableObj.columns.length} {locale === 'es' ? 'columnas relacionales' : 'columns'}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-xs mt-0.5" style={{ color: c.textSecondary }}>
+
+                  <button
+                    onClick={() => setIsDrawerOpen(false)}
+                    className="p-1.5 rounded-lg border hover:opacity-100 opacity-70 transition-all text-xs"
+                    style={{ backgroundColor: c.bgElevated, borderColor: c.border, color: c.textPrimary }}
+                    title={locale === 'es' ? 'Cerrar ficha' : 'Close panel'}
+                  >
+                    <X size={16} />
+                  </button>
+                </div>
+
+                {/* Drawer Body (Scrollable) */}
+                <div className="p-4 space-y-4 overflow-y-auto flex-1">
+                  {/* Table Description */}
+                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
                     {activeTableObj.description?.[locale as Locale] ||
                       activeInsight?.architectureRole[locale as Locale]}
                   </p>
-                </div>
-              </div>
 
-              {onSwitchToInspector && (
-                <button
-                  onClick={onSwitchToInspector}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all hover:scale-[1.02]"
-                  style={{
-                    backgroundColor: c.bgBase,
-                    borderColor: c.accent,
-                    color: c.accent,
-                  }}
-                >
-                  <Layers size={13} />
-                  {locale === 'es' ? 'Ver Columnas & Tipos en Inspector' : 'View in Schema Inspector'}
-                  <ArrowRight size={13} />
-                </button>
-              )}
-            </div>
+                  {/* Action Button: Jump to Inspector */}
+                  {onSwitchToInspector && (
+                    <button
+                      onClick={() => {
+                        onSwitchToInspector();
+                        setIsDrawerOpen(false);
+                      }}
+                      className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-semibold border transition-all hover:scale-[1.01]"
+                      style={{
+                        backgroundColor: c.bgBase,
+                        borderColor: c.accent,
+                        color: c.accent,
+                      }}
+                    >
+                      <Layers size={13} />
+                      {locale === 'es' ? 'Ver Columnas y Tipos en Inspector' : 'View in Schema Inspector'}
+                      <ArrowRight size={13} />
+                    </button>
+                  )}
 
-            {/* Architecture Invariants & Interview Rationale Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-              {/* Box 1: Technical & Relational Invariants */}
-              <div className="p-3.5 rounded-lg border flex flex-col justify-between" style={{ backgroundColor: c.bgBase, borderColor: c.border }}>
-                <div>
-                  <h5 className="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5" style={{ color: '#10B981' }}>
-                    <ShieldCheck size={14} />
-                    {locale === 'es' ? 'Invariante de Integridad en Base de Datos' : 'Database Integrity Invariant'}
-                  </h5>
-                  <p className="text-xs leading-relaxed" style={{ color: c.textPrimary }}>
-                    {activeInsight?.keyInvariant[locale as Locale] ||
-                      (locale === 'es'
-                        ? 'Integridad referencial y validación estricta de tipos de datos en PostgreSQL.'
-                        : 'Referential integrity and strict type validation in PostgreSQL.')}
-                  </p>
-                </div>
+                  {/* Box 1: Technical & Relational Invariants */}
+                  <div className="p-3.5 rounded-xl border" style={{ backgroundColor: c.bgBase, borderColor: c.border }}>
+                    <h5 className="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5" style={{ color: '#10B981' }}>
+                      <ShieldCheck size={14} />
+                      {locale === 'es' ? 'Invariante de Integridad en Base de Datos' : 'Database Integrity Invariant'}
+                    </h5>
+                    <p className="text-xs leading-relaxed" style={{ color: c.textPrimary }}>
+                      {activeInsight?.keyInvariant[locale as Locale] ||
+                        (locale === 'es'
+                          ? 'Integridad referencial y validación estricta de tipos de datos en PostgreSQL.'
+                          : 'Referential integrity and strict type validation in PostgreSQL.')}
+                    </p>
 
-                {/* Connected Foreign Keys summary */}
-                <div className="mt-3 pt-2.5 border-t text-[11px] font-mono flex flex-wrap items-center gap-2" style={{ borderColor: `${c.border}50` }}>
-                  <span style={{ color: c.textMuted }}>
-                    {locale === 'es' ? 'Relaciones activas:' : 'Active relations:'}
-                  </span>
-                  {dbSchema.relationships
-                    .filter((r) => r.from === activeTableObj.name || r.to === activeTableObj.name)
-                    .map((r, rIdx) => {
-                      const other = r.from === activeTableObj.name ? r.to : r.from;
-                      const dir = r.from === activeTableObj.name ? '➔' : '⬅';
-                      return (
-                        <button
-                          key={rIdx}
-                          onClick={() => onSelectTable(other)}
-                          className="px-2 py-0.5 rounded border hover:opacity-100 opacity-85 transition-opacity"
-                          style={{
-                            backgroundColor: c.bgElevated,
-                            borderColor: c.border,
-                            color: c.accent,
-                          }}
-                        >
-                          {dir} {other} ({r.type})
-                        </button>
-                      );
-                    })}
-                </div>
-              </div>
+                    {/* Connected Foreign Keys summary */}
+                    <div className="mt-3 pt-2.5 border-t text-[11px] font-mono flex flex-wrap items-center gap-1.5" style={{ borderColor: `${c.border}50` }}>
+                      <span style={{ color: c.textMuted }}>
+                        {locale === 'es' ? 'Relaciones:' : 'Relations:'}
+                      </span>
+                      {dbSchema.relationships
+                        .filter((r) => r.from === activeTableObj.name || r.to === activeTableObj.name)
+                        .map((r, rIdx) => {
+                          const other = r.from === activeTableObj.name ? r.to : r.from;
+                          const dir = r.from === activeTableObj.name ? '➔' : '⬅';
+                          return (
+                            <button
+                              key={rIdx}
+                              onClick={() => {
+                                onSelectTable(other);
+                                setIsDrawerOpen(true);
+                              }}
+                              className="px-2 py-0.5 rounded border hover:opacity-100 opacity-85 transition-opacity text-[10px]"
+                              style={{
+                                backgroundColor: c.bgElevated,
+                                borderColor: c.border,
+                                color: c.accent,
+                              }}
+                            >
+                              {dir} {other} ({r.type})
+                            </button>
+                          );
+                        })}
+                    </div>
+                  </div>
 
-              {/* Box 2: Interview Rationale (Why this design?) */}
-              <div
-                className="p-3.5 rounded-lg border flex flex-col justify-between"
-                style={{
-                  backgroundColor: theme === 'dark' ? 'rgba(245, 158, 11, 0.06)' : 'rgba(245, 158, 11, 0.08)',
-                  borderColor: theme === 'dark' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(245, 158, 11, 0.35)',
-                }}
-              >
-                <div>
-                  <h5 className="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5 text-amber-500">
-                    <Lightbulb size={14} />
-                    {locale === 'es' ? 'Clave de Diseño para Entrevistas Técnicas' : 'Technical Interview Rationale'}
-                  </h5>
-                  <p className="text-xs leading-relaxed" style={{ color: c.textPrimary }}>
-                    {activeInsight?.interviewRationale[locale as Locale] ||
-                      (locale === 'es'
-                        ? 'Diseñado para desacoplamiento modular, atomicidad ACID y rendimiento en queries indexadas.'
-                        : 'Designed for modular decoupling, ACID atomicity, and indexed query performance.')}
-                  </p>
+                  {/* Box 2: Interview Rationale (Why this design?) */}
+                  <div
+                    className="p-3.5 rounded-xl border"
+                    style={{
+                      backgroundColor: theme === 'dark' ? 'rgba(245, 158, 11, 0.07)' : 'rgba(245, 158, 11, 0.08)',
+                      borderColor: theme === 'dark' ? 'rgba(245, 158, 11, 0.3)' : 'rgba(245, 158, 11, 0.35)',
+                    }}
+                  >
+                    <h5 className="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-1.5 text-amber-500">
+                      <Lightbulb size={14} />
+                      {locale === 'es' ? 'Clave de Diseño para Entrevistas Técnicas' : 'Technical Interview Rationale'}
+                    </h5>
+                    <p className="text-xs leading-relaxed" style={{ color: c.textPrimary }}>
+                      {activeInsight?.interviewRationale[locale as Locale] ||
+                        (locale === 'es'
+                          ? 'Diseñado para desacoplamiento modular, atomicidad ACID y rendimiento en queries indexadas.'
+                          : 'Designed for modular decoupling, ACID atomicity, and indexed query performance.')}
+                    </p>
+                    <div className="mt-2.5 pt-2 flex items-center gap-1 text-[11px] text-amber-600 dark:text-amber-400">
+                      <HelpCircle size={12} />
+                      <span>
+                        {locale === 'es'
+                          ? 'Explica este punto al justificar la persistencia y la arquitectura del proyecto.'
+                          : 'Highlight this rationale when explaining persistence and system tradeoffs.'}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="mt-2.5 pt-2 flex items-center gap-1 text-[11px] text-amber-600 dark:text-amber-400">
-                  <HelpCircle size={12} />
-                  <span>
-                    {locale === 'es'
-                      ? 'Explica este punto al justificar la persistencia y la arquitectura del proyecto.'
-                      : 'Highlight this rationale when explaining persistence and system tradeoffs.'}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  }
