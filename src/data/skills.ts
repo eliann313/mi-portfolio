@@ -2,7 +2,8 @@ import {
   SiPython, SiFastapi, SiNodedotjs, SiPostgresql, SiMongodb, SiSqlite,
   SiReact, SiAngular, SiIonic, SiTypescript, SiJavascript, SiHtml5, SiCss,
   SiDocker, SiGit, SiGithub, SiLinux, SiMongoose, SiExpress,
-  SiNextdotjs, SiVercel, SiPrisma, SiGithubactions, SiPytest, SiVitest
+  SiNextdotjs, SiVercel, SiPrisma, SiGithubactions, SiPytest, SiVitest,
+  SiDuckdb, SiWebassembly
 } from 'react-icons/si';
 import { CSharpIcon, PlaywrightIcon, AlembicIcon, NeonIcon, SQLAlchemyIcon } from '../components/icons/CustomTechIcons';
 import type { SkillCategory } from '../types';
@@ -18,6 +19,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'C#',         icon: CSharpIcon },
       { name: 'PostgreSQL', icon: SiPostgresql },
       { name: 'Neon',       icon: NeonIcon },
+      { name: 'DuckDB',     icon: SiDuckdb },
       { name: 'MongoDB',    icon: SiMongodb },
       { name: 'SQLite',     icon: SiSqlite },
     ],
@@ -29,14 +31,15 @@ export const skillCategories: SkillCategory[] = [
   {
     category: { es: 'Frontend y Mobile', en: 'Frontend & Mobile' },
     skills: [
-      { name: 'React',      icon: SiReact },
-      { name: 'Next.js',    icon: SiNextdotjs },
-      { name: 'TypeScript', icon: SiTypescript },
-      { name: 'JavaScript', icon: SiJavascript },
-      { name: 'Angular',    icon: SiAngular },
-      { name: 'Ionic',      icon: SiIonic },
-      { name: 'HTML5',      icon: SiHtml5 },
-      { name: 'CSS3',       icon: SiCss },
+      { name: 'React',        icon: SiReact },
+      { name: 'Next.js',      icon: SiNextdotjs },
+      { name: 'TypeScript',   icon: SiTypescript },
+      { name: 'JavaScript',   icon: SiJavascript },
+      { name: 'WebAssembly',  icon: SiWebassembly },
+      { name: 'Angular',      icon: SiAngular },
+      { name: 'Ionic',        icon: SiIonic },
+      { name: 'HTML5',        icon: SiHtml5 },
+      { name: 'CSS3',         icon: SiCss },
     ],
   },
   {

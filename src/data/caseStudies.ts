@@ -5,7 +5,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     id: 'skillradar',
     projectTitle: 'SkillRadar',
     badge: {
-      es: 'Flagship SaaS · Dual-Role Privacy-First',
+      es: 'SaaS Insignia · Doble Rol y Privacidad',
       en: 'Flagship SaaS · Dual-Role Privacy-First',
     },
     subtitle: {
@@ -19,31 +19,35 @@ export const caseStudies: Record<string, CaseStudy> = {
     architectureHighlights: {
       es: [
         'Enrutamiento de IA Multi-Proveedor (Google Gemini como motor primario, soporte BYOK para OpenAI, Anthropic Claude, Groq y OpenRouter con fallback automático).',
+        'Módulo de Career Path persistente con roadmap interactivo multi-rubro, tracking de hitos formativos, analíticas de evolución y alertas automáticas.',
+        'Modo Recruiter Demo (Guest Recruiter): exploración interactiva de solo lectura para reclutadores sin registro, con aislamiento estricto de base de datos para preservar el Doble Ciego y eliminar riesgos IDOR.',
         'Cifrado de claves de API personales del lado del servidor utilizando AES-256-GCM y exención de rate-limiting (Upstash Redis).',
         'Sistema de privacidad Doble Ciego: sanitización server-side de PII (información personal identificable) y URLs firmadas de expiración corta.',
         'Pruebas automatizadas unitarias con Vitest y suites de extremo a extremo (E2E) con Playwright integradas en CI/CD mediante GitHub Actions.',
-        'Persistencia relacional escalable con Prisma ORM y PostgreSQL serverless en Neon.',
+        'Persistencia relacional escalable con Prisma ORM, baseline de migraciones y PostgreSQL serverless en Neon.',
       ],
       en: [
         'Multi-Provider AI Routing (Google Gemini as primary system engine, BYOK support for OpenAI, Anthropic Claude, Groq, OpenRouter with automatic fallback).',
+        'Persistent Career Path module with multi-domain interactive roadmaps, milestone tracking, evolution analytics, and automated progress alerts.',
+        'Recruiter Demo Mode (Guest Recruiter): interactive read-only exploration for recruiters without sign-up, strictly isolated from production DB to preserve Double-Blind privacy and eliminate IDOR vectors.',
         'Server-side encryption of user API keys using AES-256-GCM with rate-limiting bypass via Upstash Redis.',
         'Double-Blind Privacy System: server-side PII sanitization and short-lived signed URLs for candidate safety.',
         'Automated testing suite with Vitest unit tests and Playwright E2E testing integrated into GitHub Actions CI/CD.',
-        'Scalable relational persistence with Prisma ORM and serverless PostgreSQL on Neon.',
+        'Scalable relational persistence with Prisma ORM, migration baselines, and serverless PostgreSQL on Neon.',
       ],
     },
     myRoleDetailed: {
       es: [
         'Creador único y desarrollador full-stack del proyecto, asumiendo el diseño de arquitectura backend, modelado relacional y frontend.',
-        'Diseñé el motor de cálculo ATS y el algoritmo de análisis semántico de verbos de impacto.',
+        'Diseñé el motor de cálculo ATS, el algoritmo de análisis semántico de verbos de impacto y el módulo de Career Path persistente.',
         'Implementé el chatbot Career Copilot y el simulador de entrevistas con 3 niveles de exigencia (Estándar, Presión y Reclutador).',
-        'Construí la suite de reclutamiento con Reverse Job-Matching e interfaz de sourcing semántico.',
+        'Construí la suite de reclutamiento con Reverse Job-Matching, búsqueda semántica y el modo Recruiter Demo aislado.',
       ],
       en: [
         'Sole creator and full-stack developer, designing the backend architecture, relational modeling, and UI.',
-        'Designed the ATS scoring engine and semantic impact verb analysis algorithm.',
+        'Designed the ATS scoring engine, semantic impact verb analysis algorithm, and persistent Career Path module.',
         'Implemented Career Copilot chatbot and 3-mode interview simulator (Standard, Pressure, Recruiter).',
-        'Built the recruiter suite featuring Reverse Job-Matching and semantic sourcing interface.',
+        'Built the recruiter suite featuring Reverse Job-Matching, semantic sourcing, and isolated Recruiter Demo mode.',
       ],
     },
     technicalChallenges: {
@@ -139,11 +143,117 @@ export const caseStudies: Record<string, CaseStudy> = {
     ],
   },
 
+  dataforge: {
+    id: 'dataforge',
+    projectTitle: 'DataForge',
+    badge: {
+      es: 'Plataforma Analítica · DuckDB-Wasm y Local-First',
+      en: 'Analytics Platform · Local-First DuckDB-Wasm',
+    },
+    subtitle: {
+      es: 'Plataforma de análisis de datos autoservicio, browser-native y local-first, con motor columnar DuckDB-Wasm en Web Workers y procesamiento sin servidores.',
+      en: 'Browser-native, local-first self-service data analytics platform powered by DuckDB-Wasm in Web Workers with zero-cloud computation.',
+    },
+    overview: {
+      es: 'DataForge es una plataforma de análisis y exploración de datos local-first diseñada para ejecutar procesamiento analítico de alto rendimiento directamente en el navegador sin intermediación de servidores de cálculo ni costos de infraestructura. Combina la potencia del motor columnar DuckDB compilado a WebAssembly con parsers dedicados en Web Workers para ofrecer consultas SQL inmediatas, cálculo de agregaciones estadísticas y transformación de datasets tabulares preservando privacidad absoluta de los datos.',
+      en: 'DataForge is a local-first data analytics platform built to execute high-performance analytical processing directly in the browser without server-side compute or cloud infrastructure costs. It combines the columnar power of DuckDB compiled to WebAssembly with dedicated Web Worker parsers to provide instant SQL queries, statistical aggregates, and tabular transformations while maintaining absolute data privacy.',
+    },
+    architectureHighlights: {
+      es: [
+        'Arquitectura Browser-Native Local-First: procesamiento 100% en el cliente, sin costos de cómputo en la nube ni transferencia externa de datasets confidenciales.',
+        'Motor analítico columnar DuckDB-Wasm embebido en un Web Worker dedicado con inicio diferido, reinicio resiliente y contratos tipados.',
+        'Canalización de ingesta off-main-thread con parsers de CSV y XLSX en Web Workers dedicados (0 long-tasks, 100k filas procesadas en 867 ms).',
+        'Capa de persistencia local estructurada con IndexedDB versionada para guardar proyectos, esquemas, linaje y análisis reproducibles.',
+        'Harness de benchmarks automatizado con medianas de 5 corridas y suite integral de tests unitarios (Vitest 20/20) y E2E (Playwright 18/18 en Chromium y Firefox).',
+      ],
+      en: [
+        'Local-First Browser-Native Architecture: 100% client-side data processing with zero cloud compute costs and zero external confidential data transfers.',
+        'Columnar analytical engine DuckDB-Wasm embedded in a dedicated Web Worker featuring deferred startup, resilient restart, and typed message contracts.',
+        'Off-main-thread ingestion pipeline with dedicated CSV and XLSX Web Worker parsers (0 main-thread long tasks, 100k rows processed in 867 ms).',
+        'Structured local persistence layer powered by versioned IndexedDB to store projects, schemas, lineage, and reproducible workflows.',
+        'Automated local benchmark harness featuring 5-run medians and full testing suites with Vitest (20/20) and multi-browser Playwright E2E (18/18).',
+      ],
+    },
+    myRoleDetailed: {
+      es: [
+        'Creador único y arquitecto de software del proyecto, liderando el diseño técnico integral, especificaciones de arquitectura (ADRs) y Roadmap maestro.',
+        'Diseñé el protocolo de mensajería RPC tipado entre React 19 / Next.js y el Web Worker analítico para transferir buffers sin serialización pesada.',
+        'Construí los parsers de ingesta para CSV y XLSX con detección automática de delimitadores, inferencia de tipos y previews paginados.',
+        'Diseñé el modelo de dominio de proyectos y la persistencia transaccional en IndexedDB.',
+        'Implementé el arnés de benchmark automatizado y las suites de prueba unitaria y end-to-end con integración continua.',
+      ],
+      en: [
+        'Sole creator and software architect, establishing master technical roadmaps, Architecture Decision Records (ADRs), and core system specifications.',
+        'Designed typed RPC messaging protocol between React 19 / Next.js and the analytical Web Worker to transfer buffers without heavy serialization.',
+        'Engineered CSV and XLSX parsers with automatic delimiter detection, schema inference, and high-performance paginated previews.',
+        'Architected the domain project models and transactional persistence on IndexedDB.',
+        'Built automated benchmark harness and rigorous unit and end-to-end testing suites integrated into CI pipelines.',
+      ],
+    },
+    technicalChallenges: {
+      es: [
+        {
+          problem: 'Procesar grandes volúmenes de datos tabulares en el cliente sin bloquear la tasa de refresco ni congelar la interfaz de usuario.',
+          solution: 'Aislé todo el cómputo intensivo (ingesta, parseo y motor DuckDB-Wasm) en Web Workers independientes comunicados mediante Transferable Objects y TypedArrays, garantizando 0 long tasks en el hilo principal.',
+        },
+        {
+          problem: 'Permitir que el usuario guarde y retome análisis entre sesiones sin contar con una base de datos en la nube.',
+          solution: 'Modelé una capa de persistencia transaccional sobre IndexedDB con versionado de esquemas y contratos de repositorio desacoplados de la UI.',
+        },
+      ],
+      en: [
+        {
+          problem: 'Processing large tabular datasets on the client without stuttering UI frames or freezing responsiveness.',
+          solution: 'Isolated all intensive computing (ingestion, parsing, and DuckDB-Wasm engine) into background Web Workers communicating via Transferable Objects and TypedArrays, ensuring 0 main-thread long tasks.',
+        },
+        {
+          problem: 'Enabling users to save and resume analysis across sessions without relying on a remote cloud database.',
+          solution: 'Modeled a transactional persistence layer over IndexedDB featuring schema migrations and pure repository contracts decoupled from the UI.',
+        },
+      ],
+    },
+    c4Diagram: {
+      title: {
+        es: 'Diagrama de Arquitectura Local-First & Worker Pipeline (DataForge)',
+        en: 'Local-First & Worker Pipeline Architecture Diagram (DataForge)',
+      },
+      nodes: [
+        { id: 'ui', label: 'Next.js 16 Static UI', desc: 'React 19 + Tailwind CSS + Drag & Drop Workspace', type: 'client' },
+        { id: 'parser', label: 'Ingestion Worker (CSV/XLSX)', desc: 'Parsers off-main-thread, inferencia de tipos y previews', type: 'service' },
+        { id: 'engine', label: 'DuckDB-Wasm Worker', desc: 'Motor analítico columnar SQL y agregaciones estadísticas', type: 'service' },
+        { id: 'store', label: 'IndexedDB Local Store', desc: 'Persistencia local transaccional de proyectos y linaje', type: 'db' },
+      ],
+      connections: [
+        { from: 'ui', to: 'parser', label: 'Raw File Buffers (Transferable)' },
+        { from: 'parser', to: 'engine', label: 'Arrow Table / Parquet Streams' },
+        { from: 'engine', to: 'ui', label: 'Query Results & Metrics' },
+        { from: 'ui', to: 'store', label: 'Project Metadata & Saved Queries' },
+      ],
+    },
+    screenshots: [
+      {
+        url: '/projects/dataforge/1.png',
+        title: { es: 'Espacio de Trabajo Analítico y Panel (Oscuro / Claro)', en: 'Analytical Workspace & Dashboard (Dark / Light)' },
+        caption: { es: 'Diseño integral de la suite de análisis con vista de datasets, KPIs y explorador visual.', en: 'Comprehensive analytics suite design with dataset views, KPIs, and visual data explorer.' },
+      },
+      {
+        url: '/projects/dataforge/2.png',
+        title: { es: 'Explorador de Tablas y Editor SQL Columnar', en: 'Table Explorer & Columnar SQL Editor' },
+        caption: { es: 'Interfaz de consulta reactiva sobre DuckDB-Wasm con sugerencias y vista previa paginada.', en: 'Reactive query interface over DuckDB-Wasm with syntax suggestions and paginated previews.' },
+      },
+      {
+        url: '/projects/dataforge/3.png',
+        title: { es: 'Visualizaciones y Preparación de Pipelines de Datos', en: 'Data Visualizations & Pipeline Preparation' },
+        caption: { es: 'Gráficos interactivos, agregaciones estadísticas descriptivas y linaje de datos.', en: 'Interactive charts, descriptive statistical aggregations, and data lineage tracking.' },
+      },
+    ],
+  },
+
   'gridhub-wms': {
     id: 'gridhub-wms',
     projectTitle: 'GridHub WMS',
     badge: {
-      es: 'Startup Logistics · Multi-Tenant Enterprise System',
+      es: 'Logística Empresarial · Sistema Multi-Tenant',
       en: 'Startup Logistics · Multi-Tenant Enterprise System',
     },
     subtitle: {
@@ -159,29 +269,37 @@ export const caseStudies: Record<string, CaseStudy> = {
         'Arquitectura por capas backend (Onion Architecture) implementada con FastAPI, desacoplando dominio, servicios e infraestructura.',
         'Aislamiento multi-tenant estricto con PostgreSQL/SQLAlchemy y migraciones versionadas con Alembic.',
         'Sincronización offline-first en el frontend (React 19 + IndexedDB) con cola de peticiones locales y algoritmo de reconciliación de conflictos.',
+        'Rediseño modular de Dashboard de Operaciones y Supervisor con Omnibox global, comparativas de actividad entre depósitos y métricas OTIF (SLA).',
+        'Motores de almacenamiento y logística interna: algoritmo de Put Away inteligente (clasificación ABC, zona y volumen) y cálculo automático de punto de reorden (ROP).',
         'Flujo de partial pick fulfillment con creación de tareas residuales en la misma orden e idempotency keys en StockMovement y Task.',
-        'Módulo de notificaciones de alto valor con control de acceso basado en roles (5 alertas RBAC) y consolidación de expiraciones.',
+        'Módulo de notificaciones de alto valor con control de acceso basado en roles (5 alertas RBAC) y catálogo dinámico de reportes conmutables.',
       ],
       en: [
         'Backend Onion Architecture implemented with FastAPI, decoupling domain logic, application services, and infrastructure.',
         'Strict multi-tenant isolation with PostgreSQL/SQLAlchemy and versioned database migrations with Alembic.',
         'Offline-first synchronization engine in the frontend (React 19 + IndexedDB) featuring local request queues and conflict resolution algorithms.',
+        'Supervisor & Operations Dashboard redesign featuring global Omnibox search, cross-warehouse activity comparisons, and OTIF SLA fulfillment metrics.',
+        'Internal logistics engines: intelligent Put Away algorithm (ABC classification, zones, and volume) and automated Reorder Point (ROP) calculation.',
         'Partial pick fulfillment workflow with residual task creation and idempotency keys on StockMovement and Task transactions.',
-        'High-value notification module with role-based access control (5 RBAC alert types) and batch expiration consolidation.',
+        'High-value notification module with role-based access control (5 RBAC alert types) and switchable dynamic reports catalog.',
       ],
     },
     myRoleDetailed: {
       es: [
         'Co-diseñador de la arquitectura backend multi-tenant y modelado relacional de datos.',
+        'Co-diseñé el rediseño del Dashboard de Supervisor/Operaciones con Omnibox global y visualización de SLAs configurados.',
+        'Implementé motores de logística interna: sugerencia inteligente de Put Away y cálculo de punto de reorden.',
         'Líder del desarrollo del módulo de notificaciones de alto valor WMS y reporte de incidencias con resiliencia offline.',
         'Diseñé e implementé el flujo de cumplimiento parcial de picking (partial pick fulfillment) y claves de idempotencia.',
-        'Implementé el motor de sincronización offline con IndexedDB en el frontend y modularización por características (Feature-based).',
+        'Implementé el motor de sincronización offline con IndexedDB en el frontend y optimizaciones de consultas en PostgreSQL.',
       ],
       en: [
         'Co-designer of the multi-tenant backend architecture and relational data modeling.',
+        'Co-designed the Supervisor & Operations Dashboard redesign featuring global Omnibox search and configured SLA tracking.',
+        'Implemented internal logistics engines: intelligent Put Away suggestions and Reorder Point (ROP) calculations.',
         'Lead developer of high-value WMS notifications and offline-resilient incident reporting.',
         'Designed and implemented partial pick fulfillment flows and transaction idempotency keys.',
-        'Built the frontend offline sync engine with IndexedDB and feature-based module architecture.',
+        'Built the frontend offline sync engine with IndexedDB and executed PostgreSQL query optimizations.',
       ],
     },
     technicalChallenges: {
@@ -225,6 +343,31 @@ export const caseStudies: Record<string, CaseStudy> = {
     },
     screenshots: [
       {
+        url: '/projects/gridhub/1.png',
+        title: { es: 'Dashboard de Supervisor y Operaciones', en: 'Supervisor & Operations Dashboard' },
+        caption: { es: 'Visión consolidada de actividad de depósito, métricas de cumplimiento OTIF y tareas pendientes.', en: 'Consolidated warehouse activity view, OTIF fulfillment metrics, and pending tasks.' },
+      },
+      {
+        url: '/projects/gridhub/2.png',
+        title: { es: 'Omnibox Global y Búsqueda de Órdenes', en: 'Global Omnibox & Order Search' },
+        caption: { es: 'Paleta de comandos y acceso rápido para operadores a órdenes, productos y ubicaciones.', en: 'Command palette and quick operator access to orders, SKUs, and warehouse locations.' },
+      },
+      {
+        url: '/projects/gridhub/3.png',
+        title: { es: 'Gestión y Tablero de Tareas Operativas', en: 'Operations Tasks Management Board' },
+        caption: { es: 'Supervisión en tiempo real de tareas de picking, replenishment y movimientos de stock.', en: 'Real-time monitoring of picking tasks, replenishment, and stock movements.' },
+      },
+      {
+        url: '/projects/gridhub/4.png',
+        title: { es: 'Motor de Put Away Inteligente (Criterios ABC)', en: 'Intelligent Put Away Engine (ABC Rules)' },
+        caption: { es: 'Algoritmo de recomendación de ubicaciones de guardado por rotación, zona y volumen.', en: 'Location recommendation algorithm based on product velocity, zone, and capacity.' },
+      },
+      {
+        url: '/projects/gridhub/5.png',
+        title: { es: 'Catálogo Dinámico de Reportes y Auditoría', en: 'Dynamic Reports & Inventory Audit Catalog' },
+        caption: { es: 'Vistas alternables (cards vs tabla plana) para auditoría de stock y trazabilidad.', en: 'Switchable views (cards vs flat table) for stock auditing and traceability.' },
+      },
+      {
         url: '/projects/gridhub/c4-architecture.png',
         title: { es: 'Diagrama de Arquitectura de Capas C4 & Multi-Tenant', en: 'C4 Layered & Multi-Tenant Architecture Diagram' },
         caption: { es: 'Desglose visual de capas (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).', en: 'Visual breakdown of architecture layers (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).' },
@@ -236,45 +379,51 @@ export const caseStudies: Record<string, CaseStudy> = {
     id: 'prop2',
     projectTitle: 'Prop²',
     badge: {
-      es: 'Real Estate SaaS · Peer-to-Peer Backend Platform',
-      en: 'Real Estate SaaS · Peer-to-Peer Backend Platform',
+      es: 'Plataforma Inmobiliaria · Full Stack Peer-to-Peer',
+      en: 'Real Estate SaaS · Peer-to-Peer Full-Stack Platform',
     },
     subtitle: {
-      es: 'Plataforma inmobiliaria peer-to-peer para publicación, venta y alquiler directo de inmuebles en Argentina sin intermediarios, con arquitectura backend basada en dominios y seguridad avanzada.',
-      en: 'Peer-to-peer real estate platform for direct property sales and rentals in Argentina without agency fees, featuring domain-driven backend architecture and advanced security.',
+      es: 'Plataforma inmobiliaria peer-to-peer para publicación, venta y alquiler directo de inmuebles en Argentina sin intermediarios, con arquitectura backend basada en dominios, frontend responsive mobile-first y seguridad avanzada.',
+      en: 'Peer-to-peer real estate platform for direct property sales and rentals in Argentina without agency fees, featuring domain-driven backend architecture, mobile-first responsive frontend, and advanced security.',
     },
     overview: {
-      es: 'Prop² es una plataforma web full-stack concebida para conectar directamente a propietarios con compradores o inquilinos en Argentina, eliminando comisiones e intermediarios. Su enfoque técnico principal radica en una arquitectura backend robusta inspirada en Screaming Architecture y principios hexagonales, desacoplando los servicios de dominio de la infraestructura y el ORM.',
-      en: 'Prop² is a full-stack web platform built to directly connect property owners with buyers or tenants in Argentina, bypassing real estate agency fees. Its technical core is built on a domain-driven architecture separating business logic from infrastructure and ORM persistence.',
+      es: 'Prop² es una plataforma web full-stack concebida para conectar directamente a propietarios con compradores o inquilinos en Argentina, eliminando comisiones e intermediarios. Su desarrollo combina una arquitectura backend robusta inspirada en Screaming Architecture y principios hexagonales con una experiencia de usuario completa y responsive, equipada con catálogo interactivo, filtros avanzados sincronizados en URL, perfil de vendedor y bandeja de gestión de consultas directas.',
+      en: 'Prop² is a full-stack web platform built to directly connect property owners with buyers or tenants in Argentina, bypassing real estate agency fees. Its development combines a domain-driven backend architecture separating business logic from ORM persistence with a complete mobile-first user experience featuring interactive catalogs, URL-synced filters, seller profiles, and a direct inquiry management inbox.',
     },
     architectureHighlights: {
       es: [
         'Organización por dominios funcionales (Screaming Architecture) desacoplando la capa de servicios de Prisma y Next.js.',
+        'Frontend responsive mobile-first completo con buscador dinámico, drawers de filtros por URL (precio, tipo, ambientes, comodidades) y sincronización reactiva.',
+        'Panel de administración de publicaciones y bandeja de consultas recibidas (inbox) con estados de ciclo de vida (pendiente, respondida, archivada) y paginación.',
         'Persistencia relacional en PostgreSQL serverless (Neon) mediante Prisma 7 con driver adapter HTTP y migraciones versionadas.',
-        'Autenticación robusta con Auth.js v5 (Credenciales + Google OAuth), derivación optimista con proxy.ts en Next 16 y verificación por tokens temporales en Resend.',
-        'Subida directa firmada de imágenes desde el navegador a Cloudinary y control de abuso/rate-limiting con Upstash Redis.',
+        'Autenticación robusta con Auth.js v5 (Credenciales + Google OAuth), derivación optimista con proxy.ts en Next 16 y verificación por correo.',
+        'Notificaciones transaccionales por correo SMTP (Nodemailer), subida directa firmada a Cloudinary y control de abuso con Upstash Redis.',
         'Pruebas unitarias e integración aisladas con Vitest y validación de esquemas con Zod 4.',
       ],
       en: [
         'Domain-driven folder organization (Screaming Architecture) decoupling business service layers from Prisma and Next.js.',
+        'Complete mobile-first responsive frontend with dynamic search, URL-synced multi-filter drawers (price, property type, rooms, amenities), and reactive state sync.',
+        'Listing management dashboard and received inquiries inbox featuring lifecycle states (pending, answered, archived) and pagination.',
         'Relational persistence on serverless PostgreSQL (Neon) using Prisma 7 HTTP driver adapters and versioned migrations.',
-        'Robust authentication via Auth.js v5 (Credentials + Google OAuth), Next 16 proxy.ts optimistic route protection, and temporary email tokens via Resend.',
-        'Signed direct browser-to-Cloudinary image uploads and adaptive rate-limiting powered by Upstash Redis.',
+        'Robust authentication via Auth.js v5 (Credentials + Google OAuth), Next 16 proxy.ts optimistic route protection, and email verification.',
+        'Transactional SMTP email notifications (Nodemailer), signed direct browser-to-Cloudinary image uploads, and Upstash Redis rate limiting.',
         'Isolated unit and integration test suites built with Vitest and strict schema validation with Zod 4.',
       ],
     },
     myRoleDetailed: {
       es: [
-        'Líder del desarrollo técnico y diseño de la arquitectura backend por dominio.',
-        'Diseñé el modelo de datos relacional (User, Property, Image, Favorite, VerificationToken) en Prisma 7 y PostgreSQL.',
-        'Implementé el flujo completo de autenticación (Registro, Login, Email Verification, Reset Password).',
-        'Construí el wizard de publicación de inmuebles con geocoding dinámico y subida de imágenes Cloudinary.',
+        'Líder del desarrollo técnico full stack y diseño de la arquitectura por dominios.',
+        'Diseñé el modelo de datos relacional (User, Property, Image, Favorite, Inquiry, VerificationToken) en Prisma 7 y PostgreSQL.',
+        'Implementé el frontend responsive de búsqueda con filtros dinámicos en URL y la bandeja de gestión de consultas del vendedor.',
+        'Construí el flujo completo de autenticación y notificaciones transaccionales por correo SMTP (Nodemailer).',
+        'Desarrollé el wizard de publicación de inmuebles con geocoding dinámico y subida directa firmada a Cloudinary.',
       ],
       en: [
-        'Technical lead driving backend architecture and domain-driven software design.',
-        'Designed the relational data model (User, Property, Image, Favorite, VerificationToken) in Prisma 7 & PostgreSQL.',
-        'Implemented the complete authentication pipeline (Register, Login, Email Verification, Password Reset).',
-        'Built the property creation wizard featuring dynamic geocoding and Cloudinary direct uploads.',
+        'Technical lead driving full-stack development, domain-driven software design, and system architecture.',
+        'Designed the relational data model (User, Property, Image, Favorite, Inquiry, VerificationToken) in Prisma 7 & PostgreSQL.',
+        'Implemented the responsive search frontend with dynamic URL-synced filters and the seller inquiries management inbox.',
+        'Constructed complete authentication pipelines and transactional SMTP email notifications (Nodemailer).',
+        'Built the property creation wizard featuring dynamic geocoding and signed Cloudinary direct uploads.',
       ],
     },
     technicalChallenges: {
@@ -316,13 +465,40 @@ export const caseStudies: Record<string, CaseStudy> = {
         { from: 'domain', to: 'infra', label: 'Prisma Repositories & Adapters' },
       ],
     },
+    screenshots: [
+      {
+        url: '/projects/prop2/1.png',
+        title: { es: 'Búsqueda Avanzada y Catálogo (Desktop)', en: 'Advanced Search & Property Catalog (Desktop)' },
+        caption: { es: 'Filtros dinámicos sincronizados por URL, paginación reactiva y tarjetas de inmuebles.', en: 'Dynamic URL-synced filters, reactive pagination, and property listing cards.' },
+      },
+      {
+        url: '/projects/prop2/2.png',
+        title: { es: 'Bandeja de Consultas Recibidas (Inbox)', en: 'Received Inquiries Inbox & Lead Management' },
+        caption: { es: 'Gestión de consultas directas propietario-interesado con tracking de estados y paginación.', en: 'Direct owner-buyer inquiry tracking with status flows and pagination.' },
+      },
+      {
+        url: '/projects/prop2/3.png',
+        title: { es: 'Experiencia Móvil y Filtros Desplegables', en: 'Mobile Experience & Drawer Filters' },
+        caption: { es: 'Diseño responsive mobile-first adaptado para búsqueda táctil y filtros rápidos.', en: 'Mobile-first responsive design tailored for touch exploration and quick filters.' },
+      },
+      {
+        url: '/projects/prop2/4.png',
+        title: { es: 'Gestión Móvil de Consultas de Inmuebles', en: 'Mobile Property Inquiry Management' },
+        caption: { es: 'Visualización clara de mensajes y contacto directo desde dispositivos móviles.', en: 'Clear message overview and direct lead contact on mobile screens.' },
+      },
+      {
+        url: '/projects/prop2/c4-architecture.png',
+        title: { es: 'Diagrama de Arquitectura Hexagonal C4', en: 'C4 Hexagonal Architecture Diagram' },
+        caption: { es: 'Organización por dominios funcionales desacoplando la capa de servicios de Prisma.', en: 'Domain-driven folder organization decoupling business service layers from Prisma.' },
+      },
+    ],
   },
 
   pochocleando: {
     id: 'pochocleando',
     projectTitle: 'Pochocleando',
     badge: {
-      es: 'Multimedia App · AI Assistant & TMDB API',
+      es: 'Aplicación Multimedia · Asistente IA y TMDB API',
       en: 'Multimedia App · AI Assistant & TMDB API',
     },
     subtitle: {
@@ -437,7 +613,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     id: 'pokeapp',
     projectTitle: 'PokeApp',
     badge: {
-      es: 'Hybrid Web/Mobile App · PokeAPI & Firebase Auth',
+      es: 'Aplicación Híbrida Web/Móvil · PokeAPI y Firebase',
       en: 'Hybrid Web/Mobile App · PokeAPI & Firebase Auth',
     },
     subtitle: {
