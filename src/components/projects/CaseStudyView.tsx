@@ -126,7 +126,7 @@ export function CaseStudyView() {
         </motion.div>
 
         {/* Recruiter Technical Snapshot */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 rounded-xl border mb-10" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 rounded-xl border mb-6" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
           <div className="flex flex-col">
             <span className="text-[10px] font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5" style={{ color: c.textMuted }}>
               <Cpu size={12} style={{ color: c.accent }} />
@@ -171,8 +171,92 @@ export function CaseStudyView() {
           </div>
         </div>
 
+        {/* Hero Visual Preview Banner */}
+        {study.screenshots && study.screenshots.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="mb-8 rounded-2xl overflow-hidden border shadow-sm group relative cursor-pointer"
+            style={{ backgroundColor: c.bgSurface, borderColor: c.border }}
+            onClick={() => setActiveImageIndex(0)}
+          >
+            <div className="relative aspect-[16/9] min-h-[220px] sm:min-h-[280px] max-h-[440px] w-full bg-black/40 overflow-hidden">
+              <img
+                src={study.screenshots[0].url}
+                alt={study.screenshots[0].title[locale as Locale]}
+                className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end justify-between p-4 sm:p-6">
+                <div>
+                  <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-black/70 text-white border border-white/20 mb-2 inline-block">
+                    {locale === 'es' ? 'Vista Principal en Producción' : 'Production Interface Preview'}
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-0.5">
+                    {study.screenshots[0].title[locale as Locale]}
+                  </h3>
+                  <p className="text-xs text-gray-300 max-w-xl line-clamp-1 sm:line-clamp-2">
+                    {study.screenshots[0].caption[locale as Locale]}
+                  </p>
+                </div>
+                <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-white px-3 py-1.5 rounded-lg bg-black/70 backdrop-blur-xs border border-white/20 group-hover:bg-accent transition-colors">
+                  <ZoomIn size={13} /> {locale === 'es' ? 'Explorar Capturas' : 'Explore Screenshots'}
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Quick Section Anchor Navigation */}
+        <div className="sticky top-16 z-20 py-2.5 mb-8 backdrop-blur-md bg-opacity-90 flex items-center gap-2 overflow-x-auto border-y" style={{ borderColor: `${c.border}70`, backgroundColor: `${c.bgBase}e6` }}>
+          <span className="text-[11px] font-mono uppercase tracking-wider mr-1 text-muted hidden sm:inline" style={{ color: c.textMuted }}>
+            {locale === 'es' ? 'Saltar a:' : 'Jump to:'}
+          </span>
+          <a
+            href="#overview"
+            className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+            style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
+          >
+            {t.caseStudy.overviewTitle}
+          </a>
+          <a
+            href="#my-role"
+            className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+            style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
+          >
+            {t.caseStudy.myRoleTitle}
+          </a>
+          {challenges.length > 0 && (
+            <a
+              href="#challenges"
+              className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+              style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
+            >
+              {t.caseStudy.technicalChallengesTitle}
+            </a>
+          )}
+          {(study.systemArchitecture || study.dbSchema || study.c4Diagram) && (
+            <a
+              href="#architecture"
+              className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+              style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
+            >
+              {t.caseStudy.architectureTitle}
+            </a>
+          )}
+          {study.screenshots && study.screenshots.length > 0 && (
+            <a
+              href="#gallery"
+              className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+              style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
+            >
+              {t.caseStudy.galleryTitle}
+            </a>
+          )}
+        </div>
+
         {/* 1. Overview */}
-        <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+        <section id="overview" className="scroll-mt-28 mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
           <h3 className="font-bold text-lg mb-3 flex items-center gap-2" style={{ color: c.textPrimary }}>
             <Layers size={18} style={{ color: c.accent }} />
             {t.caseStudy.overviewTitle}
@@ -183,7 +267,7 @@ export function CaseStudyView() {
         </section>
 
         {/* 2. My Role & Key Contributions */}
-        <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+        <section id="my-role" className="scroll-mt-28 mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
           <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
             <CheckCircle2 size={18} style={{ color: c.accent }} />
             {t.caseStudy.myRoleTitle}
@@ -198,79 +282,9 @@ export function CaseStudyView() {
           </ul>
         </section>
 
-        {/* 3. Architecture & PostgreSQL Relational Schema Explorer */}
-        {(study.systemArchitecture || study.dbSchema) && (
-          <ArchitectureAndDBSchema
-            dbSchema={study.dbSchema}
-            systemArchitecture={study.systemArchitecture}
-          />
-        )}
-
-        {/* 3.1 Container Interconnect & Transaction Protocol Diagram */}
-        {study.c4Diagram && (
-          <section className="mb-10">
-            <ArchitectureDiagram diagram={study.c4Diagram} />
-          </section>
-        )}
-
-        {/* 3.2 Domains Breakdown (DDD) */}
-        {study.domainsBreakdown && (
-          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
-              <Layers size={18} style={{ color: c.accent }} />
-              {study.domainsBreakdown.title[locale as Locale] || t.caseStudy.domainsTitle}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {study.domainsBreakdown.items.map((item, idx) => (
-                <div key={idx} className="p-3.5 rounded-lg border flex flex-col justify-between" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
-                  <span className="font-semibold text-xs mb-1" style={{ color: c.accent }}>{item.name}</span>
-                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>{item.desc[locale as Locale]}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* 3.3 Architecture Highlights */}
-        <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
-          <h3 className="font-bold text-lg mb-4" style={{ color: c.textPrimary }}>
-            {t.caseStudy.architectureTitle}
-          </h3>
-          <ul className="space-y-2 text-sm">
-            {study.architectureHighlights[locale as Locale].map((highlight, idx) => (
-              <li key={idx} className="flex items-start gap-2.5" style={{ color: c.textSecondary }}>
-                <span className="mt-1 flex-shrink-0" style={{ color: c.accent }}>›</span>
-                <span className="leading-relaxed">{highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* 3.4 Key Architecture Decisions (ADRs) */}
-        {study.adrs && (
-          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
-              <HelpCircle size={18} style={{ color: c.accent }} />
-              {study.adrs.title[locale as Locale] || t.caseStudy.adrsTitle}
-            </h3>
-            <div className="space-y-4">
-              {study.adrs.items.map((adr, idx) => (
-                <div key={idx} className="p-4 rounded-lg border" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
-                  <p className="text-xs font-semibold mb-1.5" style={{ color: c.textPrimary }}>
-                    {adr.question[locale as Locale]}
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
-                    {adr.decision[locale as Locale]}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* 4. Technical Challenges & Engineering Solutions */}
+        {/* 3. High-Impact Technical Challenges & Engineering Solutions */}
         {challenges.length > 0 && (
-          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+          <section id="challenges" className="scroll-mt-28 mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
               <AlertTriangle size={18} style={{ color: c.accent }} />
               {t.caseStudy.technicalChallengesTitle}
@@ -296,6 +310,78 @@ export function CaseStudyView() {
           </section>
         )}
 
+        {/* 4. Architecture & PostgreSQL Relational Schema Explorer */}
+        <div id="architecture" className="scroll-mt-28 space-y-10">
+          {(study.systemArchitecture || study.dbSchema) && (
+            <ArchitectureAndDBSchema
+              dbSchema={study.dbSchema}
+              systemArchitecture={study.systemArchitecture}
+            />
+          )}
+
+          {/* 4.1 Container Interconnect & Transaction Protocol Diagram */}
+          {study.c4Diagram && (
+            <section className="mb-10">
+              <ArchitectureDiagram diagram={study.c4Diagram} />
+            </section>
+          )}
+
+          {/* 4.2 Domains Breakdown (DDD) */}
+          {study.domainsBreakdown && (
+            <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+              <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+                <Layers size={18} style={{ color: c.accent }} />
+                {study.domainsBreakdown.title[locale as Locale] || t.caseStudy.domainsTitle}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {study.domainsBreakdown.items.map((item, idx) => (
+                  <div key={idx} className="p-3.5 rounded-lg border flex flex-col justify-between" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
+                    <span className="font-semibold text-xs mb-1" style={{ color: c.accent }}>{item.name}</span>
+                    <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>{item.desc[locale as Locale]}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* 4.3 Architecture Highlights */}
+          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+            <h3 className="font-bold text-lg mb-4" style={{ color: c.textPrimary }}>
+              {t.caseStudy.architectureTitle}
+            </h3>
+            <ul className="space-y-2 text-sm">
+              {study.architectureHighlights[locale as Locale].map((highlight, idx) => (
+                <li key={idx} className="flex items-start gap-2.5" style={{ color: c.textSecondary }}>
+                  <span className="mt-1 flex-shrink-0" style={{ color: c.accent }}>›</span>
+                  <span className="leading-relaxed">{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* 4.4 Key Architecture Decisions (ADRs) */}
+          {study.adrs && (
+            <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+              <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+                <HelpCircle size={18} style={{ color: c.accent }} />
+                {study.adrs.title[locale as Locale] || t.caseStudy.adrsTitle}
+              </h3>
+              <div className="space-y-4">
+                {study.adrs.items.map((adr, idx) => (
+                  <div key={idx} className="p-4 rounded-lg border" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
+                    <p className="text-xs font-semibold mb-1.5" style={{ color: c.textPrimary }}>
+                      {adr.question[locale as Locale]}
+                    </p>
+                    <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
+                      {adr.decision[locale as Locale]}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+
         {/* 5. Video Demo (if present) */}
         {study.videoData && (
           <section className="mb-10">
@@ -303,9 +389,9 @@ export function CaseStudyView() {
           </section>
         )}
 
-        {/* 5.1 Interface & Showcase Gallery */}
+        {/* 5.1 Full Interface Showcase Gallery */}
         {study.screenshots && study.screenshots.length > 0 && (
-          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+          <section id="gallery" className="scroll-mt-28 mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
               <ImageIcon size={18} style={{ color: c.accent }} />
               {t.caseStudy.galleryTitle}
