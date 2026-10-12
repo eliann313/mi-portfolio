@@ -447,11 +447,10 @@ export function InteractiveERDDiagram({
 
               if (!fromPos || !toPos || !fromTable || !toTable) return null;
 
-              // Check domain visibility
+              // Check domain visibility: only draw edge if both endpoints are visible
               if (
                 filterDomain !== 'all' &&
-                fromTable.domain !== filterDomain &&
-                toTable.domain !== filterDomain
+                (fromTable.domain !== filterDomain || toTable.domain !== filterDomain)
               ) {
                 return null;
               }

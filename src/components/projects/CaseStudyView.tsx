@@ -208,7 +208,7 @@ export function CaseStudyView() {
               className="text-xs px-3 py-1 rounded-lg border font-medium transition-colors hover:border-accent"
               style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
             >
-              {locale === 'es' ? 'Arquitectura & DB' : 'Architecture & DB'}
+              {locale === 'es' ? 'Arquitectura y DB' : 'Architecture & DB'}
             </a>
           )}
           {study.screenshots && study.screenshots.length > 0 && (
@@ -423,7 +423,7 @@ export function CaseStudyView() {
                   <button
                     onClick={() => setIsZoomed(!isZoomed)}
                     className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
-                    title={isZoomed ? 'Alejar' : 'Acercar'}
+                    title={isZoomed ? (locale === 'es' ? 'Alejar' : 'Zoom out') : (locale === 'es' ? 'Acercar' : 'Zoom in')}
                   >
                     {isZoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} />}
                   </button>
@@ -433,7 +433,7 @@ export function CaseStudyView() {
                       setIsZoomed(false);
                     }}
                     className="p-2 rounded-lg bg-white/10 text-white hover:bg-red-500/80 transition-colors"
-                    title="Cerrar (Esc)"
+                    title={t.caseStudy.lightboxClose || (locale === 'es' ? 'Cerrar (Esc)' : 'Close (Esc)')}
                   >
                     <X size={20} />
                   </button>
@@ -454,7 +454,7 @@ export function CaseStudyView() {
                       setIsZoomed(false);
                     }}
                     className="absolute left-2 sm:left-4 z-10 p-2.5 rounded-full bg-black/60 text-white hover:bg-black/90 border border-white/20 transition-all backdrop-blur-sm"
-                    title="Anterior (Flecha Izq)"
+                    title={t.caseStudy.lightboxPrev || (locale === 'es' ? 'Anterior (Flecha Izq)' : 'Previous (Left Arrow)')}
                   >
                     <ChevronLeft size={24} />
                   </button>
@@ -479,7 +479,7 @@ export function CaseStudyView() {
                       setIsZoomed(false);
                     }}
                     className="absolute right-2 sm:right-4 z-10 p-2.5 rounded-full bg-black/60 text-white hover:bg-black/90 border border-white/20 transition-all backdrop-blur-sm"
-                    title="Siguiente (Flecha Der)"
+                    title={t.caseStudy.lightboxNext || (locale === 'es' ? 'Siguiente (Flecha Der)' : 'Next (Right Arrow)')}
                   >
                     <ChevronRight size={24} />
                   </button>

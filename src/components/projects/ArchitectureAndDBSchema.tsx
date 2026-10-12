@@ -132,7 +132,7 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
 
             <div className="flex items-center gap-2">
               <span className="text-[11px] px-2.5 py-1 rounded-full font-mono bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-medium hidden sm:inline">
-                {dbSchema.tables.length} Tablas Relacionales Verificadas
+                {dbSchema.tables.length} {locale === 'es' ? 'Tablas Relacionales Verificadas' : 'Verified Relational Tables'}
               </span>
 
               {/* View Switcher Pills */}
@@ -186,7 +186,7 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
               {allDomains.length > 1 && (
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs font-medium mr-1" style={{ color: c.textMuted }}>
-                    Dominios:
+                    {locale === 'es' ? 'Dominios:' : 'Domains:'}
                   </span>
                   <button
                     onClick={() => setFilterDomain('all')}
@@ -199,7 +199,7 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
                       color: filterDomain === 'all' ? '#ffffff' : c.textSecondary,
                     }}
                   >
-                    Todos ({dbSchema.tables.length})
+                    {locale === 'es' ? 'Todos' : 'All'} ({dbSchema.tables.length})
                   </button>
                   {allDomains.map((dom) => {
                     const count = dbSchema.tables.filter((t) => t.domain === dom).length;
@@ -290,7 +290,7 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
                           ))}
                           {table.columns.length > 3 && (
                             <span className="text-[10px] px-1 py-0.5 self-center italic" style={{ color: c.textMuted }}>
-                              +{table.columns.length - 3} más
+                              +{table.columns.length - 3} {locale === 'es' ? 'más' : 'more'}
                             </span>
                           )}
                         </div>

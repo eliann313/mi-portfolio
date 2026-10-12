@@ -63,7 +63,7 @@ export function ArchitectureDiagram({ diagram }: C4Props) {
       {/* Connections List */}
       <div className="border-t pt-4" style={{ borderColor: c.border }}>
         <p className="text-xs font-medium mb-2 uppercase tracking-wider" style={{ color: c.textMuted }}>
-          Flujo de Transacciones & Protocolos:
+          {locale === 'es' ? 'Flujo de Transacciones y Protocolos:' : 'Transaction & Protocol Flow:'}
         </p>
         <ul className="space-y-1.5 text-xs">
           {diagram.connections.map((conn, idx) => {

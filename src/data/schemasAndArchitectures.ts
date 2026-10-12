@@ -272,6 +272,7 @@ export const gridhubDBSchema: CaseStudyDBSchema = {
     { from: 'order', to: 'orderfulfillment', type: '1:1', label: 'Documento inmutable de cierre' },
     { from: 'orderfulfillment', to: 'erp_outbound_event', type: '1:1', label: 'Disparo a Transactional Outbox' },
     { from: 'warehouse', to: 'pickertable', type: '1:N', label: 'Mesas físicas de preparación' },
+    { from: 'stock', to: 'stockmovement', type: '1:N', label: 'Kardex inmutable de movimientos' },
   ],
 };
 
