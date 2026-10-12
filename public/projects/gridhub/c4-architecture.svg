@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="100%" height="100%" style="background:#0b0f19; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1322"/>
+      <stop offset="100%" stop-color="#080c16"/>
+    </linearGradient>
+
+    <!-- Marker Arrow -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#38BDF8"/>
+    </marker>
+
+    <!-- Card Glow Filters -->
+    <filter id="glow-blue" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#0284c7" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1280" height="720" fill="url(#bg-grad)"/>
+
+  <!-- Subtle Blueprint Grid Lines -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+    <line x1="0" y1="90" x2="1280" y2="90"/>
+    <line x1="0" y1="460" x2="1280" y2="460"/>
+    <line x1="80" y1="0" x2="80" y2="720"/>
+    <line x1="1200" y1="0" x2="1200" y2="720"/>
+  </g>
+
+  <!-- Title Header -->
+  <g transform="translate(60, 52)">
+    <circle cx="10" cy="10" r="4" fill="#38BDF8"/>
+    <text x="24" y="16" fill="#38BDF8" font-size="20" font-weight="700" letter-spacing="0.5">
+      GridHub WMS — Arquitectura de Capas &amp; Multi-Tenant (C4 System Level)
+    </text>
+  </g>
+
+  <!-- ===================================================================== -->
+  <!-- 4 ARCHITECTURE CARDS -->
+  <!-- ===================================================================== -->
+
+  <!-- CARD 1: React 19 Frontend -->
+  <g transform="translate(60, 115)" filter="url(#glow-blue)">
+    <!-- Card Container -->
+    <rect width="235" height="315" rx="10" fill="#111827" stroke="#0284C7" stroke-width="1.8"/>
+    <rect width="235" height="42" rx="10" fill="rgba(2, 132, 199, 0.12)"/>
+    <line x1="0" y1="42" x2="235" y2="42" stroke="#0284C7" stroke-width="1.2"/>
+
+    <!-- Header -->
+    <text x="16" y="26" fill="#38BDF8" font-size="14" font-weight="700">React 19 Frontend</text>
+
+    <!-- Subtitle / Architecture Role -->
+    <text x="16" y="66" fill="#94A3B8" font-size="11" font-family="monospace">Feature-Based UI + IndexedDB</text>
+    <line x1="16" y1="76" x2="219" y2="76" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+    <!-- Bullet Points -->
+    <g transform="translate(16, 98)" fill="#CBD5E1" font-size="11.5">
+      <circle cx="2" cy="4" r="2" fill="#38BDF8"/>
+      <text x="12" y="8" font-weight="500">Capacidad Offline-First</text>
+      <text x="12" y="24" fill="#64748B" font-size="10.5">Dexie.js 4.4 + dexie-react-hooks</text>
+
+      <circle cx="2" cy="48" r="2" fill="#38BDF8"/>
+      <text x="12" y="52" font-weight="500">Peticiones Locales &amp; PWA</text>
+      <text x="12" y="68" fill="#64748B" font-size="10.5">Service worker para depósitos</text>
+
+      <circle cx="2" cy="92" r="2" fill="#38BDF8"/>
+      <text x="12" y="96" font-weight="500">Cola FIFO de Mutaciones</text>
+      <text x="12" y="112" fill="#64748B" font-size="10.5">Reconciliación con idempotencia</text>
+
+      <circle cx="2" cy="136" r="2" fill="#38BDF8"/>
+      <text x="12" y="140" font-weight="500">Omnibox &amp; Dashboards</text>
+      <text x="12" y="156" fill="#64748B" font-size="10.5">Vistas Supervisor y Picker</text>
+    </g>
+  </g>
+
+  <!-- CONNECTOR 1 -> 2 -->
+  <g transform="translate(295, 255)">
+    <!-- Connection Line with Arrow -->
+    <line x1="6" y1="0" x2="68" y2="0" stroke="#38BDF8" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <!-- Protocol Badge -->
+    <rect x="0" y="-32" width="76" height="20" rx="4" fill="#0F172A" stroke="#38BDF8" stroke-width="0.8"/>
+    <text x="38" y="-18" text-anchor="middle" fill="#38BDF8" font-size="9" font-family="monospace" font-weight="600">HTTPS / REST</text>
+    <text x="38" y="16" text-anchor="middle" fill="#64748B" font-size="8.5" font-family="monospace">Idempotency</text>
+  </g>
+
+  <!-- CARD 2: FastAPI Core (Onion Arch) -->
+  <g transform="translate(372, 115)" filter="url(#glow-blue)">
+    <!-- Card Container -->
+    <rect width="235" height="315" rx="10" fill="#111827" stroke="#A855F7" stroke-width="1.8"/>
+    <rect width="235" height="42" rx="10" fill="rgba(168, 85, 247, 0.12)"/>
+    <line x1="0" y1="42" x2="235" y2="42" stroke="#A855F7" stroke-width="1.2"/>
+
+    <!-- Header -->
+    <text x="16" y="26" fill="#C084FC" font-size="14" font-weight="700">FastAPI Core (Backend)</text>
+
+    <!-- Subtitle / Architecture Role -->
+    <text x="16" y="66" fill="#94A3B8" font-size="11" font-family="monospace">Screaming Arch · 8 Dominios</text>
+    <line x1="16" y1="76" x2="219" y2="76" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+    <!-- Bullet Points -->
+    <g transform="translate(16, 98)" fill="#CBD5E1" font-size="11.5">
+      <circle cx="2" cy="4" r="2" fill="#C084FC"/>
+      <text x="12" y="8" font-weight="500">142 DTOs Pydantic v2</text>
+      <text x="12" y="24" fill="#64748B" font-size="10.5">Contratos estrictos y schemas</text>
+
+      <circle cx="2" cy="48" r="2" fill="#C084FC"/>
+      <text x="12" y="52" font-weight="500">Servicios OOP Puros</text>
+      <text x="12" y="68" fill="#64748B" font-size="10.5">Lógica desacoplada de la web</text>
+
+      <circle cx="2" cy="92" r="2" fill="#C084FC"/>
+      <text x="12" y="96" font-weight="500">Put Away &amp; Reglas ROP</text>
+      <text x="12" y="112" fill="#64748B" font-size="10.5">Cálculo ABC y volumetría</text>
+
+      <circle cx="2" cy="136" r="2" fill="#C084FC"/>
+      <text x="12" y="140" font-weight="500">Mesas de Armado &amp; FEFO</text>
+      <text x="12" y="156" fill="#64748B" font-size="10.5">Control de picking y lotes</text>
+    </g>
+  </g>
+
+  <!-- CONNECTOR 2 -> 3 -->
+  <g transform="translate(607, 255)">
+    <!-- Connection Line with Arrow -->
+    <line x1="6" y1="0" x2="68" y2="0" stroke="#10B981" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <!-- Protocol Badge -->
+    <rect x="0" y="-32" width="76" height="20" rx="4" fill="#0F172A" stroke="#10B981" stroke-width="0.8"/>
+    <text x="38" y="-18" text-anchor="middle" fill="#34D399" font-size="9" font-family="monospace" font-weight="600">Dependency</text>
+    <text x="38" y="16" text-anchor="middle" fill="#64748B" font-size="8.5" font-family="monospace">Injection</text>
+  </g>
+
+  <!-- CARD 3: Tenant Isolation Context -->
+  <g transform="translate(684, 115)" filter="url(#glow-blue)">
+    <!-- Card Container -->
+    <rect width="235" height="315" rx="10" fill="#111827" stroke="#10B981" stroke-width="1.8"/>
+    <rect width="235" height="42" rx="10" fill="rgba(16, 185, 129, 0.12)"/>
+    <line x1="0" y1="42" x2="235" y2="42" stroke="#10B981" stroke-width="1.2"/>
+
+    <!-- Header -->
+    <text x="16" y="26" fill="#34D399" font-size="14" font-weight="700">Aislamiento Multi-Tenant</text>
+
+    <!-- Subtitle / Architecture Role -->
+    <text x="16" y="66" fill="#94A3B8" font-size="11" font-family="monospace">Middleware &amp; Scoped Session</text>
+    <line x1="16" y1="76" x2="219" y2="76" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+    <!-- Bullet Points -->
+    <g transform="translate(16, 98)" fill="#CBD5E1" font-size="11.5">
+      <circle cx="2" cy="4" r="2" fill="#34D399"/>
+      <text x="12" y="8" font-weight="500">Inyección de client_id</text>
+      <text x="12" y="24" fill="#64748B" font-size="10.5">Filtrado estricto a nivel fila</text>
+
+      <circle cx="2" cy="48" r="2" fill="#34D399"/>
+      <text x="12" y="52" font-weight="500">Autenticación JWT &amp; RBAC</text>
+      <text x="12" y="68" fill="#64748B" font-size="10.5">Roles Supervisor y Operario</text>
+
+      <circle cx="2" cy="92" r="2" fill="#34D399"/>
+      <text x="12" y="96" font-weight="500">Transactional Outbox</text>
+      <text x="12" y="112" fill="#64748B" font-size="10.5">Worker con lease tokens</text>
+
+      <circle cx="2" cy="136" r="2" fill="#34D399"/>
+      <text x="12" y="140" font-weight="500">Integración B2B ERP</text>
+      <text x="12" y="156" fill="#64748B" font-size="10.5">Despacho at-least-once seguro</text>
+    </g>
+  </g>
+
+  <!-- CONNECTOR 3 -> 4 -->
+  <g transform="translate(919, 255)">
+    <!-- Connection Line with Arrow -->
+    <line x1="6" y1="0" x2="68" y2="0" stroke="#F59E0B" stroke-width="1.8" marker-end="url(#arrow)"/>
+    <!-- Protocol Badge -->
+    <rect x="0" y="-32" width="76" height="20" rx="4" fill="#0F172A" stroke="#F59E0B" stroke-width="0.8"/>
+    <text x="38" y="-18" text-anchor="middle" fill="#FBBF24" font-size="9" font-family="monospace" font-weight="600">SQLModel</text>
+    <text x="38" y="16" text-anchor="middle" fill="#64748B" font-size="8.5" font-family="monospace">ACID Session</text>
+  </g>
+
+  <!-- CARD 4: PostgreSQL & Alembic ORM -->
+  <g transform="translate(995, 115)" filter="url(#glow-blue)">
+    <!-- Card Container -->
+    <rect width="235" height="315" rx="10" fill="#111827" stroke="#F59E0B" stroke-width="1.8"/>
+    <rect width="235" height="42" rx="10" fill="rgba(245, 158, 11, 0.12)"/>
+    <line x1="0" y1="42" x2="235" y2="42" stroke="#F59E0B" stroke-width="1.2"/>
+
+    <!-- Header -->
+    <text x="16" y="26" fill="#FBBF24" font-size="14" font-weight="700">PostgreSQL Relacional</text>
+
+    <!-- Subtitle / Architecture Role -->
+    <text x="16" y="66" fill="#94A3B8" font-size="11" font-family="monospace">SQLModel + Alembic Engine</text>
+    <line x1="16" y1="76" x2="219" y2="76" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+    <!-- Bullet Points -->
+    <g transform="translate(16, 98)" fill="#CBD5E1" font-size="11.5">
+      <circle cx="2" cy="4" r="2" fill="#FBBF24"/>
+      <text x="12" y="8" font-weight="500">14 Tablas Relacionales</text>
+      <text x="12" y="24" fill="#64748B" font-size="10.5">Integridad referencial y FKs</text>
+
+      <circle cx="2" cy="48" r="2" fill="#FBBF24"/>
+      <text x="12" y="52" font-weight="500">Restricción Cuádruple</text>
+      <text x="12" y="68" fill="#64748B" font-size="10.5">(item, location, lot, client)</text>
+
+      <circle cx="2" cy="92" r="2" fill="#FBBF24"/>
+      <text x="12" y="96" font-weight="500">Topología de 6 Niveles</text>
+      <text x="12" y="112" fill="#64748B" font-size="10.5">(wh, zone, aisle, rack, lvl, bin)</text>
+
+      <circle cx="2" cy="136" r="2" fill="#FBBF24"/>
+      <text x="12" y="140" font-weight="500">Snapshot Inmutable</text>
+      <text x="12" y="156" fill="#64748B" font-size="10.5">OrderFulfillment auditado</text>
+    </g>
+  </g>
+
+  <!-- ===================================================================== -->
+  <!-- BOTTOM PANEL: PATRONES DE ARQUITECTURA -->
+  <!-- ===================================================================== -->
+  <g transform="translate(60, 465)">
+    <rect width="1170" height="215" rx="10" fill="#111827" stroke="#1E293B" stroke-width="1.2"/>
+
+    <!-- Panel Header -->
+    <text x="24" y="34" fill="#38BDF8" font-size="13" font-weight="700" letter-spacing="0.5">
+      PATRONES DE ARQUITECTURA E INGENIERÍA CLAVE:
+    </text>
+
+    <!-- 4 Structured Engineering Principles -->
+    <g transform="translate(24, 52)" fill="#94A3B8" font-size="12" line-height="24">
+      <text x="0" y="22">
+        <tspan fill="#38BDF8" font-weight="700">1. Aislamiento Multi-Tenant Estricto:</tspan>
+        <tspan fill="#CBD5E1"> Inyección automática de client_id en la sesión de base de datos para garantizar aislamiento a nivel de fila y eliminar riesgo de fuga de datos entre empresas.</tspan>
+      </text>
+
+      <text x="0" y="58">
+        <tspan fill="#A855F7" font-weight="700">2. Resiliencia Offline-First en Planta:</tspan>
+        <tspan fill="#CBD5E1"> Cola FIFO local en IndexedDB (Dexie.js). Los operarios completan tareas sin conexión y se sincronizan secuencialmente con claves de idempotencia al reconectar.</tspan>
+      </text>
+
+      <text x="0" y="94">
+        <tspan fill="#10B981" font-weight="700">3. Patrón Transactional Outbox para ERP:</tspan>
+        <tspan fill="#CBD5E1"> Cierre de orden y generación de evento en una sola transacción ACID. Workers asíncronos con tokens de leasing despachan a ERPs externos sin transacciones distribuidas 2PC.</tspan>
+      </text>
+
+      <text x="0" y="130">
+        <tspan fill="#F59E0B" font-weight="700">4. Screaming Architecture &amp; Pure Services:</tspan>
+        <tspan fill="#CBD5E1"> Organización simétrica en 8 dominios independientes (admin, auth, catalog, inventory, operations, etc.) con routers delgados y servicios desacoplados para máxima testeabilidad.</tspan>
+      </text>
+    </g>
+  </g>
+</svg>

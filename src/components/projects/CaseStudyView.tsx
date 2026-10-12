@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
+import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Lock } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -412,10 +412,18 @@ export function CaseStudyView() {
                 <ExternalLink size={13} /> {t.caseStudy.viewLiveDemo}
               </a>
             )}
-            {project.links.repo && project.links.repo !== '#' && (
+            {project.links.repo && project.links.repo !== '#' && !project.links.isPrivate && (
               <a href={project.links.repo} target="_blank" rel="noopener noreferrer" className="btn-secondary !py-2 !px-4 !text-xs">
                 <FiGithub size={13} /> {t.caseStudy.viewRepository}
               </a>
+            )}
+            {project.links.isPrivate && (
+              <span
+                className="btn-secondary !py-2 !px-4 !text-xs opacity-75 cursor-not-allowed inline-flex items-center gap-1.5"
+                title={locale === 'es' ? 'Repositorio Privado / Enterprise (Acceso Restringido)' : 'Private Repository (Restricted Access)'}
+              >
+                <Lock size={13} /> {locale === 'es' ? 'Repositorio Privado' : 'Private Repository'}
+              </span>
             )}
             <Link to="/#projects" className="btn-secondary !py-2 !px-4 !text-xs">
               <ArrowLeft size={13} /> {t.caseStudy.backToProjects}

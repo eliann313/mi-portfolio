@@ -515,7 +515,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         caption: { es: 'Vistas alternables (cards vs tabla plana) para auditoría de stock y trazabilidad.', en: 'Switchable views (cards vs flat table) for stock auditing and traceability.' },
       },
       {
-        url: '/projects/gridhub/c4-architecture.png',
+        url: '/projects/gridhub/c4-architecture.svg',
         title: { es: 'Diagrama de Arquitectura de Capas C4 & Multi-Tenant', en: 'C4 Layered & Multi-Tenant Architecture Diagram' },
         caption: { es: 'Desglose visual de capas (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).', en: 'Visual breakdown of architecture layers (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).' },
       },
@@ -664,7 +664,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         caption: { es: 'Visualización clara de mensajes y contacto directo desde dispositivos móviles.', en: 'Clear message overview and direct lead contact on mobile screens.' },
       },
       {
-        url: '/projects/prop2/c4-architecture.png',
+        url: '/projects/prop2/c4-architecture.svg',
         title: { es: 'Diagrama de Arquitectura Hexagonal C4', en: 'C4 Hexagonal Architecture Diagram' },
         caption: { es: 'Organización por dominios funcionales desacoplando la capa de servicios de Prisma.', en: 'Domain-driven folder organization decoupling business service layers from Prisma.' },
       },

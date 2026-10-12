@@ -69,6 +69,7 @@ export const projects: Project[] = [
     },
     links: {
       repo: 'https://github.com/Juamp1Sch/WMS',
+      isPrivate: true,
     },
     thumbnail: '/projects/gridhub/1.png',
   },

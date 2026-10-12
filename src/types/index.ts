@@ -18,6 +18,7 @@ export interface Project {
   links: {
     demo?: string;
     repo?: string;
+    isPrivate?: boolean;
   };
   thumbnail?: string;
   isPlaceholder?: boolean;
@@ -73,12 +74,12 @@ export interface CaseStudyDBSchema {
 
 export interface ArchitectureLayer {
   name: Record<Locale, string>;
-  badge?: string;
+  badge?: string | Record<Locale, string>;
   color?: string;
   components: {
-    name: string;
+    name: string | Record<Locale, string>;
     desc: Record<Locale, string>;
-    tech?: string;
+    tech?: string | Record<Locale, string>;
   }[];
 }
 

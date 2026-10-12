@@ -287,84 +287,84 @@ export const gridhubArchitecture: SystemArchitecture = {
   layers: [
     {
       name: { es: 'Capa Cliente Móvil & Web', en: 'Mobile & Web Client Layer' },
-      badge: 'Frontend',
+      badge: { es: 'Frontend PWA', en: 'Frontend PWA' },
       color: '#3B82F6',
       components: [
         {
           name: 'React 19 + Vite + Tailwind v4',
           desc: { es: 'Dashboard por rol (Supervisor / Picker) y Omnibox con búsqueda calificada.', en: 'Role-based dashboards (Supervisor / Picker) and qualified Omnibox palette.' },
-          tech: 'UI Framework',
+          tech: { es: 'Framework UI', en: 'UI Framework' },
         },
         {
           name: 'Dexie.js 4.4 + dexie-react-hooks',
           desc: { es: 'Almacenamiento reactivo local en IndexedDB y cola FIFO de mutaciones offline.', en: 'Local reactive IndexedDB store with FIFO offline mutation queue.' },
-          tech: 'Local-First Store',
+          tech: { es: 'Almacén Local Reactivo', en: 'Local-First Store' },
         },
         {
           name: 'Vite PWA Service Worker',
           desc: { es: 'Caché de estáticos para operatividad continua sin conexión de red.', en: 'App shell caching ensuring uninterrupted warehouse floor operation.' },
-          tech: 'Service Worker',
+          tech: { es: 'Service Worker PWA', en: 'PWA Service Worker' },
         },
       ],
     },
     {
       name: { es: 'Capa de Entrada & API Gateway', en: 'API Gateway & Entry Layer' },
-      badge: 'FastAPI Backend',
+      badge: { es: 'Backend FastAPI', en: 'FastAPI Backend' },
       color: '#10B981',
       components: [
         {
-          name: 'FastAPI Routers Delgados (8 Dominios)',
+          name: { es: 'Routers Delgados FastAPI (8 Dominios)', en: 'FastAPI Thin Routers (8 Domains)' },
           desc: { es: 'Endpoints desacoplados organizados por dominio funcional (admin, auth, catalog, etc.).', en: 'Thin routers cleanly organized per functional domain package.' },
           tech: 'Python 3.12',
         },
         {
-          name: 'Pydantic v2 (142 DTOs Normalizados)',
+          name: { es: 'Pydantic v2 (142 DTOs Normalizados)', en: 'Pydantic v2 (142 Normalized DTOs)' },
           desc: { es: 'Validación estricta de payloads, contratos de entrada/salida y serialización.', en: 'Strict contract schemas, runtime validation, and serialization.' },
-          tech: 'Data Contracts',
+          tech: { es: 'Contratos de Datos', en: 'Data Contracts' },
         },
         {
-          name: 'JWT & Multi-tenant Dependency Injection',
+          name: { es: 'Inyección de Dependencias JWT & Multi-tenant', en: 'JWT & Multi-tenant Dependency Injection' },
           desc: { es: 'Inyección de sesión de usuario y contexto de tenant client_id verificado.', en: 'Session context injection with verified client_id tenant isolation.' },
-          tech: 'Security',
+          tech: { es: 'Seguridad & RBAC', en: 'Security & RBAC' },
         },
       ],
     },
     {
       name: { es: 'Capa de Servicios de Dominio', en: 'Domain Service Layer' },
-      badge: 'Core Business',
+      badge: { es: 'Dominio Central', en: 'Core Business' },
       color: '#F59E0B',
       components: [
         {
-          name: 'Movement & Allocation Service',
+          name: { es: 'Servicio de Movimientos & Ubicaciones', en: 'Movement & Allocation Service' },
           desc: { es: 'Motor de Put Away inteligente (ABC y volumetría) y reglas de reorden (ROP).', en: 'Smart Put Away allocation (ABC velocity & volume) and ROP triggers.' },
-          tech: 'Logistics Engine',
+          tech: { es: 'Motor Logístico', en: 'Logistics Engine' },
         },
         {
-          name: 'Picking & Table Service',
+          name: { es: 'Servicio de Picking & Mesas de Armado', en: 'Picking & Table Service' },
           desc: { es: 'Asignación de tareas con estrategia FIFO/FEFO y verificación en mesas de armado.', en: 'FIFO/FEFO picking tasks and packing table verification workflows.' },
-          tech: 'Operations',
+          tech: { es: 'Operaciones', en: 'Operations' },
         },
         {
-          name: 'ERP Outbound Worker Daemon',
+          name: { es: 'Worker Daemon de Despacho al ERP', en: 'ERP Outbound Worker Daemon' },
           desc: { es: 'Worker en background que reclama eventos outbox mediante tokens de leasing.', en: 'Background worker claiming pending outbox events using lease tokens.' },
-          tech: 'Async Worker',
+          tech: { es: 'Worker Asíncrono', en: 'Async Worker' },
         },
       ],
     },
     {
       name: { es: 'Capa de Persistencia & Base de Datos', en: 'Persistence & Database Layer' },
-      badge: 'PostgreSQL',
+      badge: { es: 'PostgreSQL Relacional', en: 'PostgreSQL Relational' },
       color: '#8B5CF6',
       components: [
         {
-          name: 'PostgreSQL Relational Engine',
+          name: { es: 'Motor Relacional PostgreSQL', en: 'PostgreSQL Relational Engine' },
           desc: { es: 'Restricciones de integridad referencial, índices parciales multi-tenant y checks.', en: 'Foreign keys, partial tenant indexes, and check constraints.' },
-          tech: 'Database',
+          tech: { es: 'Base de Datos', en: 'Database' },
         },
         {
-          name: 'SQLModel & SQLAlchemy ORM',
+          name: { es: 'Mapeo Objeto-Relacional SQLModel & Alembic', en: 'SQLModel & SQLAlchemy ORM' },
           desc: { es: 'Mapeo objeto-relacional tipado con migraciones versionadas de Alembic.', en: 'Type-safe ORM mapping with automated Alembic migration pipeline.' },
-          tech: 'ORM',
+          tech: { es: 'ORM & Migraciones', en: 'ORM & Migrations' },
         },
       ],
     },
@@ -396,20 +396,20 @@ export const skillradarDBSchema: CaseStudyDBSchema = {
       name: 'User',
       domain: 'auth',
       description: {
-        es: 'Usuario central (desarrollador o reclutador). Almacena claves BYOK cifradas (AES-256-GCM) y preferencias de IA.',
-        en: 'Central user entity. Holds AES-256-GCM encrypted BYOK API keys and AI inference settings.',
+        es: 'Usuario dual-role (desarrollador y reclutador) con claves BYOK cifradas (AES-256-GCM).',
+        en: 'Dual-role user entity with AES-256-GCM encrypted BYOK keys.',
       },
       columns: [
         { name: 'id', type: 'CUID', isPk: true },
         { name: 'email', type: 'VARCHAR', isUnique: true },
-        { name: 'role', type: 'VARCHAR (developer, recruiter)' },
-        { name: 'geminiApiKey', type: 'TEXT (AES-256-GCM Cifrado)' },
-        { name: 'groqApiKey', type: 'TEXT (AES-256-GCM Cifrado)' },
-        { name: 'defaultAiProvider', type: 'VARCHAR (gemini, groq, openrouter)' },
+        { name: 'role', type: 'VARCHAR (Rol)' },
+        { name: 'geminiApiKey', type: 'TEXT (Cifrado)' },
+        { name: 'groqApiKey', type: 'TEXT (Cifrado)' },
+        { name: 'defaultAiProvider', type: 'VARCHAR' },
         { name: 'defaultAiModel', type: 'VARCHAR' },
         { name: 'careerPath', type: 'VARCHAR (NULLABLE)' },
         { name: 'isPublicProfile', type: 'BOOLEAN' },
-        { name: 'publicUsername', type: 'VARCHAR (UNIQUE, NULLABLE)' },
+        { name: 'publicUsername', type: 'VARCHAR (UNIQUE)' },
       ],
     },
     {
@@ -582,7 +582,7 @@ export const skillradarArchitecture: SystemArchitecture = {
   layers: [
     {
       name: { es: 'Capa Frontend & Experiencia', en: 'Frontend & UX Layer' },
-      badge: 'Next.js 16',
+      badge: { es: 'Next.js 16 SSR', en: 'Next.js 16 SSR' },
       color: '#3B82F6',
       components: [
         {
@@ -591,26 +591,26 @@ export const skillradarArchitecture: SystemArchitecture = {
           tech: 'Next.js App Router',
         },
         {
-          name: 'Radar de Habilidades & Simulador UI',
+          name: { es: 'Radar de Habilidades & Simulador UI', en: 'Skill Radar & Mock Simulator UI' },
           desc: { es: 'Visualizador de radar SVG interactivo y simulador de chat en tiempo real.', en: 'Interactive SVG skill radar chart and real-time chat mock simulator.' },
-          tech: 'Interactive UI',
+          tech: { es: 'UI Interactiva', en: 'Interactive UI' },
         },
       ],
     },
     {
       name: { es: 'Capa de Seguridad, Criptografía & PII', en: 'Security, Crypto & PII Layer' },
-      badge: 'Zero-Leak Guard',
+      badge: { es: 'Blindaje Anti-Fugas', en: 'Zero-Leak Guard' },
       color: '#EF4444',
       components: [
         {
-          name: 'AES-256-GCM Secret Vault',
+          name: { es: 'Bóveda Cifrada AES-256-GCM', en: 'AES-256-GCM Secret Vault' },
           desc: { es: 'Cifrado simétrico de API keys del usuario (BYOK) persistidas en Postgres y descifradas solo en memoria.', en: 'AES-256-GCM encryption for BYOK keys decrypted strictly in server memory.' },
-          tech: 'Node Crypto',
+          tech: { es: 'Criptografía Node', en: 'Node Crypto' },
         },
         {
-          name: 'Doble Ciego & SHA-256 Obfuscator',
+          name: { es: 'Doble Ciego & Sanitizador SHA-256', en: 'Double-Blind & SHA-256 Obfuscator' },
           desc: { es: 'Genera identificadores anónimos DEV-XXXXXX y remueve nombres, emails y teléfonos antes de la IA y el Talent Pool.', en: 'SHA-256 DEV-XXXXXX anonymizer stripping PII before LLM calls and Talent Pool.' },
-          tech: 'PII Sanitizer',
+          tech: { es: 'Sanitizador de PII', en: 'PII Sanitizer' },
         },
         {
           name: 'Upstash Redis Rate Limiting',
@@ -621,35 +621,35 @@ export const skillradarArchitecture: SystemArchitecture = {
     },
     {
       name: { es: 'Capa de Orquestación de IA & LLMs', en: 'AI Orchestration & LLM Layer' },
-      badge: 'Vercel AI SDK',
+      badge: { es: 'Orquestación AI SDK', en: 'Vercel AI SDK' },
       color: '#8B5CF6',
       components: [
         {
-          name: 'Cascada Multi-Proveedor Resiliente',
+          name: { es: 'Cascada Multi-Proveedor Resiliente', en: 'Resilient Multi-Provider Cascade' },
           desc: { es: 'Enrutamiento primario a Gemini 3.8 Flash con failover automático a Gemini 3.7, Groq y OpenRouter.', en: 'Gemini 3.8 Flash primary with automated fallback to Gemini 3.7, Groq, and OpenRouter.' },
-          tech: 'Multi-LLM Failover',
+          tech: { es: 'Failover Multi-Modelo', en: 'Multi-LLM Failover' },
         },
         {
-          name: 'Inferencia Estructurada con Zod',
+          name: { es: 'Inferencia Estructurada con Zod', en: 'Zod Structured Inference' },
           desc: { es: 'Extracción estricta de ATS (rúbrica 0-100 aditiva, verbos de impacto y métricas STAR) con clamp determinista.', en: 'Zod structured JSON extraction with deterministic validation and clamping.' },
-          tech: 'Zod & Schema Guard',
+          tech: { es: 'Validación Zod', en: 'Zod & Schema Guard' },
         },
         {
-          name: 'Simulador Heurístico Offline',
+          name: { es: 'Simulador Heurístico Offline', en: 'Offline Heuristic Simulator' },
           desc: { es: 'Motor de contingencia local basado en expresiones regulares y 22 keywords cuando no hay keys activas.', en: 'Local regex keyword parser fallback ensuring 100% test reliability.' },
-          tech: 'Offline Fallback',
+          tech: { es: 'Contingencia Offline', en: 'Offline Fallback' },
         },
       ],
     },
     {
       name: { es: 'Capa de Persistencia Serverless', en: 'Serverless Persistence Layer' },
-      badge: 'Database',
+      badge: { es: 'Base de Datos Cloud', en: 'Cloud Database' },
       color: '#10B981',
       components: [
         {
           name: 'Neon PostgreSQL Serverless',
           desc: { es: 'Base de datos en la nube con escalado a cero, pooling de conexiones y latencia ultra-baja.', en: 'Cloud database with scale-to-zero, connection pooling, and low latency.' },
-          tech: 'Postgres Serverless',
+          tech: { es: 'Postgres Serverless', en: 'Serverless Postgres' },
         },
         {
           name: 'Prisma ORM 7.10.0',
@@ -843,33 +843,33 @@ export const prop2Architecture: SystemArchitecture = {
   layers: [
     {
       name: { es: 'Capa de Presentación & Búsqueda', en: 'Presentation & Search Layer' },
-      badge: 'Next.js App Router',
+      badge: { es: 'Next.js 16 SSR', en: 'Next.js 16 SSR' },
       color: '#3B82F6',
       components: [
         {
-          name: 'Drawer de Búsqueda Sincronizado en URL',
+          name: { es: 'Drawer de Búsqueda Sincronizado en URL', en: 'URL-Synchronized Search Drawer' },
           desc: { es: 'Filtros combinados de precio, moneda, ambientes y comodidades sincronizados con searchParams.', en: 'Multi-filter drawer with searchParams URL sync (price, currency, rooms, amenities).' },
           tech: 'Next.js & React 19',
         },
         {
-          name: 'Dashboard Inmobiliario & Bandeja de Leads',
+          name: { es: 'Dashboard Inmobiliario & Bandeja de Leads', en: 'Real Estate Dashboard & Leads Inbox' },
           desc: { es: 'Gestión de ciclo de vida (borrador, activa, pausada) y panel de mensajes recibidos (nueva, atendida).', en: 'Listing lifecycle management and inquiry lead inbox with status badges.' },
-          tech: 'Seller Portal',
+          tech: { es: 'Portal Vendedor', en: 'Seller Portal' },
         },
       ],
     },
     {
       name: { es: 'Capa de Aplicación & Dominio', en: 'Application & Domain Layer' },
-      badge: 'Hexagonal Core',
+      badge: { es: 'Núcleo Hexagonal', en: 'Hexagonal Core' },
       color: '#F59E0B',
       components: [
         {
-          name: 'Servicios de Dominio & Zod Schemas',
+          name: { es: 'Servicios de Dominio & Esquemas Zod', en: 'Domain Services & Zod Schemas' },
           desc: { es: 'Aislamiento de reglas de negocio: cálculo de expensas, validación de superficies y geocodificación.', en: 'Business rules isolation: fee calculation, surface consistency, and geocoding.' },
-          tech: 'TypeScript Strict',
+          tech: { es: 'TypeScript Estricto', en: 'Strict TypeScript' },
         },
         {
-          name: 'Adaptador de Geocodificación Nominatim',
+          name: { es: 'Adaptador de Geocodificación Nominatim', en: 'Nominatim Geocoding Adapter' },
           desc: { es: 'Resolución automática de latitud/longitud a partir de dirección, barrio y ciudad.', en: 'Automated reverse geocoding from street address and neighborhood via Nominatim.' },
           tech: 'OpenStreetMap API',
         },
@@ -877,21 +877,21 @@ export const prop2Architecture: SystemArchitecture = {
     },
     {
       name: { es: 'Capa de Integraciones Externas', en: 'External Integrations Layer' },
-      badge: 'Cloud Services',
+      badge: { es: 'Servicios Cloud', en: 'Cloud Services' },
       color: '#10B981',
       components: [
         {
-          name: 'Cloudinary Signed Direct Uploads',
+          name: { es: 'Subidas Directas Firmadas a Cloudinary', en: 'Cloudinary Signed Direct Uploads' },
           desc: { es: 'El navegador sube imágenes directamente a Cloudinary mediante firmas criptográficas generadas en servidor.', en: 'Browser directly uploads photos to Cloudinary using server-signed signatures.' },
           tech: 'Cloudinary SDK',
         },
         {
-          name: 'SMTP Email Delivery (Nodemailer)',
+          name: { es: 'Envío de Emails Transaccionales (Nodemailer)', en: 'SMTP Email Delivery (Nodemailer)' },
           desc: { es: 'Envío de notificaciones transaccionales ante nuevos mensajes de contacto y verificación de cuentas.', en: 'Transactional notifications on new inquiry messages and account verification.' },
           tech: 'Nodemailer',
         },
         {
-          name: 'Upstash Redis Rate Limiter',
+          name: { es: 'Limitador de Tasa Upstash Redis', en: 'Upstash Redis Rate Limiter' },
           desc: { es: 'Protección contra spam en formularios de contacto y endpoints de autenticación.', en: 'Spam protection on inquiry forms and credentials authentication routes.' },
           tech: 'Upstash Redis',
         },
@@ -899,16 +899,16 @@ export const prop2Architecture: SystemArchitecture = {
     },
     {
       name: { es: 'Capa de Persistencia & Base de Datos', en: 'Persistence & Database Layer' },
-      badge: 'Neon PostgreSQL',
+      badge: { es: 'Neon PostgreSQL', en: 'Neon PostgreSQL' },
       color: '#8B5CF6',
       components: [
         {
-          name: 'PostgreSQL Full-Text Search (tsvector + GIN)',
+          name: { es: 'Búsqueda Full-Text PostgreSQL (tsvector + GIN)', en: 'PostgreSQL Full-Text Search (tsvector + GIN)' },
           desc: { es: 'Columna busqueda autogenerada en base de datos con índice GIN para búsquedas de texto a alta velocidad.', en: 'Generated tsvector column with GIN index for high-performance title/description matching.' },
-          tech: 'Postgres Native',
+          tech: { es: 'PostgreSQL Nativo', en: 'Native PostgreSQL' },
         },
         {
-          name: 'Prisma ORM Client',
+          name: { es: 'Cliente Tipado Prisma ORM', en: 'Prisma ORM Client' },
           desc: { es: 'Mapeo relacional con snake_case en PostgreSQL (@map) y camelCase en TypeScript.', en: 'Relational mapping with snake_case DB columns and camelCase TypeScript entities.' },
           tech: 'Prisma Client',
         },

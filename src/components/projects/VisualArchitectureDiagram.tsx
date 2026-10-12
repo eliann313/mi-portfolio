@@ -226,7 +226,7 @@ export function VisualArchitectureDiagram({ systemArchitecture }: Props) {
                         color: layerColor,
                       }}
                     >
-                      {layer.badge}
+                      {typeof layer.badge === 'object' ? layer.badge[locale as Locale] : layer.badge}
                     </span>
                   )}
                 </div>
@@ -242,7 +242,7 @@ export function VisualArchitectureDiagram({ systemArchitecture }: Props) {
                       <div>
                         <div className="flex items-center justify-between gap-2 mb-1.5">
                           <span className="font-semibold text-xs leading-snug" style={{ color: c.textPrimary }}>
-                            {comp.name}
+                            {typeof comp.name === 'object' ? comp.name[locale as Locale] : comp.name}
                           </span>
                         </div>
                         <p className="text-[12px] leading-relaxed" style={{ color: c.textSecondary }}>
@@ -259,7 +259,7 @@ export function VisualArchitectureDiagram({ systemArchitecture }: Props) {
                               color: layerColor,
                             }}
                           >
-                            {comp.tech}
+                            {typeof comp.tech === 'object' ? comp.tech[locale as Locale] : comp.tech}
                           </span>
                         </div>
                       )}
