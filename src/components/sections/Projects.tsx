@@ -151,7 +151,7 @@ export function Projects() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
           {filteredProjects.map((project, idx) => (
             <motion.div
               key={project.id}
@@ -159,7 +159,7 @@ export function Projects() {
               initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }}
               variants={fadeUp}
               whileHover={{ y: -3 }}
-              className="rounded-xl overflow-hidden border flex flex-col justify-between group"
+              className="rounded-xl overflow-hidden border flex flex-col group h-full"
               style={{ backgroundColor: c.bgSurface, borderColor: c.border, transition: 'border-color 0.2s, box-shadow 0.2s' }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.borderColor = c.accent;
@@ -170,30 +170,30 @@ export function Projects() {
                 (e.currentTarget as HTMLElement).style.boxShadow = 'none';
               }}
             >
-              <div>
-                {/* Thumbnail Preview Banner - Full Width Edge to Edge */}
-                {project.thumbnail && (
-                  <Link
-                    to={`/proyectos/${project.id}`}
-                    className="block relative overflow-hidden border-b w-full aspect-[16/9] min-h-[220px] sm:min-h-[260px] max-h-72 bg-black/20"
-                    style={{ borderColor: c.border }}
-                  >
-                    <img
-                      src={project.thumbnail}
-                      alt={project.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                      <span className="text-xs text-white font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-xs border border-white/20">
-                        <BookOpen size={13} /> {t.projects.viewCaseStudy}
-                      </span>
-                    </div>
-                  </Link>
-                )}
+              {/* Thumbnail Preview Banner - Full Width Edge to Edge */}
+              {project.thumbnail && (
+                <Link
+                  to={`/proyectos/${project.id}`}
+                  className="block relative overflow-hidden border-b w-full aspect-[16/9] min-h-[220px] sm:min-h-[260px] max-h-72 bg-black/20 flex-shrink-0"
+                  style={{ borderColor: c.border }}
+                >
+                  <img
+                    src={project.thumbnail}
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span className="text-xs text-white font-medium flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-black/60 backdrop-blur-xs border border-white/20">
+                      <BookOpen size={13} /> {t.projects.viewCaseStudy}
+                    </span>
+                  </div>
+                </Link>
+              )}
 
-                {/* Content Section with Standard Padding */}
-                <div className="p-5 sm:p-6">
+              {/* Content Section with Standard Padding - Stretches full remaining height */}
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                <div className="flex-1 flex flex-col">
                   {/* Header */}
                   <div className="flex items-start justify-between gap-2 mb-3 flex-wrap">
                     <h3 className="font-semibold text-lg" style={{ color: c.textPrimary }}>
@@ -242,35 +242,35 @@ export function Projects() {
                       {project.roles[locale as Locale].join(' · ')}
                     </p>
                   )}
+                </div>
 
-                  {/* Links */}
-                  <div className="flex items-center justify-between gap-2 flex-wrap pt-3 border-t" style={{ borderColor: c.border }}>
-                    <Link to={`/proyectos/${project.id}`} className="btn-primary !py-1.5 !px-3 !text-xs">
-                      <BookOpen size={13} /> {t.projects.viewCaseStudy}
-                    </Link>
+                {/* Action Links Bar - Always pinned to the bottom */}
+                <div className="flex items-center justify-between gap-2 flex-wrap pt-4 border-t mt-auto flex-shrink-0" style={{ borderColor: c.border }}>
+                  <Link to={`/proyectos/${project.id}`} className="btn-primary !py-1.5 !px-3 !text-xs">
+                    <BookOpen size={13} /> {t.projects.viewCaseStudy}
+                  </Link>
 
-                    <div className="flex items-center gap-2">
-                      {project.links.demo && (
-                        <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
-                          className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
-                          <ExternalLink size={12} />{t.projects.viewDemo}
-                        </a>
-                      )}
-                      {project.links.repo && project.links.repo !== '#' && !project.links.isPrivate && (
-                        <a href={project.links.repo} target="_blank" rel="noopener noreferrer"
-                          className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
-                          <FiGithub size={12} />{t.projects.viewRepo}
-                        </a>
-                      )}
-                      {project.links.isPrivate && (
-                        <span
-                          className="btn-secondary !py-1.5 !px-3 !text-xs opacity-70 cursor-not-allowed inline-flex items-center gap-1.5"
-                          title={locale === 'es' ? 'Repositorio Privado / Enterprise (Acceso Restringido)' : 'Private Repository (Restricted Access)'}
-                        >
-                          <Lock size={12} />{locale === 'es' ? 'Repo Privado' : 'Private Repo'}
-                        </span>
-                      )}
-                    </div>
+                  <div className="flex items-center gap-2">
+                    {project.links.demo && (
+                      <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
+                        className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
+                        <ExternalLink size={12} />{t.projects.viewDemo}
+                      </a>
+                    )}
+                    {project.links.repo && project.links.repo !== '#' && !project.links.isPrivate && (
+                      <a href={project.links.repo} target="_blank" rel="noopener noreferrer"
+                        className="btn-secondary !py-1.5 !px-3 !text-xs" style={{ cursor: 'pointer' }}>
+                        <FiGithub size={12} />{t.projects.viewRepo}
+                      </a>
+                    )}
+                    {project.links.isPrivate && (
+                      <span
+                        className="btn-secondary !py-1.5 !px-3 !text-xs opacity-70 cursor-not-allowed inline-flex items-center gap-1.5"
+                        title={locale === 'es' ? 'Repositorio Privado / Enterprise (Acceso Restringido)' : 'Private Repository (Restricted Access)'}
+                      >
+                        <Lock size={12} />{locale === 'es' ? 'Repo Privado' : 'Private Repo'}
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
