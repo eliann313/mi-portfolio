@@ -38,6 +38,9 @@ export const es: Translations = {
     viewRepo: 'Repositorio',
     viewCaseStudy: 'Ver Detalles',
     role: 'Rol',
+    allFilter: 'Todos',
+    individualFilter: 'Proyectos Individuales',
+    groupFilter: 'Proyectos Grupales',
   },
   caseStudy: {
     backToProjects: 'Volver a Proyectos',
@@ -50,6 +53,12 @@ export const es: Translations = {
     timestampsTitle: 'Capítulos y Puntos Clave del Video',
     problemLabel: 'Desafío / Problema:',
     solutionLabel: 'Solución Técnica Implementada:',
+    nextProject: 'Siguiente Proyecto',
+    prevProject: 'Proyecto Anterior',
+    viewLiveDemo: 'Probar Demo en Vivo',
+    viewRepository: 'Ver Código en GitHub',
+    domainsTitle: 'Arquitectura por Dominios Funcionales (DDD)',
+    adrsTitle: 'Decisiones de Arquitectura y Diseño Técnico',
   },
   education: {
     title: 'Educación',

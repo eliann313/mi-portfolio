@@ -72,6 +72,44 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
       ],
     },
+    adrs: {
+      title: {
+        es: 'Criterios de Evaluación ATS y Decisiones de Arquitectura',
+        en: 'ATS Evaluation Criteria & Architecture Decisions',
+      },
+      items: [
+        {
+          question: {
+            es: '¿Cuáles son los criterios del motor de scoring y análisis de CV (ATS)?',
+            en: 'What are the scoring and CV analysis criteria (ATS)?',
+          },
+          decision: {
+            es: 'Evalúa densidad y afinidad semántica de skills requeridas, verbos de acción en pretérito perfecto, métricas cuantificables (fórmula X-Y-Z de Google) y estructura estandarizada legible por parsers ATS clásicos.',
+            en: 'Evaluates required skills density and semantic matching, past-tense impact action verbs, quantified accomplishments (Google X-Y-Z formula), and ATS-friendly parsing structure.',
+          },
+        },
+        {
+          question: {
+            es: '¿Cómo se garantiza la veracidad y consistencia en las entrevistas simuladas?',
+            en: 'How are truthfulness and consistency guaranteed in mock interviews?',
+          },
+          decision: {
+            es: 'El simulador valida las respuestas del candidato contrastándolas con la experiencia real declarada en su CV parseado, penalizando contradicciones y evitando alucinaciones de roles no ejercidos.',
+            en: 'The simulator verifies candidate answers against actual work history in the parsed CV, penalizing contradictions and preventing hallucinated roles.',
+          },
+        },
+        {
+          question: {
+            es: '¿Por qué Privacidad Doble Ciego en lugar de perfiles públicos abiertos?',
+            en: 'Why Double-Blind Privacy instead of public candidate profiles?',
+          },
+          decision: {
+            es: 'Elimina sesgos en el reclutamiento técnico y protege la privacidad laboral del desarrollador activo, revelando sus datos de contacto solo con consentimiento explícito firmado.',
+            en: 'Eliminates hiring bias and shields actively employed developers, unlocking contact details only after explicit cryptographically signed consent.',
+          },
+        },
+      ],
+    },
     c4Diagram: {
       title: {
         es: 'Diagrama de Arquitectura de Sistema (SkillRadar)',
@@ -214,6 +252,34 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
       ],
     },
+    adrs: {
+      title: {
+        es: 'Decisiones de Arquitectura Local-First y Motores Cliente',
+        en: 'Local-First Architecture & Client Runtimes Decisions',
+      },
+      items: [
+        {
+          question: {
+            es: '¿Por qué ejecutar los motores en el cliente (DuckDB-Wasm y Pyodide) en vez de un backend tradicional?',
+            en: 'Why execute client runtimes (DuckDB-Wasm & Pyodide) instead of a traditional backend?',
+          },
+          decision: {
+            es: 'Garantiza privacidad absoluta al nunca subir datasets confidenciales a la nube (finanzas personales, encuestas, etc.) y elimina los costos de infraestructura de servidores analíticos.',
+            en: 'Guarantees zero-trust privacy since sensitive datasets (personal finance, surveys) never leave the browser, while eliminating cloud compute bills.',
+          },
+        },
+        {
+          question: {
+            es: '¿Por qué Web Workers dedicados para ingesta y cómputo?',
+            en: 'Why dedicated Web Workers for ingestion and computation?',
+          },
+          decision: {
+            es: 'Aísla las operaciones intensivas de CPU del hilo principal del navegador, manteniendo la UI en 60 FPS sin bloqueos visuales durante el procesamiento de datos tabulares.',
+            en: 'Isolates CPU-heavy parsing and computation from the main UI thread, ensuring a smooth 60 FPS user experience with zero interface freezes.',
+          },
+        },
+      ],
+    },
     c4Diagram: {
       title: {
         es: 'Diagrama de Arquitectura Local-First & Motores Cliente (DataForge)',
@@ -275,7 +341,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         'Motores Algorítmicos de Logística Interna: asignación inteligente de almacenamiento (Put Away por rotación ABC, zona y volumen) y cálculo automático de punto de reorden (ROP).',
         'Rediseño Integral de Inicio por Rol y Omnibox Global: Centro de Mando para Supervisor y Mi Turno para Picker con paleta de comandos calificada (sku:, loc:), comparativas interdepósito y SLAs OTIF.',
         'Gestión Operativa Avanzada: flujo de partial pick fulfillment con tareas residuales, módulo de devoluciones/logística inversa (RMA), transferencias interdepósito y validación en mesas de trabajo con blindaje FIFO/FEFO.',
-        'Gobernanza de Calidad y Testing: más de 745 tests en Pytest (90% de cobertura backend) y suite de pruebas en Vitest integradas en CI/CD con GitHub Actions.',
+        'Gobernanza de Calidad y Testing: suites integrales de pruebas de extremo a extremo (E2E) con Playwright sobre PostgreSQL QA real y suites continuas en Vitest y Pytest integradas en CI/CD con GitHub Actions.',
       ],
       en: [
         'Fullstack Screaming Architecture: symmetric organization of the backend into 8 cohesive functional domains (admin, auth, catalog, inventory, warehouse, operations, analytics, integration) decoupling models, 142 schema DTOs, pure OOP services, and thin routers.',
@@ -285,7 +351,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         'Algorithmic Internal Logistics Engines: intelligent Put Away location allocation (ABC classification, capacity, and velocity) and automated Reorder Point (ROP) min/max replenishment.',
         'Role-Based Dashboard Redesign & Global Omnibox: Command Center for Supervisors and My Shift for Pickers featuring qualified command palette search (sku:, loc:), multi-warehouse comparisons, and OTIF SLA metrics.',
         'Advanced Operational Management: partial pick fulfillment with residual task generation, RMA reverse logistics module, inter-warehouse stock transfers, and packing table verification with FIFO/FEFO rules.',
-        'Quality Governance & Comprehensive Testing: over 745 Pytest tests (90% backend coverage) and comprehensive Vitest suites integrated into GitHub Actions CI/CD.',
+        'Quality Governance & Testing: comprehensive Playwright End-to-End (E2E) suites executing on real PostgreSQL QA instances, plus multi-layer Vitest and Pytest suites integrated into GitHub Actions CI/CD.',
       ],
     },
     myRoleDetailed: {
@@ -296,7 +362,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         'Diseñé y desarrollé de punta a punta el nuevo inicio por rol (Centro de Mando de Supervisor y Mi Turno para Picker), la Omnibox global de búsqueda rápida y el catálogo dinámico de reportes.',
         'Implementé los motores algorítmicos de Put Away inteligente y abastecimiento automático por punto de reorden (ROP).',
         'Optimicé la capa de base de datos en PostgreSQL para producción, erradicando consultas N+1 y creando índices parciales para entornos multi-tenant.',
-        'Lideré la expansión de la suite de testing automatizado elevando la cobertura a más del 90% con 745+ tests en Pytest y suites en Vitest.',
+        'Lideré la validación de calidad del sistema con pruebas Playwright E2E sobre bases PostgreSQL QA reales y suites automatizadas en Vitest y Pytest.',
       ],
       en: [
         'Architected and implemented full-stack Screaming Architecture, structuring the system into 8 cohesive functional domains with 142 normalized DTOs, pure OOP services, and thin routers.',
@@ -305,7 +371,61 @@ export const caseStudies: Record<string, CaseStudy> = {
         'Designed and built the role-based dashboard from end to end (Supervisor Command Center & Picker My Shift), the global Omnibox search palette, and dynamic reports catalog.',
         'Implemented algorithmic Put Away suggestion and automated Reorder Point (ROP) inventory replenishment engines.',
         'Optimized the PostgreSQL production database layer, eradicating N+1 query bottlenecks and crafting tenant-scoped partial indexes for multi-tenant throughput.',
-        'Led the test automation expansion, boosting backend coverage past 90% across 745+ Pytest tests and comprehensive Vitest suites.',
+        'Led full-stack quality validation with Playwright E2E suites running on real PostgreSQL QA databases and automated Vitest & Pytest test runs.',
+      ],
+    },
+    domainsBreakdown: {
+      title: {
+        es: 'Los 8 Dominios Funcionales Cohesivos (Screaming Architecture & DDD)',
+        en: 'The 8 Cohesive Functional Domains (Screaming Architecture & DDD)',
+      },
+      items: [
+        { name: '1. admin', desc: { es: 'Plataforma SaaS, activación de inquilinos, auditoría inmutable de eventos, configuraciones globales y feedback.', en: 'SaaS platform management, tenant activation, immutable audit logging, global settings, and feedback.' } },
+        { name: '2. auth', desc: { es: 'Autenticación JWT, gestión de usuarios, roles RBAC granulares, recuperación de claves y preferencias.', en: 'JWT authentication, user management, granular RBAC roles, password recovery, and preferences.' } },
+        { name: '3. catalog', desc: { es: 'Maestro de artículos (SKU, códigos de barra, clases ABC, volumetría), proveedores y adaptadores ERP.', en: 'Master item catalog (SKU, barcodes, ABC classes, dimensions), suppliers, and ERP adapters.' } },
+        { name: '4. inventory', desc: { es: 'Control de existencias físicas, lotes, vencimientos, estados de calidad y auditoría de movimientos.', en: 'Physical stock tracking, lots, expirations, quality status gates, and movement auditing.' } },
+        { name: '5. warehouse', desc: { es: 'Topología física de depósitos, ubicaciones, etiquetas de racks/pasillos y plano interactivo.', en: 'Warehouse layout topology, physical storage locations, rack labeling, and interactive map.' } },
+        { name: '6. operations', desc: { es: 'Gestión de pedidos, tareas de picking (FIFO/FEFO), carros multibolsa y mesas de consolidación.', en: 'Order processing, picking workflows (FIFO/FEFO), multi-bin carts, and packing tables.' } },
+        { name: '7. analytics', desc: { es: 'Catálogo de 17 reportes operativos, rotación ABC, ocupación de depósitos y seguimiento de SLAs OTIF.', en: '17 operational reports, ABC velocity, warehouse occupancy, and OTIF SLA fulfillment tracking.' } },
+        { name: '8. integration', desc: { es: 'Sincronización offline-first (IndexedDB), scanner QR, notificaciones y Transactional Outbox para ERP.', en: 'Offline-first sync (IndexedDB), QR scanning, alerts, and Transactional Outbox for ERPs.' } },
+      ],
+    },
+    adrs: {
+      title: {
+        es: 'Decisiones de Arquitectura y Diseño Técnico (ADRs)',
+        en: 'Key Architecture & Engineering Decisions (ADRs)',
+      },
+      items: [
+        {
+          question: {
+            es: '¿Por qué Transactional Outbox en vez de peticiones HTTP directas al ERP externo?',
+            en: 'Why Transactional Outbox instead of direct synchronous HTTP calls to external ERPs?',
+          },
+          decision: {
+            es: 'Garantiza consistencia transaccional y entrega fiable at-least-once sin riesgo de perder movimientos de inventario ante cortes de red o caídas del servicio externo.',
+            en: 'Guarantees transactional consistency and at-least-once reliable delivery with zero inventory movement data loss during network outages or third-party downtime.',
+          },
+        },
+        {
+          question: {
+            es: '¿Por qué priorizar Playwright E2E sobre pruebas puramente unitarias?',
+            en: 'Why prioritize Playwright E2E over purely unit testing?',
+          },
+          decision: {
+            es: 'En sistemas logísticos críticos, los errores de mayor impacto ocurren en la integración: concurrencia en reservas de stock, navegación de Omnibox y renderizado multi-dispositivo con PostgreSQL QA real.',
+            en: 'In critical logistics systems, high-severity defects occur at integration boundaries: stock reservation race conditions, Omnibox navigation, and multi-device UI with real PostgreSQL QA.',
+          },
+        },
+        {
+          question: {
+            es: '¿Por qué Screaming Architecture orientada a 8 paquetes de dominio?',
+            en: 'Why Screaming Architecture structured into 8 domain packages?',
+          },
+          decision: {
+            es: 'Permite que la estructura del código grite el negocio logístico en lugar del framework, aislando modelos, DTOs y servicios puros para facilitar mantenimiento y escalabilidad del equipo.',
+            en: 'Enables the codebase structure to scream logistics business capabilities rather than the web framework, isolating models, DTOs, and pure services for scalability.',
+          },
+        },
       ],
     },
     technicalChallenges: {
@@ -460,6 +580,34 @@ export const caseStudies: Record<string, CaseStudy> = {
         {
           problem: 'Processing heavy property photos without overloading serverless function memory or execution timeouts.',
           solution: 'Implemented direct signed browser-to-Cloudinary uploads via short-lived backend-generated URLs, fully decoupling media traffic from the core server.',
+        },
+      ],
+    },
+    adrs: {
+      title: {
+        es: 'Decisiones de Arquitectura Hexagonal y Seguridad',
+        en: 'Hexagonal Architecture & Security Decisions',
+      },
+      items: [
+        {
+          question: {
+            es: '¿Por qué Arquitectura Hexagonal con repositorios tipados desacoplados del ORM?',
+            en: 'Why Hexagonal Architecture with typed repositories decoupled from Prisma?',
+          },
+          decision: {
+            es: 'Mantiene las reglas de negocio inmobiliarias (estados de publicación, verificación, consultas) independientes de la base de datos, facilitando tests unitarios rápidos y aislados.',
+            en: 'Keeps business logic (listing lifecycle, verification, inquiries) agnostic of the persistence layer, enabling fast isolated unit tests.',
+          },
+        },
+        {
+          question: {
+            es: '¿Por qué subidas directas firmadas browser-to-Cloudinary?',
+            en: 'Why direct signed browser-to-Cloudinary uploads?',
+          },
+          decision: {
+            es: 'Evita que el servidor Next.js procese megabytes de imágenes pesadas, previniendo límites de timeout y memoria en funciones serverless.',
+            en: 'Bypasses Next.js serverless functions from processing large image payloads, preventing memory exhaustion and execution timeouts.',
+          },
         },
       ],
     },

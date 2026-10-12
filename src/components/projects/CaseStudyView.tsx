@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X } from 'lucide-react';
+import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X, ArrowRight, HelpCircle } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -22,6 +22,11 @@ export function CaseStudyView() {
 
   const study = slug ? caseStudies[slug] : undefined;
   const project = slug ? projects.find(p => p.id === slug) : undefined;
+
+  const realProjects = projects.filter(p => !p.isPlaceholder);
+  const currentIndex = realProjects.findIndex(p => p.id === slug);
+  const prevProject = currentIndex > 0 ? realProjects[currentIndex - 1] : null;
+  const nextProject = currentIndex >= 0 && currentIndex < realProjects.length - 1 ? realProjects[currentIndex + 1] : null;
 
   if (!study || !project) {
     return (
@@ -261,6 +266,100 @@ export function CaseStudyView() {
             <VideoTimestampPlayer src={study.videoData.src} timestamps={study.videoData.timestamps} />
           </section>
         )}
+
+        {/* 8. Domains Breakdown (DDD) */}
+        {study.domainsBreakdown && (
+          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+              <Layers size={18} style={{ color: c.accent }} />
+              {study.domainsBreakdown.title[locale as Locale] || t.caseStudy.domainsTitle}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {study.domainsBreakdown.items.map((item, idx) => (
+                <div key={idx} className="p-3.5 rounded-lg border flex flex-col justify-between" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
+                  <span className="font-semibold text-xs mb-1" style={{ color: c.accent }}>{item.name}</span>
+                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>{item.desc[locale as Locale]}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 9. Key Architecture Decisions (ADRs) */}
+        {study.adrs && (
+          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+              <HelpCircle size={18} style={{ color: c.accent }} />
+              {study.adrs.title[locale as Locale] || t.caseStudy.adrsTitle}
+            </h3>
+            <div className="space-y-4">
+              {study.adrs.items.map((adr, idx) => (
+                <div key={idx} className="p-4 rounded-lg border" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
+                  <p className="text-xs font-semibold mb-1.5" style={{ color: c.textPrimary }}>
+                    {adr.question[locale as Locale]}
+                  </p>
+                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
+                    {adr.decision[locale as Locale]}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 10. Bottom Action Card (CTA) */}
+        <section className="mb-10 rounded-xl p-6 border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+          <div>
+            <h4 className="font-bold text-base mb-1" style={{ color: c.textPrimary }}>{study.projectTitle}</h4>
+            <p className="text-xs" style={{ color: c.textMuted }}>{project.stack.join(' · ')}</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5">
+            {project.links.demo && (
+              <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn-primary !py-2 !px-4 !text-xs">
+                <ExternalLink size={13} /> {t.caseStudy.viewLiveDemo}
+              </a>
+            )}
+            {project.links.repo && project.links.repo !== '#' && (
+              <a href={project.links.repo} target="_blank" rel="noopener noreferrer" className="btn-secondary !py-2 !px-4 !text-xs">
+                <FiGithub size={13} /> {t.caseStudy.viewRepository}
+              </a>
+            )}
+            <Link to="/#projects" className="btn-secondary !py-2 !px-4 !text-xs">
+              <ArrowLeft size={13} /> {t.caseStudy.backToProjects}
+            </Link>
+          </div>
+        </section>
+
+        {/* 11. Next / Previous Project Navigation */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t" style={{ borderColor: c.border }}>
+          {prevProject ? (
+            <Link
+              to={`/proyectos/${prevProject.id}`}
+              className="p-4 rounded-xl border flex items-center gap-3 transition-colors group"
+              style={{ backgroundColor: c.bgSurface, borderColor: c.border }}
+            >
+              <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" style={{ color: c.accent }} />
+              <div>
+                <p className="text-[11px] font-medium" style={{ color: c.textMuted }}>{t.caseStudy.prevProject}</p>
+                <p className="text-sm font-semibold" style={{ color: c.textPrimary }}>{prevProject.title}</p>
+              </div>
+            </Link>
+          ) : <div />}
+
+          {nextProject ? (
+            <Link
+              to={`/proyectos/${nextProject.id}`}
+              className="p-4 rounded-xl border flex items-center justify-end gap-3 text-right transition-colors group sm:col-start-2"
+              style={{ backgroundColor: c.bgSurface, borderColor: c.border }}
+            >
+              <div>
+                <p className="text-[11px] font-medium" style={{ color: c.textMuted }}>{t.caseStudy.nextProject}</p>
+                <p className="text-sm font-semibold" style={{ color: c.textPrimary }}>{nextProject.title}</p>
+              </div>
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" style={{ color: c.accent }} />
+            </Link>
+          ) : <div />}
+        </div>
       </div>
     </div>
   );

@@ -38,6 +38,9 @@ export const en: Translations = {
     viewRepo: 'Repository',
     viewCaseStudy: 'View Details',
     role: 'Role',
+    allFilter: 'All',
+    individualFilter: 'Individual Projects',
+    groupFilter: 'Group Projects',
   },
   caseStudy: {
     backToProjects: 'Back to Projects',
@@ -50,6 +53,12 @@ export const en: Translations = {
     timestampsTitle: 'Video Chapters & Highlights',
     problemLabel: 'Challenge / Problem:',
     solutionLabel: 'Implemented Technical Solution:',
+    nextProject: 'Next Project',
+    prevProject: 'Previous Project',
+    viewLiveDemo: 'Try Live Demo',
+    viewRepository: 'View GitHub Code',
+    domainsTitle: 'Domain-Driven Package Architecture (DDD)',
+    adrsTitle: 'Key Architecture & Engineering Decisions',
   },
   education: {
     title: 'Education',

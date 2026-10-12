@@ -19,6 +19,7 @@ export interface Project {
     demo?: string;
     repo?: string;
   };
+  thumbnail?: string;
   isPlaceholder?: boolean;
 }
 
@@ -27,6 +28,16 @@ export interface VideoTimestamp {
   timeLabel: string;
   title: Record<Locale, string>;
   description: Record<Locale, string>;
+}
+
+export interface CaseStudyDomain {
+  name: string;
+  desc: Record<Locale, string>;
+}
+
+export interface CaseStudyADR {
+  question: Record<Locale, string>;
+  decision: Record<Locale, string>;
 }
 
 export interface CaseStudy {
@@ -38,6 +49,14 @@ export interface CaseStudy {
   architectureHighlights: Record<Locale, string[]>;
   myRoleDetailed: Record<Locale, string[]>;
   technicalChallenges: Record<Locale, { problem: string; solution: string }[]>;
+  domainsBreakdown?: {
+    title: Record<Locale, string>;
+    items: CaseStudyDomain[];
+  };
+  adrs?: {
+    title: Record<Locale, string>;
+    items: CaseStudyADR[];
+  };
   c4Diagram?: {
     title: Record<Locale, string>;
     nodes: { id: string; label: string; desc: string; type: 'client' | 'api' | 'db' | 'service' }[];
@@ -122,6 +141,9 @@ export interface Translations {
     viewRepo: string;
     viewCaseStudy: string;
     role: string;
+    allFilter: string;
+    individualFilter: string;
+    groupFilter: string;
   };
   caseStudy: {
     backToProjects: string;
@@ -134,6 +156,12 @@ export interface Translations {
     timestampsTitle: string;
     problemLabel: string;
     solutionLabel: string;
+    nextProject: string;
+    prevProject: string;
+    viewLiveDemo: string;
+    viewRepository: string;
+    domainsTitle: string;
+    adrsTitle: string;
   };
   education: {
     title: string;

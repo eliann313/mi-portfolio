@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion, type Variants } from 'framer-motion';
 import { ExternalLink, Plus, BookOpen } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
@@ -40,8 +41,15 @@ export function Projects() {
   const { locale, t } = useLanguage();
   const c = colors[theme];
 
+  const [activeFilter, setActiveFilter] = useState<'all' | 'individual' | 'group'>('all');
+
   const realProjects = projects.filter(p => !p.isPlaceholder);
   const placeholder = projects.find(p => p.isPlaceholder);
+
+  const filteredProjects = realProjects.filter(p => {
+    if (activeFilter === 'all') return true;
+    return p.type === activeFilter;
+  });
 
   return (
     <section id="projects" className="section-padding">
@@ -51,15 +59,56 @@ export function Projects() {
           <div className="section-divider" />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          {realProjects.map((project, idx) => (
+        {/* Filter Tabs */}
+        <motion.div
+          initial="hidden" whileInView="visible" viewport={{ once: true }}
+          variants={fadeUp} custom={0.05}
+          className="flex flex-wrap items-center gap-2 mb-8"
+        >
+          <button
+            onClick={() => setActiveFilter('all')}
+            className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
+            style={{
+              backgroundColor: activeFilter === 'all' ? `${c.accent}1f` : c.bgSurface,
+              borderColor: activeFilter === 'all' ? c.accent : c.border,
+              color: activeFilter === 'all' ? c.accent : c.textSecondary,
+            }}
+          >
+            {t.projects.allFilter} ({realProjects.length})
+          </button>
+          <button
+            onClick={() => setActiveFilter('individual')}
+            className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
+            style={{
+              backgroundColor: activeFilter === 'individual' ? `${c.accent}1f` : c.bgSurface,
+              borderColor: activeFilter === 'individual' ? c.accent : c.border,
+              color: activeFilter === 'individual' ? c.accent : c.textSecondary,
+            }}
+          >
+            {t.projects.individualFilter} ({realProjects.filter(p => p.type === 'individual').length})
+          </button>
+          <button
+            onClick={() => setActiveFilter('group')}
+            className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
+            style={{
+              backgroundColor: activeFilter === 'group' ? `${c.accent}1f` : c.bgSurface,
+              borderColor: activeFilter === 'group' ? c.accent : c.border,
+              color: activeFilter === 'group' ? c.accent : c.textSecondary,
+            }}
+          >
+            {t.projects.groupFilter} ({realProjects.filter(p => p.type === 'group').length})
+          </button>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {filteredProjects.map((project, idx) => (
             <motion.div
               key={project.id}
-              custom={idx * 0.1}
+              custom={idx * 0.08}
               initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-40px' }}
               variants={fadeUp}
               whileHover={{ y: -3 }}
-              className="rounded-xl p-6 border flex flex-col justify-between"
+              className="rounded-xl p-5 sm:p-6 border flex flex-col justify-between group"
               style={{ backgroundColor: c.bgSurface, borderColor: c.border, transition: 'border-color 0.2s, box-shadow 0.2s' }}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLElement).style.borderColor = c.accent;
@@ -71,9 +120,34 @@ export function Projects() {
               }}
             >
               <div>
+                {/* Thumbnail Preview Banner */}
+                {project.thumbnail && (
+                  <Link
+                    to={`/proyectos/${project.id}`}
+                    className="block relative overflow-hidden rounded-lg mb-4 border aspect-[16/9] max-h-52 bg-black/10"
+                    style={{ borderColor: c.border }}
+                  >
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                      <span className="text-xs text-white font-medium flex items-center gap-1.5">
+                        <BookOpen size={13} /> {t.projects.viewCaseStudy}
+                      </span>
+                    </div>
+                  </Link>
+                )}
+
                 {/* Header */}
                 <div className="flex items-start justify-between gap-2 mb-3 flex-wrap">
-                  <h3 className="font-semibold text-base" style={{ color: c.textPrimary }}>{project.title}</h3>
+                  <h3 className="font-semibold text-lg" style={{ color: c.textPrimary }}>
+                    <Link to={`/proyectos/${project.id}`} className="hover:underline">
+                      {project.title}
+                    </Link>
+                  </h3>
                   <div className="flex items-center gap-1.5">
                     <span className="tag text-xs" style={{ color: c.textMuted, backgroundColor: c.bgElevated, borderColor: c.border }}>
                       {project.type === 'group' ? t.projects.group : t.projects.individual}
