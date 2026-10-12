@@ -920,6 +920,290 @@ export const prop2Architecture: SystemArchitecture = {
     { step: 1, title: { es: 'Creación & Geocodificación', en: 'Listing Creation & Geocoding' }, desc: { es: 'El vendedor completa el formulario; el servidor valida con Zod y geocodifica la ubicación con Nominatim antes de guardar.', en: 'Seller submits form; server validates with Zod and geocodes coordinates with Nominatim.' } },
     { step: 2, title: { es: 'Subida Directa de Fotos', en: 'Direct Photo Upload' }, desc: { es: 'El cliente solicita firma criptográfica efímera al servidor y envía los archivos directamente al CDN de Cloudinary.', en: 'Client requests ephemeral signature from server and uploads image bytes directly to Cloudinary CDN.' } },
     { step: 3, title: { es: 'Búsqueda Full-Text', en: 'Full-Text Search Query' }, desc: { es: 'El comprador filtra en el drawer; PostgreSQL ejecuta búsqueda full-text con tsvector y GIN junto con filtros numéricos Decimal.', en: 'Buyer searches; PostgreSQL executes tsvector GIN full-text matching combined with Decimal filters.' } },
-    { step: 4, title: { es: 'Contacto & Notificación', en: 'Inquiry & Notification' }, desc: { es: 'El interesado envía un mensaje (con o sin cuenta); se guarda el lead en DB y se notifica al propietario por email.', en: 'Buyer sends inquiry (authenticated or guest); lead is persisted and owner is notified via email.' } },
+    { step: 4, title: { es: 'Contacto y Notificación', en: 'Inquiry & Notification' }, desc: { es: 'El interesado envía un mensaje (con o sin cuenta); se guarda el lead en DB y se notifica al propietario por email.', en: 'Buyer sends inquiry (authenticated or guest); lead is persisted and owner is notified via email.' } },
+  ],
+};
+
+// ============================================================================
+// 4. DATAFORGE — Schemas y Architecture
+// ============================================================================
+
+export const dataforgeDBSchema: CaseStudyDBSchema = {
+  title: {
+    es: 'Modelo de Datos Relacional y Catálogo Local — DataForge',
+    en: 'Relational Data Model & Local Catalog — DataForge',
+  },
+  engine: 'IndexedDB (Dexie.js) + DuckDB-Wasm In-Memory Engine',
+  overview: {
+    es: 'Esquema local-first transaccional con persistencia en IndexedDB y catálogo columnar en DuckDB-Wasm. Modela proyectos, esquemas inferidos de datasets, DAG de transformaciones con preservación estricta de linaje de datos, consultas analíticas y módulo financiero con contabilidad bimoneda (ARS/USD).',
+    en: 'Local-first transactional schema persisted in IndexedDB with DuckDB-Wasm in-memory columnar catalog. Models projects, dataset schema inference, DAG transformation pipelines with strict data lineage preservation, analytical queries, and dual-currency finance ledger.',
+  },
+  tables: [
+    {
+      name: 'projects',
+      domain: 'workspace',
+      description: {
+        es: 'Entidad raíz del espacio de trabajo. Aísla datasets, pipelines, modelos y plantillas configuradas.',
+        en: 'Root workspace entity. Scopes datasets, transformation pipelines, models, and template settings.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'name', type: 'VARCHAR(100)' },
+        { name: 'template_type', type: 'ENUM (free_analysis, personal_finance, sales, surveys)' },
+        { name: 'created_at', type: 'TIMESTAMP' },
+        { name: 'updated_at', type: 'TIMESTAMP' },
+      ],
+    },
+    {
+      name: 'datasets',
+      domain: 'ingestion',
+      description: {
+        es: 'Fuente de datos cruda importada en la sesión. Soporta CSV, XLSX, Parquet y JSON tabular sin enviar bytes a servidores.',
+        en: 'Raw ingested data source. Supports CSV, XLSX, Parquet, and tabular JSON with zero cloud transfer.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'project_id', type: 'UUID', isFk: true, ref: 'projects.id' },
+        { name: 'file_name', type: 'VARCHAR(255)' },
+        { name: 'file_format', type: 'ENUM (csv, xlsx, parquet, json)' },
+        { name: 'row_count', type: 'INT' },
+        { name: 'column_count', type: 'INT' },
+        { name: 'raw_size_bytes', type: 'BIGINT' },
+      ],
+    },
+    {
+      name: 'dataset_schemas',
+      domain: 'ingestion',
+      description: {
+        es: 'Metadatos y tipos inferidos off-main-thread por columna con roles semánticos (numérico, temporal, categórico, monetario).',
+        en: 'Off-main-thread inferred column types and semantic roles (numerical, temporal, categorical, monetary).',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'dataset_id', type: 'UUID', isFk: true, ref: 'datasets.id' },
+        { name: 'column_name', type: 'VARCHAR(100)' },
+        { name: 'data_type', type: 'VARCHAR(50)' },
+        { name: 'semantic_role', type: 'VARCHAR(50)' },
+        { name: 'is_nullable', type: 'BOOLEAN' },
+        { name: 'unique_count', type: 'INT' },
+      ],
+    },
+    {
+      name: 'pipeline_definitions',
+      domain: 'pipeline',
+      description: {
+        es: 'Definición estructurada del DAG de transformaciones y operaciones de limpieza por proyecto.',
+        en: 'Structured DAG definition of transformation and data cleaning pipelines scoped to the project.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'project_id', type: 'UUID', isFk: true, ref: 'projects.id' },
+        { name: 'name', type: 'VARCHAR(100)' },
+        { name: 'is_valid', type: 'BOOLEAN' },
+        { name: 'created_at', type: 'TIMESTAMP' },
+      ],
+    },
+    {
+      name: 'pipeline_steps',
+      domain: 'pipeline',
+      description: {
+        es: 'Paso individual de transformación (FILTRO, CAST, AGREGAR, JOIN, APPEND) con validación estricta de cardinalidad.',
+        en: 'Individual transformation step (FILTER, CAST, AGGREGATE, JOIN, APPEND) with strict fan-out validation.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'pipeline_id', type: 'UUID', isFk: true, ref: 'pipeline_definitions.id' },
+        { name: 'step_order', type: 'INT' },
+        { name: 'operation_type', type: 'ENUM (filter, transform, cast, aggregate, join, append)' },
+        { name: 'params_json', type: 'JSON' },
+      ],
+    },
+    {
+      name: 'dataset_versions',
+      domain: 'lineage',
+      description: {
+        es: 'Instantánea derivada de un pipeline. Preserva el linaje determinista (data lineage) sin mutar la fuente original.',
+        en: 'Derived snapshot from a pipeline. Guarantees deterministic lineage without mutating the source dataset.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'step_id', type: 'UUID', isFk: true, ref: 'pipeline_steps.id' },
+        { name: 'version_hash', type: 'VARCHAR(64)' },
+        { name: 'row_count', type: 'INT' },
+        { name: 'lineage_parent_ids', type: 'ARRAY<UUID>' },
+      ],
+    },
+    {
+      name: 'analysis_saved',
+      domain: 'analytics',
+      description: {
+        es: 'Consultas SQL DuckDB, modelos estadísticos inferenciales (Pyodide) o algoritmos temporales guardados.',
+        en: 'Saved DuckDB SQL queries, inferential statistical models (Pyodide), or time-series forecasts.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'project_id', type: 'UUID', isFk: true, ref: 'projects.id' },
+        { name: 'query_sql', type: 'TEXT' },
+        { name: 'chart_config_json', type: 'JSON' },
+        { name: 'execution_engine', type: 'ENUM (duckdb, pyodide, rust_wasm)' },
+      ],
+    },
+    {
+      name: 'reports',
+      domain: 'workspace',
+      description: {
+        es: 'Reporte ejecutivo estructurado con bloques de texto, hallazgos estadísticos, gráficos ECharts y exportación PDF/HTML.',
+        en: 'Executive report document with methodology, statistical findings, ECharts, and PDF/HTML export.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'project_id', type: 'UUID', isFk: true, ref: 'projects.id' },
+        { name: 'title', type: 'VARCHAR(200)' },
+        { name: 'sections_json', type: 'JSON' },
+        { name: 'exported_at', type: 'TIMESTAMP (NULLABLE)' },
+      ],
+    },
+    {
+      name: 'finance_accounts',
+      domain: 'finance',
+      description: {
+        es: 'Cuentas financieras de la plantilla de Finanzas Personales con saldo segregado en ARS y USD.',
+        en: 'Personal finance ledger accounts with segregated balances across ARS and USD currencies.',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'project_id', type: 'UUID', isFk: true, ref: 'projects.id' },
+        { name: 'name', type: 'VARCHAR(100)' },
+        { name: 'currency', type: 'ENUM (ARS, USD)' },
+        { name: 'account_type', type: 'ENUM (cash, bank, credit, investment)' },
+        { name: 'balance', type: 'DECIMAL(14,2)' },
+      ],
+    },
+    {
+      name: 'finance_transactions',
+      domain: 'finance',
+      description: {
+        es: 'Libro de asientos contables: ingresos, egresos, transferencias y cotizaciones históricas (Oficial, MEP, CCL).',
+        en: 'Ledger transactions: income, expenses, internal transfers, and exchange rate references (Official, MEP, CCL).',
+      },
+      columns: [
+        { name: 'id', type: 'UUID', isPk: true },
+        { name: 'account_id', type: 'UUID', isFk: true, ref: 'finance_accounts.id' },
+        { name: 'date', type: 'DATE' },
+        { name: 'amount', type: 'DECIMAL(14,2)' },
+        { name: 'category', type: 'VARCHAR(50)' },
+        { name: 'type', type: 'ENUM (income, expense, transfer)' },
+        { name: 'exchange_rate_type', type: 'ENUM (official, mep, ccl, manual)' },
+      ],
+    },
+  ],
+  relationships: [
+    { from: 'projects', to: 'datasets', type: '1:N', label: 'Datasets importados en sesión' },
+    { from: 'datasets', to: 'dataset_schemas', type: '1:N', label: 'Esquema y tipos inferidos' },
+    { from: 'projects', to: 'pipeline_definitions', type: '1:N', label: 'Pipelines de transformación' },
+    { from: 'pipeline_definitions', to: 'pipeline_steps', type: '1:N', label: 'Pasos secuenciales del DAG' },
+    { from: 'pipeline_steps', to: 'dataset_versions', type: '1:N', label: 'Instantáneas derivadas con linaje' },
+    { from: 'projects', to: 'analysis_saved', type: '1:N', label: 'Consultas y analíticas guardadas' },
+    { from: 'projects', to: 'reports', type: '1:N', label: 'Reportes ejecutivos exportables' },
+    { from: 'projects', to: 'finance_accounts', type: '1:N', label: 'Cuentas financieras bimoneda' },
+    { from: 'finance_accounts', to: 'finance_transactions', type: '1:N', label: 'Libro diario de transacciones' },
+  ],
+};
+
+export const dataforgeArchitecture: SystemArchitecture = {
+  title: {
+    es: 'Arquitectura de Sistema — DataForge',
+    en: 'System Architecture — DataForge',
+  },
+  summary: {
+    es: 'Arquitectura local-first modular cliente con Next.js 16 (Static Export), Web Workers para aislamiento de cómputo, orquestación multi-engine (DuckDB-Wasm, Pyodide y Rust), Apache ECharts y persistencia transaccional en IndexedDB y OPFS.',
+    en: 'Client-side modular local-first architecture with Next.js 16 (Static Export), isolated Web Workers, multi-engine orchestration (DuckDB-Wasm, Pyodide, and Rust), Apache ECharts, and local transactional persistence in IndexedDB and OPFS.',
+  },
+  layers: [
+    {
+      name: { es: 'Capa de Interfaz y Workspace', en: 'Workspace & UI Layer' },
+      badge: { es: 'Next.js 16 Static', en: 'Next.js 16 Static' },
+      color: '#3B82F6',
+      components: [
+        {
+          name: 'React 19 Workspace UI',
+          desc: { es: 'Entorno de trabajo reactivo con visualización de tablas paginadas, paneles contextuales e inspector de calidad de datos.', en: 'Reactive workspace with paginated table views, contextual panels, and data quality inspector.' },
+          tech: 'React 19 + Tailwind CSS',
+        },
+        {
+          name: { es: 'Visualizaciones Apache ECharts', en: 'Apache ECharts Visualizations' },
+          desc: { es: 'Renderizado interactivo de gráficos de barras, dispersión, histogramas, cajas y series temporales.', en: 'Interactive rendering of bar charts, scatter plots, histograms, boxplots, and time series.' },
+          tech: 'Apache ECharts',
+        },
+        {
+          name: { es: 'Editor SQL Interactivo', en: 'Interactive SQL Editor' },
+          desc: { es: 'Consola SQL integrada para consultas directas sobre DuckDB con autocompletado y resaltado de sintaxis.', en: 'Integrated SQL console for ad-hoc DuckDB queries with syntax highlighting.' },
+          tech: 'Monaco Editor',
+        },
+      ],
+    },
+    {
+      name: { es: 'Capa de Dominio y Casos de Uso (Hexagonal)', en: 'Domain & Use Cases Layer (Hexagonal)' },
+      badge: { es: 'Screaming Architecture', en: 'Screaming Architecture' },
+      color: '#6366F1',
+      components: [
+        {
+          name: { es: 'Módulos de Negocio Core', en: 'Core Business Modules' },
+          desc: { es: 'Módulos cohesivos y desacoplados: projects, datasets, analysis, pipelines, reports y finance.', en: 'Decoupled cohesive modules: projects, datasets, analysis, pipelines, reports, and finance.' },
+          tech: { es: 'TypeScript Puro', en: 'Pure TypeScript' },
+        },
+        {
+          name: { es: 'Motor de Linaje DAG y Validaciones', en: 'DAG Lineage Engine & Validations' },
+          desc: { es: 'Orquestación de operaciones de transformación con validación previa de cardinalidad y fan-out para evitar duplicados.', en: 'Transformation DAG orchestration with upfront cardinality and fan-out validation to prevent duplicates.' },
+          tech: { es: 'Invariantes de Dominio', en: 'Domain Invariants' },
+        },
+      ],
+    },
+    {
+      name: { es: 'Motores Analíticos Multi-Engine (Web Workers)', en: 'Multi-Engine Analytics (Web Workers)' },
+      badge: { es: 'DuckDB + Pyodide + Rust', en: 'DuckDB + Pyodide + Rust' },
+      color: '#F59E0B',
+      components: [
+        {
+          name: 'DuckDB-Wasm Worker',
+          desc: { es: 'Motor SQL columnar OLAP vectorizado en Web Worker. Ejecuta agregaciones y joins sobre millones de filas a sub-milisegundo.', en: 'Vectorized columnar OLAP SQL engine in Web Worker executing aggregations and joins on millions of rows in sub-milliseconds.' },
+          tech: 'DuckDB-Wasm',
+        },
+        {
+          name: 'Pyodide Worker (Python Científico)',
+          desc: { es: 'Entorno Python científico en WebAssembly con carga diferida (NumPy, SciPy) para modelos estadísticos y forecasting.', en: 'WebAssembly scientific Python runtime lazy-loaded (NumPy, SciPy) for inferential statistics and forecasting.' },
+          tech: 'Pyodide (Python 3.12)',
+        },
+        {
+          name: 'Rust / Wasm Worker',
+          desc: { es: 'Módulo WebAssembly en Rust para algoritmos de cálculo numérico intensivo (Dynamic Time Warping para series temporales).', en: 'Rust WebAssembly module for compute-intensive numerical algorithms (Dynamic Time Warping for time series).' },
+          tech: 'Rust + wasm-pack',
+        },
+      ],
+    },
+    {
+      name: { es: 'Capa de Persistencia Local y Archivos', en: 'Local Persistence & Storage Layer' },
+      badge: { es: 'IndexedDB + OPFS', en: 'IndexedDB + OPFS' },
+      color: '#10B981',
+      components: [
+        {
+          name: 'IndexedDB (Dexie.js)',
+          desc: { es: 'Almacenamiento transaccional de metadatos de proyectos, definiciones de pipelines, consultas guardadas y asientos contables.', en: 'Transactional storage for project metadata, pipeline definitions, saved queries, and finance ledger entries.' },
+          tech: 'Dexie.js / IndexedDB',
+        },
+        {
+          name: 'Origin Private File System (OPFS)',
+          desc: { es: 'Sistema de archivos privado del navegador para buffers binarios crudos sin saturar el heap de JavaScript.', en: 'Browser private filesystem for raw binary buffers with zero network overhead and no heap saturation.' },
+          tech: 'Native OPFS API',
+        },
+      ],
+    },
+  ],
+  dataFlow: [
+    { step: 1, title: { es: 'Ingesta Off-Main-Thread', en: 'Off-Main-Thread Ingestion' }, desc: { es: 'El usuario arrastra CSV, XLSX o Parquet; un Web Worker parsea los bytes e infiere tipos y estadísticas sin bloquear la UI.', en: 'User drops CSV, XLSX, or Parquet; a Web Worker parses bytes and infers schemas without freezing UI.' } },
+    { step: 2, title: { es: 'Carga Columnar en DuckDB', en: 'DuckDB Columnar Load' }, desc: { es: 'DuckDB-Wasm monta el buffer de datos en memoria para consultas SQL analíticas instantáneas con cero latencia de red.', en: 'DuckDB-Wasm mounts in-memory columnar buffers for instant analytical SQL queries with zero network latency.' } },
+    { step: 3, title: { es: 'Transformaciones DAG con Linaje', en: 'DAG Transforms with Lineage' }, desc: { es: 'El usuario aplica filtros, JOINs o agrupaciones; el motor valida cardinalidad y registra versiones inmutables.', en: 'User applies filters, JOINs, or aggregations; engine validates cardinality and logs immutable versions.' } },
+    { step: 4, title: { es: 'Visualización y Análisis Estadístico', en: 'Visualization & Statistical Analysis' }, desc: { es: 'ECharts renderiza gráficos reactivos y Pyodide ejecuta predicciones y descomposición de series temporales bajo demanda.', en: 'ECharts renders reactive dashboards and Pyodide executes on-demand forecasts and time series decomposition.' } },
+    { step: 5, title: { es: 'Persistencia Local y Reportes', en: 'Local Persistence & Reporting' }, desc: { es: 'IndexedDB almacena la receta del proyecto y Report Builder compila informes técnicos exportables a HTML o PDF.', en: 'IndexedDB persists project definitions and Report Builder compiles executive reports to HTML or PDF.' } },
   ],
 };

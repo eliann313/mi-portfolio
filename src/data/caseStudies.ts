@@ -6,6 +6,8 @@ import {
   skillradarArchitecture,
   prop2DBSchema,
   prop2Architecture,
+  dataforgeDBSchema,
+  dataforgeArchitecture,
 } from './schemasAndArchitectures';
 
 export const caseStudies: Record<string, CaseStudy> = {
@@ -187,142 +189,6 @@ export const caseStudies: Record<string, CaseStudy> = {
         url: '/projects/skillradar/10.png',
         title: { es: 'Configuración de IA y Privacidad BYOK', en: 'AI Configuration & BYOK Privacy' },
         caption: { es: 'Cifrado AES-256 de API keys personales y selección de proveedor.', en: 'AES-256 encryption for personal API keys and model provider selection.' },
-      },
-    ],
-  },
-
-  dataforge: {
-    id: 'dataforge',
-    projectTitle: 'DataForge',
-    badge: {
-      es: 'Plataforma Analítica · Runtimes Client-Side y Local-First',
-      en: 'Analytics Platform · Client-Side Runtimes & Local-First',
-    },
-    subtitle: {
-      es: 'Plataforma analítica autoservicio y local-first ejecutada 100% en el navegador, que combina DuckDB-Wasm, Python científico (Pyodide) y Rust para análisis libre, finanzas personales en ARS/USD y reportes reproducibles.',
-      en: 'Browser-native, local-first self-service analytics platform executing 100% in the browser, combining DuckDB-Wasm, scientific Python (Pyodide), and Rust for open analysis, personal finance in ARS/USD, and reproducible reports.',
-    },
-    overview: {
-      es: 'DataForge es una plataforma de análisis y exploración de datos local-first concebida para que cualquier usuario pueda importar, limpiar, transformar, analizar estadísticamente, visualizar y reportar datos sin servidores ni subida de archivos confidenciales a la nube. Su arquitectura modular desacopla la UI de múltiples runtimes analíticos en Web Workers (DuckDB-Wasm para SQL y columnar, Pyodide para modelos estadísticos en Python, y Rust para algoritmos de alta intensidad) con plantillas especializadas para Análisis Libre, Finanzas Personales (ARS/USD), Negocios y Encuestas.',
-      en: 'DataForge is a local-first data exploration and analytics workbench designed to allow anyone to import, clean, transform, model, visualize, and report data without servers or confidential cloud file uploads. Its modular architecture decouples the UI from multiple client-side analytical runtimes in Web Workers (DuckDB-Wasm for columnar SQL, Pyodide for scientific Python models, and Rust for compute-intensive tasks) with dedicated templates for Free Analysis, Personal Finance (ARS/USD), Sales, and Surveys.',
-    },
-    architectureHighlights: {
-      es: [
-        'Arquitectura Browser-Native Local-First: procesamiento 100% en el cliente sin costos de cómputo en la nube ni transferencia externa de datasets.',
-        'Orquestación Multi-Engine en Web Workers: DuckDB-Wasm como motor SQL columnar primario, Pyodide (Python, NumPy, Pandas, SciPy) para modelos estadísticos/forecasting y Rust/Wasm para algoritmos de alta intensidad (DTW).',
-        'Plantillas de dominio especializadas: Análisis Libre, Finanzas Personales (registro manual y bancario en ARS/USD con cotizaciones oficial/MEP/CCL y sin dobles conteos), Ventas y Encuestas.',
-        'Canalización de ingesta off-main-thread con parsers de CSV y XLSX en Web Workers dedicados para procesar grandes volúmenes de datos tabulares sin congelar la UI.',
-        'Persistencia local estructurada con IndexedDB versionada y OPFS para guardar proyectos, esquemas, linaje y análisis reproducibles.',
-        'Suites continuas de testing con Vitest y Playwright automatizadas para validar la reactividad y los contratos de datos en navegadores Chromium y Firefox.',
-      ],
-      en: [
-        'Local-First Browser-Native Architecture: 100% client-side data processing with zero cloud compute costs and zero external confidential data transfers.',
-        'Multi-Engine Orchestration in Web Workers: DuckDB-Wasm for primary columnar SQL, Pyodide (Python, NumPy, Pandas, SciPy) for statistical models/forecasting, and Rust/Wasm for compute-heavy tasks (DTW).',
-        'Specialized Domain Templates: Free Analysis, Personal Finance (manual & bank ledger in ARS/USD with official/MEP/CCL rates, avoiding double counts), Sales, and Surveys.',
-        'Off-main-thread ingestion pipeline with dedicated CSV and XLSX Web Worker parsers to process large tabular datasets without freezing the main UI thread.',
-        'Structured local persistence layer powered by versioned IndexedDB and OPFS to store projects, schemas, lineage, and reproducible workflows.',
-        'Automated testing suites with Vitest and multi-browser Playwright E2E suites validating state reactivity and data contracts across Chromium and Firefox.',
-      ],
-    },
-    myRoleDetailed: {
-      es: [
-        'Creador único y arquitecto de software del proyecto, liderando el diseño técnico integral, especificaciones de arquitectura (ADRs) y Roadmap maestro.',
-        'Diseñé la arquitectura modular por capacidades (Screaming / Feature-first) y el orquestador desacoplado de runtimes analíticos cliente (DuckDB-Wasm, Pyodide, Rust).',
-        'Modelé los contratos y flujos de plantillas especializadas (Finanzas personales con soporte dual ARS/USD, cotizaciones y conciliación bancaria).',
-        'Construí los parsers de ingesta para CSV y XLSX con detección automática de delimitadores, inferencia de tipos y previews paginados off-main-thread.',
-        'Implementé el dominio de proyectos con persistencia transaccional en IndexedDB y suites automatizadas de prueba con Vitest y Playwright.',
-      ],
-      en: [
-        'Sole creator and software architect, establishing master technical roadmaps, Architecture Decision Records (ADRs), and core system specifications.',
-        'Architected feature-first modular system boundaries and the decoupled client-side analytical runtime orchestrator (DuckDB-Wasm, Pyodide, Rust).',
-        'Modeled domain contracts and workflows for specialized templates (Personal finance with ARS/USD dual-currency support, market rate schemas, and bank reconciliation).',
-        'Engineered off-main-thread CSV and XLSX parsers with automatic delimiter detection, schema inference, and high-performance paginated previews.',
-        'Built transactional project domain persistence on IndexedDB and automated testing suites with Vitest & Playwright.',
-      ],
-    },
-    technicalChallenges: {
-      es: [
-        {
-          problem: 'Coordinar múltiples motores analíticos (DuckDB-Wasm, Pyodide, Rust) en el navegador sin bloquear el render loop de la UI ni asumir copias de memoria zero-copy.',
-          solution: 'Diseñé adaptadores dedicados en Web Workers independientes que se comunican mediante contratos tipados y buffers transferibles (Transferable Objects / TypedArrays), garantizando 0 long tasks en la interfaz.',
-        },
-        {
-          problem: 'Modelar plantillas de negocio avanzadas (como Finanzas Personales en ARS/USD) sin violar el principio de inmutabilidad de datos originales.',
-          solution: 'Establecí una separación estricta entre la fuente original del dataset y la capa de transformaciones, preservando linaje auditable y permitiendo reconciliación de cotizaciones y categorizaciones reproducibles.',
-        },
-      ],
-      en: [
-        {
-          problem: 'Coordinating multiple analytical engines (DuckDB-Wasm, Pyodide, Rust) in the browser without freezing the UI render loop or assuming zero-copy memory between WASM boundaries.',
-          solution: 'Designed dedicated worker adapters in isolated Web Workers communicating via typed contracts and Transferable Objects / TypedArrays, ensuring 0 main-thread long tasks.',
-        },
-        {
-          problem: 'Modeling complex business templates (like ARS/USD Personal Finance) without violating raw source immutability principles.',
-          solution: 'Established strict decoupling between raw dataset sources and transformation layers, maintaining auditable data lineage and reproducible exchange-rate reconciliation.',
-        },
-      ],
-    },
-    adrs: {
-      title: {
-        es: 'Decisiones de Arquitectura Local-First y Motores Cliente',
-        en: 'Local-First Architecture & Client Runtimes Decisions',
-      },
-      items: [
-        {
-          question: {
-            es: '¿Por qué ejecutar los motores en el cliente (DuckDB-Wasm y Pyodide) en vez de un backend tradicional?',
-            en: 'Why execute client runtimes (DuckDB-Wasm & Pyodide) instead of a traditional backend?',
-          },
-          decision: {
-            es: 'Garantiza privacidad absoluta al nunca subir datasets confidenciales a la nube (finanzas personales, encuestas, etc.) y elimina los costos de infraestructura de servidores analíticos.',
-            en: 'Guarantees zero-trust privacy since sensitive datasets (personal finance, surveys) never leave the browser, while eliminating cloud compute bills.',
-          },
-        },
-        {
-          question: {
-            es: '¿Por qué Web Workers dedicados para ingesta y cómputo?',
-            en: 'Why dedicated Web Workers for ingestion and computation?',
-          },
-          decision: {
-            es: 'Aísla las operaciones intensivas de CPU del hilo principal del navegador, manteniendo la UI en 60 FPS sin bloqueos visuales durante el procesamiento de datos tabulares.',
-            en: 'Isolates CPU-heavy parsing and computation from the main UI thread, ensuring a smooth 60 FPS user experience with zero interface freezes.',
-          },
-        },
-      ],
-    },
-    c4Diagram: {
-      title: {
-        es: 'Diagrama de Arquitectura Local-First & Motores Cliente (DataForge)',
-        en: 'Local-First & Client Engines Architecture Diagram (DataForge)',
-      },
-      nodes: [
-        { id: 'ui', label: 'Next.js 16 UI + ECharts', desc: 'React 19 + Tailwind CSS + Drag & Drop Workspace y plantillas', type: 'client' },
-        { id: 'parser', label: 'Ingestion Worker (CSV/XLSX)', desc: 'Parsers off-main-thread, inferencia de tipos y previews', type: 'service' },
-        { id: 'engine', label: 'Runtimes WASM (DuckDB/Py/Rust)', desc: 'DuckDB-Wasm (SQL columnar) + Pyodide (Python) + Rust (DTW)', type: 'service' },
-        { id: 'store', label: 'IndexedDB + OPFS Store', desc: 'Persistencia local transaccional de proyectos, linaje y análisis', type: 'db' },
-      ],
-      connections: [
-        { from: 'ui', to: 'parser', label: 'Raw File Buffers (Transferable)' },
-        { from: 'parser', to: 'engine', label: 'Arrow Tables & Transformed Datasets' },
-        { from: 'engine', to: 'ui', label: 'Query Results, Insights & Charts' },
-        { from: 'ui', to: 'store', label: 'Project Metadata, Lineage & Local State' },
-      ],
-    },
-    screenshots: [
-      {
-        url: '/projects/dataforge/1.png',
-        title: { es: 'Espacio de Trabajo Analítico y Panel (Oscuro / Claro)', en: 'Analytical Workspace & Dashboard (Dark / Light)' },
-        caption: { es: 'Diseño integral de la suite de análisis con vista de datasets, KPIs y explorador visual.', en: 'Comprehensive analytics suite design with dataset views, KPIs, and visual data explorer.' },
-      },
-      {
-        url: '/projects/dataforge/2.png',
-        title: { es: 'Explorador de Tablas y Editor SQL Columnar', en: 'Table Explorer & Columnar SQL Editor' },
-        caption: { es: 'Interfaz de consulta reactiva sobre DuckDB-Wasm con sugerencias y vista previa paginada.', en: 'Reactive query interface over DuckDB-Wasm with syntax suggestions and paginated previews.' },
-      },
-      {
-        url: '/projects/dataforge/3.png',
-        title: { es: 'Visualizaciones y Preparación de Pipelines de Datos', en: 'Data Visualizations & Pipeline Preparation' },
-        caption: { es: 'Gráficos interactivos, agregaciones estadísticas descriptivas y linaje de datos.', en: 'Interactive charts, descriptive statistical aggregations, and data lineage tracking.' },
       },
     ],
   },
@@ -516,8 +382,162 @@ export const caseStudies: Record<string, CaseStudy> = {
       },
       {
         url: '/projects/gridhub/c4-architecture.svg',
-        title: { es: 'Diagrama de Arquitectura de Capas C4 & Multi-Tenant', en: 'C4 Layered & Multi-Tenant Architecture Diagram' },
+        title: { es: 'Diagrama de Arquitectura de Capas C4 y Multi-Tenant', en: 'C4 Layered & Multi-Tenant Architecture Diagram' },
         caption: { es: 'Desglose visual de capas (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).', en: 'Visual breakdown of architecture layers (React 19 -> FastAPI Onion -> Tenant Middleware -> Postgres/Alembic).' },
+      },
+    ],
+  },
+
+  dataforge: {
+    id: 'dataforge',
+    projectTitle: 'DataForge',
+    badge: {
+      es: 'Plataforma Analítica · Local-First y Motores Wasm',
+      en: 'Analytics Platform · Local-First & Wasm Engines',
+    },
+    subtitle: {
+      es: 'Plataforma de análisis de datos autoservicio en el navegador con DuckDB-Wasm, Pyodide (Python), Rust, preservación estricta de linaje DAG y cero telemetría externa.',
+      en: 'Browser-native self-service data analytics platform powered by DuckDB-Wasm, Pyodide (Python), Rust, strict DAG data lineage, and zero external telemetry.',
+    },
+    overview: {
+      es: 'DataForge es una plataforma de análisis de datos autoservicio, orientada a la privacidad y ejecutada íntegramente en el cliente (local-first). Permite importar archivos tabulares (CSV, XLSX, Parquet, JSON), explorar y perfilar esquemas, aplicar transformaciones reproducibles con preservación determinista de linaje (Data Lineage), ejecutar consultas SQL analíticas de baja latencia con DuckDB-Wasm, computar modelos estadísticos y pronósticos de series temporales en Python (Pyodide) y compilar reportes ejecutivos con visualizaciones de Apache ECharts, todo sin requerir servidores de backend ni incurrir en costos de infraestructura cloud.',
+      en: 'DataForge is a privacy-first, client-side self-service data analytics platform executed entirely in the browser (local-first). It empowers users to import tabular files (CSV, XLSX, Parquet, JSON), explore and profile schemas, execute reproducible transformations with deterministic data lineage, run sub-millisecond analytical SQL queries via DuckDB-Wasm, perform statistical modeling and time-series forecasting in Python (Pyodide), and compile executive reports with Apache ECharts—all with zero backend servers and zero cloud infrastructure costs.',
+    },
+    architectureHighlights: {
+      es: [
+        'Arquitectura Monolítica Modular Client-Side (Screaming Architecture) con separación estricta en capas de Dominio, Aplicación, Infraestructura y Presentación.',
+        'Orquestación multi-motor en Web Workers aislados: DuckDB-Wasm como motor SQL columnar OLAP primario, Pyodide (Python científico) para modelos inferenciales/forecasting diferidos, y Rust/Wasm para algoritmos numéricos de alta intensidad (DTW).',
+        'Preservación determinista del linaje de datos (Data Lineage) mediante un grafo acíclico dirigido (DAG) de transformaciones inmutables sin mutar los archivos fuente originales.',
+        'Parsers off-main-thread para CSV, XLSX y Parquet con inferencia automática de esquemas y tipos semánticos (moneda, temporales, categóricos) sin bloquear el render loop de React.',
+        'Validación preventiva de cardinalidad y fan-out en operaciones JOIN y APPEND (ADR-0007) para evitar explosiones combinatorias y duplicaciones en memoria.',
+        'Plantillas de dominio especializadas: Análisis Libre, Finanzas Personales (doble moneda ARS/USD, cotizaciones Oficial/MEP/CCL y prevención de doble contabilización), Ventas y Encuestas.',
+        'Persistencia transaccional local en IndexedDB (Dexie.js) para recetas de proyectos y OPFS (Origin Private File System) para almacenamiento seguro de archivos.',
+        'Suite automatizada de pruebas unitarias con Vitest y pruebas E2E con Playwright (31/31 suites verificadas en R1).',
+      ],
+      en: [
+        'Client-side Modular Monolith (Screaming Architecture) strictly decoupling Domain, Application, Infrastructure, and Presentation layers.',
+        'Multi-engine orchestration across isolated Web Workers: DuckDB-Wasm as primary columnar OLAP engine, Pyodide (scientific Python) for lazy-loaded inferential models, and Rust/Wasm for intensive numerical algorithms (DTW).',
+        'Deterministic Data Lineage preservation using an immutable transformation Directed Acyclic Graph (DAG) leaving original source buffers untouched.',
+        'Off-main-thread CSV, XLSX, and Parquet parsers featuring automatic schema inference and semantic role detection without freezing the React render loop.',
+        'Preventative cardinality and fan-out validation on JOIN and APPEND operations (ADR-0007) preventing combinational row duplication in memory.',
+        'Specialized domain templates: Free Analysis, Personal Finance (segregated ARS/USD ledger with Official/MEP/CCL exchange rates), Sales, and Surveys.',
+        'Transactional local persistence in IndexedDB (Dexie.js) for project recipes and OPFS (Origin Private File System) for zero-network byte streaming.',
+        'Automated testing suite with Vitest unit tests and Playwright E2E suites (31/31 verified tests in R1 release).',
+      ],
+    },
+    myRoleDetailed: {
+      es: [
+        'Creador único y arquitecto de software: definí la visión de producto, la arquitectura hexagonal cliente y el roadmap técnico de entregas (R1 cerrado con 31/31 tests E2E).',
+        'Diseñé el orquestador multi-engine y el canal de comunicación asíncrono tipado entre la UI de React y los Web Workers de DuckDB-Wasm y Pyodide.',
+        'Implementé el motor de linaje de datos y transformaciones DAG, garantizando inmutabilidad de fuentes y pre-validación de cardinalidad en operaciones JOIN y APPEND.',
+        'Modelé la plantilla de Finanzas Personales con contabilidad bimoneda (ARS/USD), segregación estricta de transferencias y tipos de cambio históricos.',
+      ],
+      en: [
+        'Sole creator and software architect: defined product vision, client-side hexagonal architecture, and technical milestone roadmap (R1 completed with 31/31 E2E tests).',
+        'Designed the multi-engine orchestrator and typed message-passing bridge between the React UI and DuckDB-Wasm/Pyodide Web Workers.',
+        'Engineered the data lineage engine and transformation DAG, guaranteeing source immutability and cardinality pre-checks on JOIN and APPEND operations.',
+        'Modeled the Personal Finance template with dual-currency (ARS/USD) accounting, strict transfer segregation, and historical exchange rates.',
+      ],
+    },
+    technicalChallenges: {
+      es: [
+        {
+          problem: 'Ejecutar cómputo analítico intensivo y queries SQL complejas sobre grandes datasets sin bloquear el hilo principal de renderizado de la interfaz.',
+          solution: 'Aislé por completo DuckDB-Wasm, los parsers de ingesta y Pyodide en Web Workers independientes con canales de mensajes basados en Transferable Objects y TypedArrays. La interfaz de usuario mantiene 60 FPS estables mientras el motor ejecuta agregaciones vectorizadas sobre millones de registros en segundo plano.',
+        },
+        {
+          problem: 'Prevenir duplicación accidental de filas y explosión de memoria (fan-out) durante transformaciones JOIN y combinaciones APPEND en el navegador.',
+          solution: 'Diseñé una etapa de análisis de cardinalidad previa a la ejecución (ADR-0007). El sistema analiza la unicidad de las columnas clave y el ratio de fan-out; si detecta relaciones muchos a muchos (M:N) no deseadas, advierte al usuario con el impacto proyectado en filas antes de materializar la operación en memoria.',
+        },
+        {
+          problem: 'Garantizar reproducibilidad científica y linaje de datos (Data Lineage) sin duplicar archivos pesados en el almacenamiento local del navegador.',
+          solution: 'Implementé un modelo de versiones derivadas inmutables basado en grafos acíclicos dirigidos (DAG). En lugar de clonar el dataset completo en cada paso, cada nodo almacena la receta determinista de transformación y punteros a los identificadores de origen (lineage_parent_ids), recalculando o persistiendo instantáneas de forma diferida en IndexedDB.',
+        },
+      ],
+      en: [
+        {
+          problem: 'Executing heavy analytical compute and complex SQL queries on large datasets without freezing the browser UI main thread.',
+          solution: 'Completely isolated DuckDB-Wasm, ingestion parsers, and Pyodide into dedicated Web Workers using structured message passing with Transferable Objects and TypedArrays. The UI maintains a constant 60 FPS while the engine executes vectorized queries on millions of rows in the background.',
+        },
+        {
+          problem: 'Preventing accidental row duplication and memory exhaustion (fan-out) during in-browser JOIN and APPEND combinations.',
+          solution: 'Engineered an upfront cardinality inspection phase (ADR-0007) that inspects key uniqueness and fan-out ratios before execution. If unintended many-to-many relationships are detected, the system alerts the user with projected row impacts before materializing data in memory.',
+        },
+        {
+          problem: 'Guaranteeing scientific data lineage and auditability without duplicating massive file buffers in browser storage.',
+          solution: 'Implemented an immutable DAG-based derived version model. Instead of duplicating datasets at every transform step, nodes persist deterministic transformation recipes and parent pointers (lineage_parent_ids), lazily computing or persisting snapshots in IndexedDB.',
+        },
+      ],
+    },
+    domainsBreakdown: {
+      title: {
+        es: 'Módulos y Dominios Funcionales (Screaming Architecture Cliente)',
+        en: 'Functional Domains & Modules (Client Screaming Architecture)',
+      },
+      items: [
+        { name: '1. projects', desc: { es: 'Entidad raíz del espacio de trabajo, metadatos, plantillas activas y gestión transaccional.', en: 'Root workspace entity, metadata, active templates, and transactional management.' } },
+        { name: '2. datasets', desc: { es: 'Ingesta multi-formato off-main-thread, detección de tipos, inferencia de roles semánticos y buffer columnar.', en: 'Off-main-thread multi-format ingestion, type detection, semantic role inference, and columnar buffer.' } },
+        { name: '3. pipelines', desc: { es: 'Grafo acíclico dirigido (DAG) de transformaciones con pre-validación de cardinalidad y fan-out.', en: 'Directed Acyclic Graph (DAG) transformation pipeline with cardinality and fan-out pre-validation.' } },
+        { name: '4. analysis', desc: { es: 'Consultas SQL analíticas sobre DuckDB-Wasm y modelos inferenciales avanzados en Pyodide.', en: 'Analytical SQL queries powered by DuckDB-Wasm and advanced inferential models in Pyodide.' } },
+        { name: '5. reports', desc: { es: 'Report Builder ejecutivo modular con bloques de texto, hallazgos, metodología y exportación PDF/HTML.', en: 'Modular executive Report Builder with narrative blocks, findings, methodology, and PDF/HTML export.' } },
+        { name: '6. finance', desc: { es: 'Contabilidad personal bimoneda (ARS/USD), cotizaciones (Oficial/MEP/CCL) y prevención de doble cómputo.', en: 'Personal finance dual-currency ledger (ARS/USD), exchange rates (Official/MEP/CCL), and double-counting prevention.' } },
+      ],
+    },
+    adrs: {
+      title: {
+        es: 'Decisiones de Arquitectura y Diseño Técnico (ADR)',
+        en: 'Architecture Decision Records (ADRs)',
+      },
+      items: [
+        {
+          question: {
+            es: '¿Por qué Next.js con exportación estática (Static Export) en lugar de un backend tradicional?',
+            en: 'Why Next.js with Static Export instead of a traditional backend?',
+          },
+          decision: {
+            es: 'ADR-0001: Para garantizar una arquitectura local-first pura con costo de infraestructura cloud igual a cero, cero latencia de red en las consultas analíticas y privacidad total (los datos privados del usuario nunca salen de su máquina). Next.js estático se despliega en cualquier CDN global mientras DuckDB-Wasm y Web Workers asumen el 100% del cómputo.',
+            en: 'ADR-0001: Guarantees pure local-first architecture with zero cloud infrastructure cost, zero network latency on analytical queries, and total user privacy. Static Next.js deploys on any global CDN while DuckDB-Wasm and Web Workers handle 100% of analytical compute.',
+          },
+        },
+        {
+          question: {
+            es: '¿Cómo se orquestan múltiples motores analíticos (DuckDB-Wasm, Pyodide y Rust)?',
+            en: 'How are multi-engine analytics orchestrated (DuckDB-Wasm, Pyodide, and Rust)?',
+          },
+          decision: {
+            es: 'ADR-0002: DuckDB-Wasm actúa como motor SQL columnar primario para carga tabular, filtros y agregaciones de alta velocidad. Pyodide (Python científico) se carga de forma diferida (lazy loading) solo cuando el usuario solicita análisis inferencial avanzado o series temporales (ARIMA/Prophet), evitando descargar el runtime de 20 MB innecesariamente.',
+            en: 'ADR-0002: DuckDB-Wasm serves as primary columnar SQL engine for ingestion, filtering, and rapid aggregations. Pyodide (scientific Python) is lazy-loaded only when advanced inferential statistics or time series forecasting (ARIMA/Prophet) are requested, saving 20 MB initial downloads.',
+          },
+        },
+        {
+          question: {
+            es: '¿Cómo se maneja la persistencia y linaje sin agotar las cuotas del navegador?',
+            en: 'How are persistence and lineage managed without exhausting browser quotas?',
+          },
+          decision: {
+            es: 'ADR-0003, ADR-0004 y ADR-0005: IndexedDB almacena las definiciones estructuradas de proyectos, metadatos de columnas y el DAG de operaciones (recetas livianas). Los datos derivados se calculan en memoria de forma reactiva y el Origin Private File System (OPFS) se reserva para streaming de archivos binarios crudos sin saturar el heap de JavaScript.',
+            en: 'ADR-0003, ADR-0004, and ADR-0005: IndexedDB persists structured project definitions, schema metadata, and transformation DAGs (lightweight recipes). Derived datasets are evaluated reactively in memory, reserving OPFS for raw binary streaming without JavaScript heap bloat.',
+          },
+        },
+      ],
+    },
+    dbSchema: dataforgeDBSchema,
+    systemArchitecture: dataforgeArchitecture,
+    screenshots: [
+      {
+        url: '/projects/dataforge/1.png',
+        title: { es: 'Flujo Completo de la Plataforma Analítica', en: 'End-to-End Analytics Platform Workflow' },
+        caption: { es: 'Visión panorámica de las capacidades: Landing, ingesta de archivos multi-formato, exploración con detección de tipos, perfilado estadístico y calidad de datos, análisis automático con correlaciones, visualizaciones interactivas con Apache ECharts, pipeline visual de transformaciones, series temporales y Report Builder exportable.', en: 'Comprehensive workflow overview: Landing, multi-format file ingestion, type detection schema exploration, statistical profiling and data quality, automated correlation analysis, interactive Apache ECharts visualizations, visual transformation pipeline, time series analysis, and exportable Report Builder.' },
+      },
+      {
+        url: '/projects/dataforge/2.png',
+        title: { es: 'Dashboard de Análisis, Series Temporales y Consola SQL', en: 'Analytics Dashboard, Time Series & SQL Workspace' },
+        caption: { es: 'Entorno de trabajo avanzado: Dashboard con datasets de ejemplo, importación local segura sin backend, análisis exploratorio con roles semánticos inferidos, pronósticos de series temporales con Prophet/Python, entrenamiento de modelos en navegador con curva ROC, editor SQL interactivo sobre DuckDB y gestión de almacenamiento en IndexedDB/OPFS.', en: 'Advanced workspace: Interactive dashboard with sample datasets, secure local ingestion without backends, exploratory analysis with inferred semantic roles, time series forecasting with Prophet/Python, in-browser machine learning model training with ROC curves, interactive DuckDB SQL editor, and IndexedDB/OPFS browser quota management.' },
+      },
+      {
+        url: '/projects/dataforge/3.png',
+        title: { es: 'Pipeline DAG de Transformaciones y Generador de Informes', en: 'Transformation DAG Pipeline & Report Generator' },
+        caption: { es: 'Flujo de trabajo guiado: Importación multi-fuente, perfilado con mini-histogramas sparkline y métricas de completitud, análisis exploratorio con KPIs ejecutivos, pipeline visual con operaciones encadenadas y previsualización de resultados, modelos SARIMA con intervalo de confianza y generador de reportes ejecutivos.', en: 'Guided analytics pipeline: Multi-source import, schema profiling with sparkline mini-histograms and completeness metrics, exploratory analysis with executive KPIs, visual DAG pipeline with chained operations and live result preview, SARIMA forecasting with confidence intervals, and executive report generator.' },
       },
     ],
   },

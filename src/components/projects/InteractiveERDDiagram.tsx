@@ -69,6 +69,18 @@ const defaultLayouts: Record<string, { x: number; y: number }> = {
   publicacion_caracteristica: { x: 700, y: 300 },
   caracteristica: { x: 1020, y: 300 },
   mensaje_contacto: { x: 700, y: 520 },
+
+  // DataForge (Projects en centro; datasets y pipelines a la izquierda; reportes y finanzas a la derecha)
+  dataset_schemas: { x: 40, y: 70 },
+  pipeline_steps: { x: 40, y: 280 },
+  dataset_versions: { x: 40, y: 490 },
+  datasets: { x: 280, y: 70 },
+  pipeline_definitions: { x: 280, y: 280 },
+  analysis_saved: { x: 280, y: 490 },
+  projects: { x: 600, y: 280 },
+  reports: { x: 920, y: 70 },
+  finance_accounts: { x: 920, y: 280 },
+  finance_transactions: { x: 1240, y: 280 },
 };
 
 const domainColors: Record<string, string> = {
@@ -89,6 +101,11 @@ const domainColors: Record<string, string> = {
   simulator: '#F59E0B',
   recruiter: '#EC4899',
   copilot: '#10B981',
+  workspace: '#6366F1',
+  ingestion: '#06B6D4',
+  pipeline: '#F59E0B',
+  lineage: '#10B981',
+  finance: '#EC4899',
 };
 
 export function InteractiveERDDiagram({

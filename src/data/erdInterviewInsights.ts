@@ -499,4 +499,158 @@ export const erdInterviewInsights: Record<string, TableInterviewInsight> = {
       en: 'Foreign key to publicacion with lead status tracking (nueva, leida, atendida).',
     },
   },
+
+  // =========================================================================
+  // DATAFORGE (Local-First OLAP, Web Workers, IndexedDB & DuckDB-Wasm)
+  // =========================================================================
+  projects: {
+    tableName: 'projects',
+    architectureRole: {
+      es: 'Entidad raíz del espacio de trabajo local-first. Agrupa datasets, pipelines, analíticas y plantillas.',
+      en: 'Root local-first workspace entity scoping datasets, pipelines, analytics, and templates.',
+    },
+    interviewRationale: {
+      es: 'En una entrevista, resalta que DataForge aísla completamente los proyectos en el navegador mediante IndexedDB. Permite alternar entre plantillas (Análisis Libre, Finanzas Personales, Ventas, Encuestas) sin enviar metadatos ni archivos a la nube.',
+      en: 'In an interview, emphasize that DataForge completely isolates projects within the browser via IndexedDB. Users can switch between specialized templates without uploading data to cloud backends.',
+    },
+    keyInvariant: {
+      es: 'Clave primaria UUID con metadatos transaccionales y tipo de plantilla estrictamente tipado.',
+      en: 'UUID primary key with transactional metadata and strictly typed template discriminator.',
+    },
+  },
+  datasets: {
+    tableName: 'datasets',
+    architectureRole: {
+      es: 'Fuente de datos cruda ingestada off-main-thread. Soporta CSV, XLSX, Parquet y JSON tabular.',
+      en: 'Raw data source ingested off-main-thread supporting CSV, XLSX, Parquet, and tabular JSON.',
+    },
+    interviewRationale: {
+      es: 'Menciona que la lectura de archivos ocurre en un Web Worker dedicado para no congelar la UI de React. Los bytes se cargan directamente en buffers de memoria columnar para ser consumidos por DuckDB-Wasm sin copias intermedias innecesarias.',
+      en: 'Highlight that file parsing runs entirely inside a dedicated Web Worker to prevent UI thread freezing. Bytes are directly loaded into in-memory columnar buffers consumed by DuckDB-Wasm.',
+    },
+    keyInvariant: {
+      es: 'Inmutabilidad de la fuente original: los datos crudos de origen jamás se modifican directamente.',
+      en: 'Source data immutability: original raw data files are never modified in-place.',
+    },
+  },
+  dataset_schemas: {
+    tableName: 'dataset_schemas',
+    architectureRole: {
+      es: 'Metadatos de esquema inferidos por columna: tipos primitivos, nulabilidad y roles semánticos.',
+      en: 'Inferred column schema metadata: primitive types, nullability, and semantic roles.',
+    },
+    interviewRationale: {
+      es: 'Explica que la inferencia no es solo técnica (VARCHAR vs INT), sino semántica: detecta roles como moneda (ARS/USD), identificadores, fechas o variables continuas. Esto permite a Apache ECharts y a los componentes sugerir gráficos coherentes automáticamente.',
+      en: 'Explain that schema inference goes beyond primitive types to detect semantic roles (monetary, IDs, temporal, continuous), enabling automated chart recommendations in Apache ECharts.',
+    },
+    keyInvariant: {
+      es: 'Unicidad de nombre de columna por dataset con conteo de cardinalidad y porcentaje de completitud.',
+      en: 'Unique column name per dataset with cardinality counts and completeness ratios.',
+    },
+  },
+  pipeline_definitions: {
+    tableName: 'pipeline_definitions',
+    architectureRole: {
+      es: 'Definición estructurada del grafo acíclico dirigido (DAG) de transformaciones por proyecto.',
+      en: 'Structured Directed Acyclic Graph (DAG) transformation pipeline definition per project.',
+    },
+    interviewRationale: {
+      es: 'Destaca que el pipeline modela una receta reproducible de transformaciones. El usuario puede guardar, editar y re-ejecutar toda la secuencia de limpieza y cálculo sobre nuevos datos sin perder el trabajo previo.',
+      en: 'Highlight that pipelines represent reproducible transformation recipes. Users can persist, modify, and re-execute clean/transform sequences on fresh data without losing configuration.',
+    },
+    keyInvariant: {
+      es: 'Grafo acíclico validado: no permite dependencias circulares entre pasos de transformación.',
+      en: 'Validated acyclic graph preventing circular dependencies between transformation steps.',
+    },
+  },
+  pipeline_steps: {
+    tableName: 'pipeline_steps',
+    architectureRole: {
+      es: 'Nodo unitario de transformación (FILTRADO, CAST, AGREGAR, JOIN, APPEND) con validación de fan-out.',
+      en: 'Atomic transformation step (FILTER, CAST, AGGREGATE, JOIN, APPEND) with fan-out validation.',
+    },
+    interviewRationale: {
+      es: 'Comenta cómo se implementó el ADR-0007: antes de ejecutar un JOIN o APPEND en el navegador, se valida la cardinalidad de las claves para prevenir explosiones combinatorias (fan-out) o duplicaciones accidentales de registros en memoria.',
+      en: 'Describe ADR-0007 implementation: prior to materializing in-browser JOINs or APPENDs, key cardinality is validated to prevent combinational fan-out explosions and memory bloat.',
+    },
+    keyInvariant: {
+      es: 'Orden secuencial estricto step_order por pipeline con validación de esquema en tiempo de diseño.',
+      en: 'Strict sequential step_order per pipeline with design-time schema contract validation.',
+    },
+  },
+  dataset_versions: {
+    tableName: 'dataset_versions',
+    architectureRole: {
+      es: 'Instantánea derivada generada por un paso del pipeline con registro determinista de procedencia.',
+      en: 'Derived snapshot emitted by a pipeline step with deterministic data provenance tracking.',
+    },
+    interviewRationale: {
+      es: 'La piedra angular de la reproducibilidad científica (Data Lineage). Cada versión derivada tiene un hash determinista y un array de padres (lineage_parent_ids), permitiendo auditar de dónde provino cada número sin mutar el archivo original.',
+      en: 'The cornerstone of scientific reproducibility (Data Lineage). Each derived version carries a deterministic hash and parent pointers (lineage_parent_ids) to audit data origin without mutation.',
+    },
+    keyInvariant: {
+      es: 'Inmutabilidad absoluta del snapshot derivado con trazabilidad multi-padre para operaciones JOIN.',
+      en: 'Absolute immutability of derived snapshots with multi-parent traceability for JOIN operations.',
+    },
+  },
+  analysis_saved: {
+    tableName: 'analysis_saved',
+    architectureRole: {
+      es: 'Consultas SQL analíticas en DuckDB y modelos estadísticos inferenciales en Pyodide persistidos.',
+      en: 'Persisted analytical DuckDB SQL queries and Pyodide inferential statistical models.',
+    },
+    interviewRationale: {
+      es: 'Muestra la versatilidad de la arquitectura multi-engine: una misma consulta puede alimentarse de DuckDB-Wasm para agregaciones masivas y luego transferirse a Pyodide (Python) para forecasting o descomposición de series temporales.',
+      en: 'Demonstrates multi-engine versatility: a query leverages DuckDB-Wasm for columnar aggregations and lazily hands off to Pyodide (Python) for ARIMA forecasting or decomposition.',
+    },
+    keyInvariant: {
+      es: 'Configuración tipada del motor ejecutor (duckdb, pyodide, rust_wasm) y parámetros serializados.',
+      en: 'Typed execution engine discriminator (duckdb, pyodide, rust_wasm) with serialized parameters.',
+    },
+  },
+  reports: {
+    tableName: 'reports',
+    architectureRole: {
+      es: 'Documento ejecutivo estructurado del Report Builder con hallazgos, metodología y gráficos.',
+      en: 'Structured executive Report Builder document containing findings, methodology, and charts.',
+    },
+    interviewRationale: {
+      es: 'Permite pasar de los datos crudos a una presentación profesional para stakeholders en un solo clic, exportando reportes limpios a HTML interactivo o PDF con explicaciones metodológicas.',
+      en: 'Enables seamless transition from raw data to executive stakeholder presentations, exporting clean interactive HTML or PDF reports with clear methodology disclaimers.',
+    },
+    keyInvariant: {
+      es: 'Estructura modular de bloques de reporte desacoplada del renderizador de salida.',
+      en: 'Modular report block structure completely decoupled from the output rendering format.',
+    },
+  },
+  finance_accounts: {
+    tableName: 'finance_accounts',
+    architectureRole: {
+      es: 'Cuentas monetarias segregadas por divisa (ARS / USD) de la plantilla de Finanzas Personales.',
+      en: 'Segregated monetary accounts by currency (ARS / USD) for the Personal Finance template.',
+    },
+    interviewRationale: {
+      es: 'Explica el criterio contable riguroso: nunca mezclar o sumar directamente saldos en pesos y dólares sin explicitar el tipo de cambio y su fuente (Oficial, MEP, CCL) para evitar desinformación financiera.',
+      en: 'Highlight strict accounting principles: never combine ARS and USD balances without explicitly specifying the FX rate and its source (Official, MEP, CCL) to prevent distorted metrics.',
+    },
+    keyInvariant: {
+      es: 'Divisa estrictamente tipada (ARS, USD) y balance calculado mediante sumatoria determinista.',
+      en: 'Strictly typed currency discriminator (ARS, USD) with deterministic balance recalculation.',
+    },
+  },
+  finance_transactions: {
+    tableName: 'finance_transactions',
+    architectureRole: {
+      es: 'Libro diario de movimientos financieros: ingresos, egresos, transferencias propias y pagos de tarjeta.',
+      en: 'Journal ledger entries: income, expenses, internal transfers, and credit card settlements.',
+    },
+    interviewRationale: {
+      es: 'Menciona la prevención de doble contabilización: las transferencias entre cuentas propias se tratan como asientos compensados y no como ingresos o gastos, manteniendo la exactitud de los informes mensuales.',
+      en: 'Mention double-counting prevention: internal transfers between own accounts are modeled as balanced movements rather than revenue or expenditure, keeping monthly statements exact.',
+    },
+    keyInvariant: {
+      es: 'Clave foránea a finance_accounts con fecha estricta, importe decimal de precisión fija y tipo contable.',
+      en: 'Foreign key to finance_accounts with strict date, fixed-precision decimal amount, and movement type.',
+    },
+  },
 };
