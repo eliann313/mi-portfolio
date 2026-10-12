@@ -117,8 +117,8 @@ export function InteractiveERDDiagram({
     return initial;
   });
 
-  const [scale, setScale] = useState<number>(0.85);
-  const [pan, setPan] = useState<{ x: number; y: number }>({ x: 20, y: 20 });
+  const [scale, setScale] = useState<number>(0.68);
+  const [pan, setPan] = useState<{ x: number; y: number }>({ x: 25, y: 25 });
   const [isPanning, setIsPanning] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hoveredTable, setHoveredTable] = useState<string | null>(null);
@@ -201,9 +201,24 @@ export function InteractiveERDDiagram({
     return () => window.removeEventListener('mouseup', handleGlobalMouseUp);
   }, []);
 
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      setScale((s) => Math.min(Math.max(s - e.deltaY * 0.001, 0.45), 1.5));
+    };
+
+    container.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
   const handleResetView = () => {
-    setScale(0.85);
-    setPan({ x: 20, y: 20 });
+    setScale(0.68);
+    setPan({ x: 25, y: 25 });
     // Reset positions to defaults
     const reset: Record<string, { x: number; y: number }> = {};
     dbSchema.tables.forEach((t, idx) => {
@@ -229,11 +244,11 @@ export function InteractiveERDDiagram({
   }, [positions]);
 
   const canvasHeight = useMemo(() => {
-    let max = 880;
+    let max = 950;
     Object.entries(positions).forEach(([name, p]) => {
       const table = dbSchema.tables.find((t) => t.name === name);
       const h = table ? getNodeHeight(table) : 150;
-      if (p.y + h + 100 > max) max = p.y + h + 100;
+      if (p.y + h + 150 > max) max = p.y + h + 150;
     });
     return max;
   }, [positions, dbSchema.tables]);
@@ -334,7 +349,7 @@ export function InteractiveERDDiagram({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         className={`relative rounded-xl border overflow-hidden select-none cursor-grab active:cursor-grabbing transition-all ${
-          isExpanded ? 'h-[750px] shadow-2xl' : 'h-[540px]'
+          isExpanded ? 'h-[850px] shadow-2xl' : 'h-[680px]'
         }`}
         style={{
           backgroundColor: theme === 'dark' ? '#090d16' : '#f8fafc',

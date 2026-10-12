@@ -171,42 +171,6 @@ export function CaseStudyView() {
           </div>
         </div>
 
-        {/* Hero Visual Preview Banner */}
-        {study.screenshots && study.screenshots.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mb-8 rounded-2xl overflow-hidden border shadow-sm group relative cursor-pointer"
-            style={{ backgroundColor: c.bgSurface, borderColor: c.border }}
-            onClick={() => setActiveImageIndex(0)}
-          >
-            <div className="relative aspect-[16/9] min-h-[220px] sm:min-h-[280px] max-h-[440px] w-full bg-black/40 overflow-hidden">
-              <img
-                src={study.screenshots[0].url}
-                alt={study.screenshots[0].title[locale as Locale]}
-                className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end justify-between p-4 sm:p-6">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-black/70 text-white border border-white/20 mb-2 inline-block">
-                    {locale === 'es' ? 'Vista Principal en Producción' : 'Production Interface Preview'}
-                  </span>
-                  <h3 className="text-base sm:text-lg font-bold text-white mb-0.5">
-                    {study.screenshots[0].title[locale as Locale]}
-                  </h3>
-                  <p className="text-xs text-gray-300 max-w-xl line-clamp-1 sm:line-clamp-2">
-                    {study.screenshots[0].caption[locale as Locale]}
-                  </p>
-                </div>
-                <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-white px-3 py-1.5 rounded-lg bg-black/70 backdrop-blur-xs border border-white/20 group-hover:bg-accent transition-colors">
-                  <ZoomIn size={13} /> {locale === 'es' ? 'Explorar Capturas' : 'Explore Screenshots'}
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
         {/* Quick Section Anchor Navigation */}
         <div
           className="sticky top-16 z-20 py-2.5 mb-8 backdrop-blur-md flex flex-wrap items-center gap-2 border-y"

@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Layers,
   ArrowDown,
-  Play,
   RotateCcw,
   CheckCircle2,
   Server,
@@ -28,32 +27,12 @@ export function VisualArchitectureDiagram({ systemArchitecture }: Props) {
 
   const [activeStep, setActiveStep] = useState<number | null>(null);
   const [selectedLayerIndex, setSelectedLayerIndex] = useState<number | null>(null);
-  const [isPlayingFlow, setIsPlayingFlow] = useState<boolean>(false);
 
   const layerIcons = [Smartphone, Server, Cpu, Database];
 
-  const handlePlayFlow = () => {
-    if (!systemArchitecture.dataFlow || systemArchitecture.dataFlow.length === 0) return;
-    setIsPlayingFlow(true);
-    setActiveStep(1);
-
-    const totalSteps = systemArchitecture.dataFlow.length;
-    let current = 1;
-
-    const interval = setInterval(() => {
-      current += 1;
-      if (current > totalSteps) {
-        clearInterval(interval);
-        setIsPlayingFlow(false);
-      } else {
-        setActiveStep(current);
-      }
-    }, 2800);
-  };
-
   return (
     <div className="space-y-6">
-      {/* Interactive Step-by-Step Data Flow Simulator */}
+      {/* Interactive Step-by-Step Data Flow */}
       {systemArchitecture.dataFlow && systemArchitecture.dataFlow.length > 0 && (
         <div
           className="rounded-xl border p-5 transition-all"
@@ -66,44 +45,25 @@ export function VisualArchitectureDiagram({ systemArchitecture }: Props) {
               </span>
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: c.textPrimary }}>
-                  {locale === 'es' ? 'Simulador del Flujo de Datos Arquitectónico' : 'Architectural Data Flow Simulator'}
+                  {locale === 'es' ? 'Flujo de Transacciones y Datos' : 'Transaction & Data Flow'}
                 </h4>
                 <p className="text-[11px]" style={{ color: c.textMuted }}>
-                  {locale === 'es' ? 'Recorre cómo viajan las transacciones de punta a punta' : 'Inspect transaction trajectory from client to database'}
+                  {locale === 'es' ? 'Haz clic en cada paso para ver la trayectoria técnica' : 'Click on each step to inspect the technical trajectory'}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            {activeStep !== null && (
               <button
-                onClick={handlePlayFlow}
-                disabled={isPlayingFlow}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all disabled:opacity-50 hover:scale-[1.02]"
-                style={{
-                  backgroundColor: c.accent,
-                  borderColor: c.accent,
-                  color: '#ffffff',
-                }}
+                onClick={() => setActiveStep(null)}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border hover:opacity-100 opacity-75 transition-all text-xs self-start sm:self-auto"
+                style={{ backgroundColor: c.bgBase, borderColor: c.border, color: c.textSecondary }}
+                title={locale === 'es' ? 'Reiniciar' : 'Reset'}
               >
-                <Play size={12} fill="#ffffff" />
-                {isPlayingFlow
-                  ? (locale === 'es' ? 'Reproduciendo...' : 'Playing...')
-                  : (locale === 'es' ? 'Reproducir Flujo' : 'Play Flow')}
+                <RotateCcw size={12} />
+                <span>{locale === 'es' ? 'Reiniciar' : 'Reset'}</span>
               </button>
-              {activeStep !== null && (
-                <button
-                  onClick={() => {
-                    setActiveStep(null);
-                    setIsPlayingFlow(false);
-                  }}
-                  className="p-1.5 rounded-lg border hover:opacity-100 opacity-70 transition-all text-xs"
-                  style={{ backgroundColor: c.bgBase, borderColor: c.border, color: c.textSecondary }}
-                  title={locale === 'es' ? 'Reiniciar' : 'Reset'}
-                >
-                  <RotateCcw size={13} />
-                </button>
-              )}
-            </div>
+            )}
           </div>
 
           {/* Stepper Pills */}
@@ -113,7 +73,7 @@ export function VisualArchitectureDiagram({ systemArchitecture }: Props) {
               return (
                 <div
                   key={flow.step}
-                  onClick={() => setActiveStep(flow.step)}
+                  onClick={() => setActiveStep(activeStep === flow.step ? null : flow.step)}
                   className={`p-3 rounded-lg border cursor-pointer transition-all ${
                     isActive ? 'ring-2 scale-[1.01]' : 'hover:border-opacity-100 opacity-80'
                   }`}
@@ -163,7 +123,7 @@ export function VisualArchitectureDiagram({ systemArchitecture }: Props) {
                   return (
                     <div className="p-3 rounded-lg bg-black/5 dark:bg-white/5 border" style={{ borderColor: `${c.accent}40` }}>
                       <div className="flex items-center gap-2 font-mono font-bold mb-1" style={{ color: c.accent }}>
-                        <span>Paso {currentFlow.step}:</span>
+                        <span>{locale === 'es' ? 'Paso' : 'Step'} {currentFlow.step}:</span>
                         <span>{currentFlow.title[locale as Locale]}</span>
                       </div>
                       <p className="text-xs leading-relaxed" style={{ color: c.textPrimary }}>
