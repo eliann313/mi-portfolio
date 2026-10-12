@@ -19,9 +19,9 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
   const c = colors[theme];
   const inspectorRef = useRef<HTMLDivElement>(null);
 
-  // Default to architecture if present, otherwise schema
-  const [activeTab, setActiveTab] = useState<'architecture' | 'schema'>(
-    systemArchitecture ? 'architecture' : 'schema'
+  // Default to database schema (ERD) if present, otherwise system architecture
+  const [activeTab, setActiveTab] = useState<'schema' | 'architecture'>(
+    dbSchema ? 'schema' : 'architecture'
   );
 
   // Sub-view mode for schema: tabular inspector (default) or visual diagram
@@ -65,35 +65,22 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
         <div>
           <h3 className="text-xl font-bold flex items-center gap-2.5" style={{ color: c.textPrimary }}>
             <span className="p-2 rounded-lg" style={{ backgroundColor: `${c.accent}15`, color: c.accent }}>
-              {activeTab === 'architecture' ? <Layers size={20} /> : <Database size={20} />}
+              {activeTab === 'schema' ? <Database size={20} /> : <Layers size={20} />}
             </span>
-            {activeTab === 'architecture'
-              ? systemArchitecture?.title[locale as Locale] || t.caseStudy.tabArchitecture
-              : dbSchema?.title[locale as Locale] || t.caseStudy.tabSchema}
+            {activeTab === 'schema'
+              ? dbSchema?.title[locale as Locale] || t.caseStudy.tabSchema
+              : systemArchitecture?.title[locale as Locale] || t.caseStudy.tabArchitecture}
           </h3>
           <p className="text-xs mt-1.5 leading-relaxed max-w-2xl" style={{ color: c.textSecondary }}>
-            {activeTab === 'architecture'
-              ? systemArchitecture?.summary[locale as Locale]
-              : dbSchema?.overview[locale as Locale]}
+            {activeTab === 'schema'
+              ? dbSchema?.overview[locale as Locale]
+              : systemArchitecture?.summary[locale as Locale]}
           </p>
         </div>
 
-        {/* Tab Pills */}
+        {/* Tab Pills: Schema (Primary) and Architecture (Secondary) */}
         {systemArchitecture && dbSchema && (
           <div className="flex items-center gap-1.5 p-1 rounded-xl self-start sm:self-center border" style={{ backgroundColor: c.bgBase, borderColor: c.border }}>
-            <button
-              onClick={() => setActiveTab('architecture')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                activeTab === 'architecture' ? 'shadow-sm' : 'opacity-70 hover:opacity-100'
-              }`}
-              style={{
-                backgroundColor: activeTab === 'architecture' ? c.accent : 'transparent',
-                color: activeTab === 'architecture' ? '#ffffff' : c.textSecondary,
-              }}
-            >
-              <Layers size={14} />
-              {t.caseStudy.tabArchitecture || 'Arquitectura'}
-            </button>
             <button
               onClick={() => setActiveTab('schema')}
               className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
@@ -105,7 +92,20 @@ export function ArchitectureAndDBSchema({ dbSchema, systemArchitecture }: Props)
               }}
             >
               <Database size={14} />
-              {t.caseStudy.tabSchema || 'Esquema PostgreSQL'}
+              {t.caseStudy.tabSchema || (locale === 'es' ? 'Modelo PostgreSQL (ERD)' : 'PostgreSQL Schema (ERD)')}
+            </button>
+            <button
+              onClick={() => setActiveTab('architecture')}
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'architecture' ? 'shadow-sm' : 'opacity-70 hover:opacity-100'
+              }`}
+              style={{
+                backgroundColor: activeTab === 'architecture' ? c.accent : 'transparent',
+                color: activeTab === 'architecture' ? '#ffffff' : c.textSecondary,
+              }}
+            >
+              <Layers size={14} />
+              {t.caseStudy.tabArchitecture || (locale === 'es' ? 'Arquitectura del Sistema' : 'System Architecture')}
             </button>
           </div>
         )}
