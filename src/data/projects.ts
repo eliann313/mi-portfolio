@@ -37,6 +37,38 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'gridhub-wms',
+    title: 'GridHub WMS',
+    type: 'group',
+    status: 'in-progress',
+    description: {
+      es: 'Sistema logístico empresarial multi-tenant con aislamiento de datos por cliente, resiliencia offline, algoritmos de almacenamiento y arquitectura por capas.',
+      en: 'Enterprise multi-tenant logistics system with per-client data isolation, offline resilience, intelligent storage algorithms, and layered architecture.',
+    },
+    contributions: {
+      es: [
+        'Diseñé la arquitectura backend multi-tenant (Onion Architecture) con FastAPI, PostgreSQL y aislamiento por tenant con migraciones Alembic.',
+        'Desarrollé el motor de resiliencia y sincronización offline en frontend (React 19 + IndexedDB) con colas locales, reconciliación y claves de idempotencia.',
+        'Co-diseñé el rediseño del Dashboard de Supervisor y Operaciones con Omnibox global, comparativas de actividad entre depósitos y seguimiento de métricas OTIF (SLA).',
+        'Implementé motores de logística interna: sugerencia inteligente de Put Away (criterios ABC, volumen y zona) y cálculo automático de punto de reorden (ROP).',
+        'Construí el catálogo de reportes conmutables (tarjetas vs tablas), navegación móvil con bottom bar y optimización de consultas reduciendo drásticamente roundtrips en PostgreSQL.',
+      ],
+      en: [
+        'Designed backend multi-tenant architecture (Onion Architecture) with FastAPI, PostgreSQL, and per-tenant isolation managed via Alembic migrations.',
+        'Developed frontend offline resilience engine (React 19 + IndexedDB) with local queues, conflict reconciliation, and transaction idempotency keys.',
+        'Co-designed Supervisor Operations Dashboard redesign featuring global Omnibox search, multi-warehouse activity comparisons, and OTIF SLA fulfillment metrics.',
+        'Implemented internal logistics engines: intelligent Put Away suggestions (ABC classification, volume, and zone rules) and automated Reorder Point (ROP) calculation.',
+        'Built switchable reports catalog (cards vs tables), native mobile bottom-bar navigation, and PostgreSQL query optimizations drastically reducing database roundtrips.',
+      ],
+    },
+    stack: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'IndexedDB'],
+    roles: {
+      es: ['Backend y Arquitectura', 'Frontend y Operaciones'],
+      en: ['Backend & Architecture', 'Frontend & Operations'],
+    },
+    links: {},
+  },
+  {
     id: 'dataforge',
     title: 'DataForge',
     type: 'individual',
@@ -105,38 +137,6 @@ export const projects: Project[] = [
       demo: 'https://prop2inmuebles.vercel.app',
       repo: 'https://github.com/eliann313/Prop2',
     },
-  },
-  {
-    id: 'gridhub-wms',
-    title: 'GridHub WMS',
-    type: 'group',
-    status: 'in-progress',
-    description: {
-      es: 'Sistema logístico empresarial multi-tenant con aislamiento de datos por cliente, resiliencia offline, algoritmos de almacenamiento y arquitectura por capas.',
-      en: 'Enterprise multi-tenant logistics system with per-client data isolation, offline resilience, intelligent storage algorithms, and layered architecture.',
-    },
-    contributions: {
-      es: [
-        'Diseñé la arquitectura backend multi-tenant (Onion Architecture) con FastAPI, PostgreSQL y aislamiento por tenant con migraciones Alembic.',
-        'Desarrollé el motor de resiliencia y sincronización offline en frontend (React 19 + IndexedDB) con colas locales, reconciliación y claves de idempotencia.',
-        'Co-diseñé el rediseño del Dashboard de Supervisor y Operaciones con Omnibox global, comparativas de actividad entre depósitos y seguimiento de métricas OTIF (SLA).',
-        'Implementé motores de logística interna: sugerencia inteligente de Put Away (criterios ABC, volumen y zona) y cálculo automático de punto de reorden (ROP).',
-        'Construí el catálogo de reportes conmutables (tarjetas vs tablas), navegación móvil con bottom bar y optimización de consultas reduciendo drásticamente roundtrips en PostgreSQL.',
-      ],
-      en: [
-        'Designed backend multi-tenant architecture (Onion Architecture) with FastAPI, PostgreSQL, and per-tenant isolation managed via Alembic migrations.',
-        'Developed frontend offline resilience engine (React 19 + IndexedDB) with local queues, conflict reconciliation, and transaction idempotency keys.',
-        'Co-designed Supervisor Operations Dashboard redesign featuring global Omnibox search, multi-warehouse activity comparisons, and OTIF SLA fulfillment metrics.',
-        'Implemented internal logistics engines: intelligent Put Away suggestions (ABC classification, volume, and zone rules) and automated Reorder Point (ROP) calculation.',
-        'Built switchable reports catalog (cards vs tables), native mobile bottom-bar navigation, and PostgreSQL query optimizations drastically reducing database roundtrips.',
-      ],
-    },
-    stack: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'IndexedDB'],
-    roles: {
-      es: ['Backend y Arquitectura', 'Frontend y Operaciones'],
-      en: ['Backend & Architecture', 'Frontend & Operations'],
-    },
-    links: {},
   },
   {
     id: 'pochocleando',
