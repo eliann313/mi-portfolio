@@ -48,17 +48,17 @@ const defaultLayouts: Record<string, { x: number; y: number }> = {
   orderfulfillment: { x: 1640, y: 400 },
   erp_outbound_event: { x: 1960, y: 400 },
 
-  // SkillRadar (User en columna 1; entidades directas en columna 2; flujos derivados a la derecha en 3 y 4)
-  User: { x: 50, y: 450 },
-  Resume: { x: 370, y: 50 },
-  JobMatch: { x: 690, y: 50 },
-  GithubAnalysis: { x: 370, y: 210 },
-  InterviewSession: { x: 370, y: 370 },
-  RoadmapTask: { x: 370, y: 530 },
-  JobPosting: { x: 370, y: 690 },
-  JobPostingApplication: { x: 690, y: 690 },
-  InterviewScorecard: { x: 1010, y: 690 },
-  ContactRequest: { x: 370, y: 850 },
+  // SkillRadar (User en centro; perfil/candidato a la izquierda; simulador/reclutador a la derecha)
+  JobMatch: { x: 60, y: 70 },
+  Resume: { x: 380, y: 70 },
+  GithubAnalysis: { x: 380, y: 280 },
+  ContactRequest: { x: 380, y: 490 },
+  User: { x: 740, y: 280 },
+  InterviewSession: { x: 1100, y: 70 },
+  RoadmapTask: { x: 1100, y: 280 },
+  JobPosting: { x: 1100, y: 490 },
+  JobPostingApplication: { x: 1460, y: 490 },
+  InterviewScorecard: { x: 1820, y: 490 },
 
   // Prop² (usuario a la izquierda; flujo directo a publicacion y sub-entidades)
   usuario: { x: 60, y: 300 },
@@ -466,7 +466,9 @@ export function InteractiveERDDiagram({
 
               let startX: number, startY: number, endX: number, endY: number;
 
-              if (Math.abs(dx) >= Math.abs(dy)) {
+              const isHorizontal = Math.abs(dx) >= NODE_WIDTH * 0.7;
+
+              if (isHorizontal) {
                 if (dx > 0) {
                   startX = fromPos.x + NODE_WIDTH;
                   startY = fromCenter.y;
@@ -493,11 +495,11 @@ export function InteractiveERDDiagram({
               }
 
               const dist = Math.hypot(endX - startX, endY - startY);
-              const curvature = Math.min(dist * 0.45, 110);
+              const curvature = Math.min(dist * 0.45, 120);
 
               let cp1X: number, cp1Y: number, cp2X: number, cp2Y: number;
 
-              if (Math.abs(dx) >= Math.abs(dy)) {
+              if (isHorizontal) {
                 const dir = dx > 0 ? 1 : -1;
                 cp1X = startX + dir * curvature;
                 cp1Y = startY;
