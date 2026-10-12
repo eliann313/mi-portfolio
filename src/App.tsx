@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { LanguageProvider } from './context/LanguageContext';
@@ -12,7 +12,19 @@ import { Projects } from './components/sections/Projects';
 import { Education } from './components/sections/Education';
 import { Languages } from './components/sections/Languages';
 import { Contact } from './components/sections/Contact';
-import { CaseStudyView } from './components/projects/CaseStudyView';
+
+const CaseStudyView = lazy(() =>
+  import('./components/projects/CaseStudyView').then((m) => ({ default: m.CaseStudyView }))
+);
+
+function RouteLoadingFallback() {
+  return (
+    <div className="min-h-[70vh] flex flex-col items-center justify-center p-8">
+      <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin mb-3" />
+      <span className="text-xs font-mono text-zinc-400">Cargando proyecto...</span>
+    </div>
+  );
+}
 
 function ScrollToHashOrTop() {
   const { pathname, hash } = useLocation();
@@ -55,7 +67,14 @@ function App() {
           <main>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/proyectos/:slug" element={<CaseStudyView />} />
+              <Route
+                path="/proyectos/:slug"
+                element={
+                  <Suspense fallback={<RouteLoadingFallback />}>
+                    <CaseStudyView />
+                  </Suspense>
+                }
+              />
               <Route path="*" element={<HomePage />} />
             </Routes>
           </main>

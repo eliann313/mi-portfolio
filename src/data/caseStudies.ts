@@ -1,4 +1,12 @@
 import type { CaseStudy } from '../types';
+import {
+  gridhubDBSchema,
+  gridhubArchitecture,
+  skillradarDBSchema,
+  skillradarArchitecture,
+  prop2DBSchema,
+  prop2Architecture,
+} from './schemasAndArchitectures';
 
 export const caseStudies: Record<string, CaseStudy> = {
   skillradar: {
@@ -54,21 +62,21 @@ export const caseStudies: Record<string, CaseStudy> = {
       es: [
         {
           problem: 'Garantizar privacidad absoluta del candidato (Doble Ciego) sin romper la capacidad de búsqueda de los reclutadores.',
-          solution: 'Implementé sanitización server-side que remueve PII antes de almacenar el perfil en el Talent Pool público. La identidad del candidato solo se revela mediante firma criptográfica cuando el candidato acepta la solicitud de contacto.',
+          solution: 'Implementé sanitización server-side que remueve PII antes de almacenar el perfil en el Talent Pool público. La identidad del candidato permanece blindada con identificadores ofuscados DEV-XXXXXX generados con SHA-256, y solo se revela tras la aceptación explícita de la solicitud de contacto persistida en PostgreSQL.',
         },
         {
           problem: 'Gestionar fallos de disponibilidad o límites de cuotas de proveedores de IA de forma transparente para el usuario.',
-          solution: 'Diseñé una canalización de enrutamiento resiliente impulsada por Vercel AI SDK que conmuta automáticamente entre Google Gemini, Groq y OpenRouter si el motor principal agota su cuota.',
+          solution: 'Diseñé una canalización de enrutamiento resiliente impulsada por Vercel AI SDK que conmuta automáticamente en cascada entre Google Gemini 3.8 Flash, Gemini 3.7, Groq y OpenRouter con validación estricta Zod y motor heurístico offline.',
         },
       ],
       en: [
         {
           problem: 'Guaranteeing complete candidate privacy (Double Blind) without hindering recruiter search capabilities.',
-          solution: 'Implemented server-side sanitization stripping PII before storing candidate profiles in the public Talent Pool. Identities are revealed via cryptographic signature only after candidate acceptance.',
+          solution: 'Implemented server-side sanitization stripping PII before publishing candidate profiles in the Talent Pool. Candidate identity remains masked via SHA-256 hashed DEV-XXXXXX IDs and is unmasked only upon explicit contact request acceptance in PostgreSQL.',
         },
         {
           problem: 'Handling AI provider outages or quota limits transparently for users.',
-          solution: 'Designed a resilient routing pipeline using Vercel AI SDK that automatically fails over between Google Gemini, Groq, and OpenRouter if the primary engine exhausts quota.',
+          solution: 'Designed a resilient multi-model failover pipeline using Vercel AI SDK cascading across Google Gemini 3.8 Flash, Gemini 3.7, Groq, and OpenRouter with strict Zod validation and offline heuristic fallback.',
         },
       ],
     },
@@ -84,8 +92,8 @@ export const caseStudies: Record<string, CaseStudy> = {
             en: 'What are the scoring and CV analysis criteria (ATS)?',
           },
           decision: {
-            es: 'Evalúa densidad y afinidad semántica de skills requeridas, verbos de acción en pretérito perfecto, métricas cuantificables (fórmula X-Y-Z de Google) y estructura estandarizada legible por parsers ATS clásicos.',
-            en: 'Evaluates required skills density and semantic matching, past-tense impact action verbs, quantified accomplishments (Google X-Y-Z formula), and ATS-friendly parsing structure.',
+            es: 'Rúbrica aditiva estructurada de 0 a 100 evaluada con Vercel AI SDK y Zod: 15 pts datos de contacto parseables, 25 pts secciones estándar, 20 pts legibilidad máquina, 20 pts keywords en contexto de proyectos y 20 pts logros cuantificados con impacto medible (fórmula X-Y-Z de Google), con clamp determinista.',
+            en: 'Additive 0-to-100 rubric validated with Vercel AI SDK and Zod: 15 pts parseable contact, 25 pts standard sections, 20 pts machine readability, 20 pts in-context keywords, and 20 pts quantified achievements (Google X-Y-Z formula), guarded by deterministic clamping.',
           },
         },
         {
@@ -104,12 +112,14 @@ export const caseStudies: Record<string, CaseStudy> = {
             en: 'Why Double-Blind Privacy instead of public candidate profiles?',
           },
           decision: {
-            es: 'Elimina sesgos en el reclutamiento técnico y protege la privacidad laboral del desarrollador activo, revelando sus datos de contacto solo con consentimiento explícito firmado.',
-            en: 'Eliminates hiring bias and shields actively employed developers, unlocking contact details only after explicit cryptographically signed consent.',
+            es: 'Elimina sesgos en el reclutamiento técnico y protege la privacidad laboral del desarrollador activo, sanitizando PII en servidor y revelando datos de contacto únicamente tras la aceptación explícita de la solicitud persistida en base de datos.',
+            en: 'Eliminates hiring bias and shields actively employed developers, stripping PII server-side and unlocking contact details only after explicit candidate acceptance persisted in the database.',
           },
         },
       ],
     },
+    dbSchema: skillradarDBSchema,
+    systemArchitecture: skillradarArchitecture,
     c4Diagram: {
       title: {
         es: 'Diagrama de Arquitectura de Sistema (SkillRadar)',
@@ -335,7 +345,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     architectureHighlights: {
       es: [
         'Screaming Architecture Fullstack: organización simétrica del backend en 8 dominios funcionales cohesivos (admin, auth, catalog, inventory, warehouse, operations, analytics, integration) desacoplando modelos, 142 DTOs de schemas, servicios OOP puros y thin routers de transporte.',
-        'Sincronización Offline-First (React 19 + IndexedDB): cola local de mutaciones, reconciliación automática de conflictos y claves de idempotencia para operabilidad ininterrumpida en zonas ciegas.',
+        'Sincronización Offline-First (React 19 + Dexie.js / IndexedDB + PWA): colas locales FIFO reactivas (dexie-react-hooks), resolución de conflictos y claves de idempotencia para operabilidad ininterrumpida en zonas ciegas.',
         'Integración B2B ERP y Transactional Outbox: API de interoperabilidad con sistemas empresariales externos, catálogo configurable y despacho garantizado de eventos asíncronos sin pérdida de mensajes.',
         'Optimización de PostgreSQL y Calidad de Migraciones: eliminación de consultas N+1, índices parciales para multi-tenancy a escala de producción y pipeline automatizado de salud de migraciones con Alembic.',
         'Motores Algorítmicos de Logística Interna: asignación inteligente de almacenamiento (Put Away por rotación ABC, zona y volumen) y cálculo automático de punto de reorden (ROP).',
@@ -345,7 +355,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       ],
       en: [
         'Fullstack Screaming Architecture: symmetric organization of the backend into 8 cohesive functional domains (admin, auth, catalog, inventory, warehouse, operations, analytics, integration) decoupling models, 142 schema DTOs, pure OOP services, and thin routers.',
-        'Offline-First Synchronization (React 19 + IndexedDB): local mutation queues, automated conflict reconciliation, and transaction idempotency keys for uninterrupted offline warehouse operations.',
+        'Offline-First Synchronization (React 19 + Dexie.js / IndexedDB + PWA): reactive local FIFO mutation queues (dexie-react-hooks), conflict reconciliation, and transaction idempotency keys for uninterrupted warehouse operations.',
         'B2B ERP Integration & Transactional Outbox Pattern: enterprise interoperability API with configurable catalogs and guaranteed asynchronous event dispatch with zero message loss.',
         'PostgreSQL Optimization & Migration Integrity: elimination of N+1 query bottlenecks, tenant-scoped partial indexing, and automated migration health pipelines with Alembic.',
         'Algorithmic Internal Logistics Engines: intelligent Put Away location allocation (ABC classification, capacity, and velocity) and automated Reorder Point (ROP) min/max replenishment.',
@@ -357,7 +367,7 @@ export const caseStudies: Record<string, CaseStudy> = {
     myRoleDetailed: {
       es: [
         'Diseñé e implementé la Screaming Architecture en backend y frontend, estructurando el sistema en 8 dominios funcionales cohesivos con 142 DTOs normalizados, servicios OOP puros y routers delgados.',
-        'Desarrollé el motor de resiliencia y sincronización offline en React 19 con IndexedDB, incorporando colas transaccionales locales y reporte automatizado de conflictos.',
+        'Desarrollé el motor de resiliencia y sincronización offline en React 19 con Dexie.js (IndexedDB) y Service Worker (Vite PWA), incorporando colas transaccionales locales y reporte automatizado de conflictos.',
         'Diseñé la API de integración B2B para sistemas ERP externos e implementé el patrón Transactional Outbox para comunicación asíncrona confiable.',
         'Diseñé y desarrollé de punta a punta el nuevo inicio por rol (Centro de Mando de Supervisor y Mi Turno para Picker), la Omnibox global de búsqueda rápida y el catálogo dinámico de reportes.',
         'Implementé los motores algorítmicos de Put Away inteligente y abastecimiento automático por punto de reorden (ROP).',
@@ -366,7 +376,7 @@ export const caseStudies: Record<string, CaseStudy> = {
       ],
       en: [
         'Architected and implemented full-stack Screaming Architecture, structuring the system into 8 cohesive functional domains with 142 normalized DTOs, pure OOP services, and thin routers.',
-        'Developed the frontend offline resilience and synchronization engine in React 19 with IndexedDB, featuring local mutation queues and automated conflict reporting.',
+        'Developed the frontend offline resilience and synchronization engine in React 19 with Dexie.js (IndexedDB) and Vite PWA Service Worker, featuring local mutation queues and automated conflict reporting.',
         'Designed B2B ERP integration APIs and implemented the Transactional Outbox pattern for reliable asynchronous enterprise communication.',
         'Designed and built the role-based dashboard from end to end (Supervisor Command Center & Picker My Shift), the global Omnibox search palette, and dynamic reports catalog.',
         'Implemented algorithmic Put Away suggestion and automated Reorder Point (ROP) inventory replenishment engines.',
@@ -428,6 +438,8 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
       ],
     },
+    dbSchema: gridhubDBSchema,
+    systemArchitecture: gridhubArchitecture,
     technicalChallenges: {
       es: [
         {
@@ -611,6 +623,8 @@ export const caseStudies: Record<string, CaseStudy> = {
         },
       ],
     },
+    dbSchema: prop2DBSchema,
+    systemArchitecture: prop2Architecture,
     c4Diagram: {
       title: {
         es: 'Diagrama de Arquitectura Hexagonal / Por Dominios (Prop²)',

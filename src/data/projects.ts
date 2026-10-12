@@ -49,20 +49,20 @@ export const projects: Project[] = [
     contributions: {
       es: [
         'Diseñé la Screaming Architecture orientada a 8 dominios funcionales cohesivos en backend (FastAPI/SQLModel con organización simétrica, 142 DTOs, servicios OOP puros y thin routers) y frontend modular en React 19, con cobertura rigurosa en Playwright E2E y suites de Vitest y Pytest.',
-        'Desarrollé el motor de resiliencia y sincronización offline-first en frontend (React 19 + IndexedDB) con cola local de mutaciones, reconciliación automática de conflictos y claves de idempotencia para operabilidad sin conexión en depósitos.',
+        'Desarrollé el motor de resiliencia y sincronización offline-first en frontend (React 19 + Dexie.js / IndexedDB + PWA) con cola local de mutaciones, reconciliación automática de conflictos y claves de idempotencia para operabilidad sin conexión en depósitos.',
         'Diseñé la API de integración B2B para sistemas ERP externos con catálogo dinámico y patrón Transactional Outbox para despacho asíncrono y fiable de eventos logísticos sin pérdida de mensajes.',
         'Implementé los motores algorítmicos de logística interna: asignación inteligente de almacenamiento (Put Away por rotación ABC, zona y volumen) y cálculo automático de reabastecimiento por punto de reorden (ROP) y reglas min/max.',
         'Optimicé la capa de datos en PostgreSQL para entornos multi-tenant de alta carga, eliminando consultas N+1, diseñando índices parciales por cliente y consolidando el pipeline automatizado de consistencia de migraciones con Alembic.',
       ],
       en: [
         'Architected full-stack Screaming Architecture structured into 8 cohesive functional domains on backend (FastAPI/SQLModel with symmetric organization, 142 DTOs, pure OOP services, and thin routers) and modular React 19 frontend, validated with Playwright E2E suites and multi-layer Vitest & Pytest tests.',
-        'Engineered frontend offline-first synchronization and resilience engine (React 19 + IndexedDB) with local mutation queues, conflict reconciliation, and transaction idempotency keys for uninterrupted warehouse operations.',
+        'Engineered frontend offline-first synchronization and resilience engine (React 19 + Dexie.js / IndexedDB + PWA) with local mutation queues, conflict reconciliation, and transaction idempotency keys for uninterrupted warehouse operations.',
         'Designed B2B ERP integration API with configurable catalogs and Transactional Outbox pattern for reliable, asynchronous logistics event dispatch with zero message loss.',
         'Implemented internal algorithmic logistics engines: intelligent storage allocation (Put Away based on ABC velocity, zone, and capacity) and automated Reorder Point (ROP) replenishment under min/max inventory rules.',
         'Optimized PostgreSQL data layer for high-throughput multi-tenant workloads by eliminating N+1 queries, designing tenant-scoped partial indexes, and automating migration health pipelines with Alembic.',
       ],
     },
-    stack: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'IndexedDB', 'Playwright', 'Vitest'],
+    stack: ['Python', 'FastAPI', 'PostgreSQL', 'SQLAlchemy', 'Alembic', 'React 19', 'TypeScript', 'Dexie.js', 'Playwright', 'Vitest'],
     roles: {
       es: ['Backend, Frontend y Arquitectura'],
       en: ['Backend, Frontend & Architecture'],

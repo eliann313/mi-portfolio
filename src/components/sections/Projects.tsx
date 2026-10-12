@@ -42,13 +42,26 @@ export function Projects() {
   const c = colors[theme];
 
   const [activeFilter, setActiveFilter] = useState<'all' | 'individual' | 'group'>('all');
+  const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
   const realProjects = projects.filter(p => !p.isPlaceholder);
   const placeholder = projects.find(p => p.isPlaceholder);
 
+  const curatedTechs = [
+    'PostgreSQL',
+    'FastAPI',
+    'Next.js 16',
+    'TypeScript',
+    'Dexie.js',
+    'DuckDB-Wasm',
+    'Playwright',
+    'Prisma',
+  ];
+
   const filteredProjects = realProjects.filter(p => {
-    if (activeFilter === 'all') return true;
-    return p.type === activeFilter;
+    const matchesCategory = activeFilter === 'all' || p.type === activeFilter;
+    const matchesTech = !selectedTech || p.stack.some(s => s.toLowerCase().includes(selectedTech.toLowerCase()));
+    return matchesCategory && matchesTech;
   });
 
   return (
@@ -59,45 +72,83 @@ export function Projects() {
           <div className="section-divider" />
         </motion.div>
 
-        {/* Filter Tabs */}
+        {/* Filter Tabs & Tech Stack Filters */}
         <motion.div
           initial="hidden" whileInView="visible" viewport={{ once: true }}
           variants={fadeUp} custom={0.05}
-          className="flex flex-wrap items-center gap-2 mb-8"
+          className="space-y-3 mb-8"
         >
-          <button
-            onClick={() => setActiveFilter('all')}
-            className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
-            style={{
-              backgroundColor: activeFilter === 'all' ? `${c.accent}1f` : c.bgSurface,
-              borderColor: activeFilter === 'all' ? c.accent : c.border,
-              color: activeFilter === 'all' ? c.accent : c.textSecondary,
-            }}
-          >
-            {t.projects.allFilter} ({realProjects.length})
-          </button>
-          <button
-            onClick={() => setActiveFilter('individual')}
-            className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
-            style={{
-              backgroundColor: activeFilter === 'individual' ? `${c.accent}1f` : c.bgSurface,
-              borderColor: activeFilter === 'individual' ? c.accent : c.border,
-              color: activeFilter === 'individual' ? c.accent : c.textSecondary,
-            }}
-          >
-            {t.projects.individualFilter} ({realProjects.filter(p => p.type === 'individual').length})
-          </button>
-          <button
-            onClick={() => setActiveFilter('group')}
-            className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
-            style={{
-              backgroundColor: activeFilter === 'group' ? `${c.accent}1f` : c.bgSurface,
-              borderColor: activeFilter === 'group' ? c.accent : c.border,
-              color: activeFilter === 'group' ? c.accent : c.textSecondary,
-            }}
-          >
-            {t.projects.groupFilter} ({realProjects.filter(p => p.type === 'group').length})
-          </button>
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setActiveFilter('all')}
+              className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
+              style={{
+                backgroundColor: activeFilter === 'all' ? `${c.accent}1f` : c.bgSurface,
+                borderColor: activeFilter === 'all' ? c.accent : c.border,
+                color: activeFilter === 'all' ? c.accent : c.textSecondary,
+              }}
+            >
+              {t.projects.allFilter} ({realProjects.length})
+            </button>
+            <button
+              onClick={() => setActiveFilter('individual')}
+              className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
+              style={{
+                backgroundColor: activeFilter === 'individual' ? `${c.accent}1f` : c.bgSurface,
+                borderColor: activeFilter === 'individual' ? c.accent : c.border,
+                color: activeFilter === 'individual' ? c.accent : c.textSecondary,
+              }}
+            >
+              {t.projects.individualFilter} ({realProjects.filter(p => p.type === 'individual').length})
+            </button>
+            <button
+              onClick={() => setActiveFilter('group')}
+              className="text-xs font-medium px-3.5 py-1.5 rounded-full border transition-all cursor-pointer"
+              style={{
+                backgroundColor: activeFilter === 'group' ? `${c.accent}1f` : c.bgSurface,
+                borderColor: activeFilter === 'group' ? c.accent : c.border,
+                color: activeFilter === 'group' ? c.accent : c.textSecondary,
+              }}
+            >
+              {t.projects.groupFilter} ({realProjects.filter(p => p.type === 'group').length})
+            </button>
+          </div>
+
+          {/* Tech Stack Pills */}
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+            <span className="text-[11px] font-mono mr-1" style={{ color: c.textMuted }}>
+              Stack:
+            </span>
+            {curatedTechs.map((tech) => {
+              const isSelected = selectedTech === tech;
+              return (
+                <button
+                  key={tech}
+                  onClick={() => setSelectedTech(isSelected ? null : tech)}
+                  className={`text-[11px] font-mono px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
+                    isSelected ? 'font-bold shadow-sm' : 'opacity-75 hover:opacity-100'
+                  }`}
+                  style={{
+                    backgroundColor: isSelected ? c.accent : c.bgElevated,
+                    borderColor: isSelected ? c.accent : c.border,
+                    color: isSelected ? '#ffffff' : c.textSecondary,
+                  }}
+                >
+                  {tech}
+                </button>
+              );
+            })}
+            {selectedTech && (
+              <button
+                onClick={() => setSelectedTech(null)}
+                className="text-[10px] font-mono px-2 py-0.5 rounded-full underline ml-1 cursor-pointer transition-colors"
+                style={{ color: c.accent }}
+              >
+                Limpiar ({selectedTech})
+              </button>
+            )}
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

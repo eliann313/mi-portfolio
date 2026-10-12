@@ -16,6 +16,9 @@ export const en: Translations = {
     downloadCV: 'Download CV',
     contactMe: 'Contact me',
     availability: 'Open to new opportunities',
+    cvSpanish: 'Download CV (Spanish)',
+    cvEnglish: 'Download CV (English)',
+    cvModalTitle: 'Curriculum Vitae',
   },
   about: {
     title: 'Professional Profile',
@@ -41,6 +44,7 @@ export const en: Translations = {
     allFilter: 'All',
     individualFilter: 'Individual Projects',
     groupFilter: 'Group Projects',
+    techFilterAll: 'All Technologies',
   },
   caseStudy: {
     backToProjects: 'Back to Projects',
@@ -59,6 +63,13 @@ export const en: Translations = {
     viewRepository: 'View GitHub Code',
     domainsTitle: 'Domain-Driven Package Architecture (DDD)',
     adrsTitle: 'Key Architecture & Engineering Decisions',
+    schemaTitle: 'PostgreSQL Relational Schema (ERD)',
+    architectureDiagramTitle: 'System Architecture & Data Flow',
+    tabArchitecture: 'System Architecture',
+    tabSchema: 'PostgreSQL Schema (ERD)',
+    lightboxClose: 'Close preview',
+    lightboxNext: 'Next image',
+    lightboxPrev: 'Previous image',
   },
   education: {
     title: 'Education',

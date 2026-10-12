@@ -16,6 +16,9 @@ export const es: Translations = {
     downloadCV: 'Descargar CV',
     contactMe: 'Contacto',
     availability: 'Abierto a nuevas oportunidades',
+    cvSpanish: 'Descargar CV (Español)',
+    cvEnglish: 'Descargar CV (English)',
+    cvModalTitle: 'Curriculum Vitae',
   },
   about: {
     title: 'Perfil Profesional',
@@ -41,6 +44,7 @@ export const es: Translations = {
     allFilter: 'Todos',
     individualFilter: 'Proyectos Individuales',
     groupFilter: 'Proyectos Grupales',
+    techFilterAll: 'Todas las tecnologías',
   },
   caseStudy: {
     backToProjects: 'Volver a Proyectos',
@@ -59,6 +63,13 @@ export const es: Translations = {
     viewRepository: 'Ver Código en GitHub',
     domainsTitle: 'Arquitectura por Dominios Funcionales (DDD)',
     adrsTitle: 'Decisiones de Arquitectura y Diseño Técnico',
+    schemaTitle: 'Modelo de Datos PostgreSQL (ERD Relacional)',
+    architectureDiagramTitle: 'Arquitectura y Flujo de Datos del Sistema',
+    tabArchitecture: 'Arquitectura del Sistema',
+    tabSchema: 'Modelo PostgreSQL (ERD)',
+    lightboxClose: 'Cerrar vista previa',
+    lightboxNext: 'Siguiente imagen',
+    lightboxPrev: 'Imagen anterior',
   },
   education: {
     title: 'Educación',

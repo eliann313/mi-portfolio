@@ -17,10 +17,10 @@ const fadeUp: Variants = {
 
 export function Hero() {
   const { theme } = useTheme();
-  const { locale, t } = useLanguage();
+  const { t } = useLanguage();
   const c = colors[theme];
-  const cvUrl = `/CV_Elian_Nahuel_${locale.toUpperCase()}.pdf`;
   const [copied, setCopied] = useState(false);
+  const [showCvMenu, setShowCvMenu] = useState(false);
 
   const handleEmailClick = () => {
     const email = atob('ZWxpYW4ubmFodWVsMDM0OEBnbWFpbC5jb20=');
@@ -94,10 +94,57 @@ export function Hero() {
               variants={fadeUp}
               className="flex flex-wrap items-center gap-3"
             >
-              <a href={cvUrl} download className="btn-primary" style={{ cursor: 'pointer' }}>
-                <Download size={14} />
-                {t.hero.downloadCV}
-              </a>
+              {/* Bilingual CV Selector Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowCvMenu(!showCvMenu)}
+                  className="btn-primary flex items-center gap-2 cursor-pointer"
+                  aria-expanded={showCvMenu}
+                >
+                  <Download size={14} />
+                  {t.hero.downloadCV}
+                  <span className="text-[10px] opacity-80">▾</span>
+                </button>
+
+                <AnimatePresence>
+                  {showCvMenu && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      className="absolute left-0 top-full mt-2 w-56 rounded-xl border p-1.5 shadow-xl z-50 backdrop-blur-md"
+                      style={{ backgroundColor: c.bgElevated, borderColor: c.border }}
+                    >
+                      <a
+                        href="/CV_Elian_Nahuel_ES.pdf"
+                        download="CV_Elian_Nahuel_ES.pdf"
+                        onClick={() => setShowCvMenu(false)}
+                        className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors hover:bg-white/10 cursor-pointer"
+                        style={{ color: c.textPrimary }}
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>🇦🇷</span>
+                          <span>CV (Español)</span>
+                        </span>
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10" style={{ color: c.accent }}>PDF</span>
+                      </a>
+                      <a
+                        href="/CV_Elian_Nahuel_EN.pdf"
+                        download="CV_Elian_Nahuel_EN.pdf"
+                        onClick={() => setShowCvMenu(false)}
+                        className="flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors hover:bg-white/10 cursor-pointer"
+                        style={{ color: c.textPrimary }}
+                      >
+                        <span className="flex items-center gap-2">
+                          <span>🇺🇸</span>
+                          <span>Resume (English)</span>
+                        </span>
+                        <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10" style={{ color: c.accent }}>PDF</span>
+                      </a>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
               <a href={personal.github} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ cursor: 'pointer' }}>
                 <FiGithub size={14} />
                 GitHub

@@ -40,6 +40,61 @@ export interface CaseStudyADR {
   decision: Record<Locale, string>;
 }
 
+export interface CaseStudyTableColumn {
+  name: string;
+  type: string;
+  isPk?: boolean;
+  isFk?: boolean;
+  ref?: string;
+  isUnique?: boolean;
+}
+
+export interface CaseStudyTable {
+  name: string;
+  domain?: string;
+  description?: Record<Locale, string>;
+  columns: CaseStudyTableColumn[];
+}
+
+export interface CaseStudyRelationship {
+  from: string;
+  to: string;
+  type: '1:N' | '1:1' | 'N:M';
+  label: string;
+}
+
+export interface CaseStudyDBSchema {
+  title: Record<Locale, string>;
+  engine: string;
+  overview: Record<Locale, string>;
+  tables: CaseStudyTable[];
+  relationships: CaseStudyRelationship[];
+}
+
+export interface ArchitectureLayer {
+  name: Record<Locale, string>;
+  badge?: string;
+  color?: string;
+  components: {
+    name: string;
+    desc: Record<Locale, string>;
+    tech?: string;
+  }[];
+}
+
+export interface ArchitectureFlowStep {
+  step: number;
+  title: Record<Locale, string>;
+  desc: Record<Locale, string>;
+}
+
+export interface SystemArchitecture {
+  title: Record<Locale, string>;
+  summary: Record<Locale, string>;
+  layers: ArchitectureLayer[];
+  dataFlow?: ArchitectureFlowStep[];
+}
+
 export interface CaseStudy {
   id: string;
   projectTitle: string;
@@ -57,6 +112,8 @@ export interface CaseStudy {
     title: Record<Locale, string>;
     items: CaseStudyADR[];
   };
+  dbSchema?: CaseStudyDBSchema;
+  systemArchitecture?: SystemArchitecture;
   c4Diagram?: {
     title: Record<Locale, string>;
     nodes: { id: string; label: string; desc: string; type: 'client' | 'api' | 'db' | 'service' }[];
@@ -119,6 +176,9 @@ export interface Translations {
     downloadCV: string;
     contactMe: string;
     availability: string;
+    cvSpanish?: string;
+    cvEnglish?: string;
+    cvModalTitle?: string;
   };
   about: {
     title: string;
@@ -144,6 +204,7 @@ export interface Translations {
     allFilter: string;
     individualFilter: string;
     groupFilter: string;
+    techFilterAll?: string;
   };
   caseStudy: {
     backToProjects: string;
@@ -162,6 +223,13 @@ export interface Translations {
     viewRepository: string;
     domainsTitle: string;
     adrsTitle: string;
+    schemaTitle?: string;
+    architectureDiagramTitle?: string;
+    tabArchitecture?: string;
+    tabSchema?: string;
+    lightboxClose?: string;
+    lightboxNext?: string;
+    lightboxPrev?: string;
   };
   education: {
     title: string;

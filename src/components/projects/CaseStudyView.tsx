@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X, ArrowRight, HelpCircle } from 'lucide-react';
+import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -9,6 +9,7 @@ import { caseStudies } from '../../data/caseStudies';
 import { projects } from '../../data/projects';
 import { colors } from '../../utils/colors';
 import { ArchitectureDiagram } from './ArchitectureDiagram';
+import { ArchitectureAndDBSchema } from './ArchitectureAndDBSchema';
 import { VideoTimestampPlayer } from './VideoTimestampPlayer';
 import type { Locale } from '../../types';
 
@@ -19,9 +20,28 @@ export function CaseStudyView() {
   const c = colors[theme];
 
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
+  const [isZoomed, setIsZoomed] = useState<boolean>(false);
 
   const study = slug ? caseStudies[slug] : undefined;
   const project = slug ? projects.find(p => p.id === slug) : undefined;
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (activeImageIndex === null || !study?.screenshots) return;
+      if (e.key === 'Escape') {
+        setActiveImageIndex(null);
+        setIsZoomed(false);
+      } else if (e.key === 'ArrowRight') {
+        setActiveImageIndex(prev => (prev !== null && prev < (study.screenshots?.length || 1) - 1 ? prev + 1 : 0));
+        setIsZoomed(false);
+      } else if (e.key === 'ArrowLeft') {
+        setActiveImageIndex(prev => (prev !== null && prev > 0 ? prev - 1 : (study.screenshots?.length || 1) - 1));
+        setIsZoomed(false);
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeImageIndex, study?.screenshots]);
 
   const realProjects = projects.filter(p => !p.isPlaceholder);
   const currentIndex = realProjects.findIndex(p => p.id === slug);
@@ -183,35 +203,100 @@ export function CaseStudyView() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setActiveImageIndex(null)}
-              className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm p-4 flex flex-col items-center justify-center cursor-pointer"
+              onClick={() => {
+                setActiveImageIndex(null);
+                setIsZoomed(false);
+              }}
+              className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md p-4 sm:p-6 flex flex-col items-center justify-between cursor-pointer"
             >
-              <button
-                onClick={() => setActiveImageIndex(null)}
-                className="absolute top-6 right-6 p-2 rounded-full border text-white hover:bg-white/10"
-                style={{ borderColor: 'rgba(255,255,255,0.2)' }}
-              >
-                <X size={20} />
-              </button>
-
+              {/* Lightbox Top Control Bar */}
               <div
                 onClick={e => e.stopPropagation()}
-                className="max-w-4xl max-h-[85vh] flex flex-col items-center cursor-default"
+                className="w-full max-w-5xl flex items-center justify-between pb-3 cursor-default"
               >
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/20">
+                    {activeImageIndex + 1} / {study.screenshots.length}
+                  </span>
+                  <h4 className="text-sm font-semibold text-white truncate max-w-xs sm:max-w-md">
+                    {study.screenshots[activeImageIndex].title[locale as Locale]}
+                  </h4>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setIsZoomed(!isZoomed)}
+                    className="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
+                    title={isZoomed ? 'Alejar' : 'Acercar'}
+                  >
+                    {isZoomed ? <ZoomOut size={18} /> : <ZoomIn size={18} />}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setActiveImageIndex(null);
+                      setIsZoomed(false);
+                    }}
+                    className="p-2 rounded-lg bg-white/10 text-white hover:bg-red-500/80 transition-colors"
+                    title="Cerrar (Esc)"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Image with Navigation Arrows */}
+              <div
+                onClick={e => e.stopPropagation()}
+                className="relative w-full max-w-5xl flex-1 flex items-center justify-center overflow-auto cursor-default py-2"
+              >
+                {/* Prev Button */}
+                {study.screenshots.length > 1 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveImageIndex(prev => (prev !== null && prev > 0 ? prev - 1 : study.screenshots!.length - 1));
+                      setIsZoomed(false);
+                    }}
+                    className="absolute left-2 sm:left-4 z-10 p-2.5 rounded-full bg-black/60 text-white hover:bg-black/90 border border-white/20 transition-all backdrop-blur-sm"
+                    title="Anterior (Flecha Izq)"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                )}
+
+                {/* Screenshot Display */}
                 <img
                   src={study.screenshots[activeImageIndex].url}
                   alt={study.screenshots[activeImageIndex].title[locale as Locale]}
-                  className="max-w-full max-h-[70vh] object-contain rounded-lg border shadow-2xl"
-                  style={{ borderColor: c.border }}
+                  onClick={() => setIsZoomed(!isZoomed)}
+                  className={`object-contain rounded-xl border border-white/20 shadow-2xl transition-transform duration-200 cursor-zoom-in ${
+                    isZoomed ? 'scale-125 max-h-[85vh] cursor-zoom-out' : 'max-h-[72vh] max-w-full'
+                  }`}
                 />
-                <div className="mt-4 text-center">
-                  <h4 className="text-base font-bold text-white mb-1">
-                    {study.screenshots[activeImageIndex].title[locale as Locale]}
-                  </h4>
-                  <p className="text-xs text-gray-300">
-                    {study.screenshots[activeImageIndex].caption[locale as Locale]}
-                  </p>
-                </div>
+
+                {/* Next Button */}
+                {study.screenshots.length > 1 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveImageIndex(prev => (prev !== null && prev < study.screenshots!.length - 1 ? prev + 1 : 0));
+                      setIsZoomed(false);
+                    }}
+                    className="absolute right-2 sm:right-4 z-10 p-2.5 rounded-full bg-black/60 text-white hover:bg-black/90 border border-white/20 transition-all backdrop-blur-sm"
+                    title="Siguiente (Flecha Der)"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                )}
+              </div>
+
+              {/* Bottom Caption */}
+              <div
+                onClick={e => e.stopPropagation()}
+                className="max-w-2xl text-center pt-2 cursor-default"
+              >
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  {study.screenshots[activeImageIndex].caption[locale as Locale]}
+                </p>
               </div>
             </motion.div>
           )}
@@ -231,6 +316,14 @@ export function CaseStudyView() {
             ))}
           </ul>
         </section>
+
+        {/* 5.1 Architecture & PostgreSQL Relational Schema Explorer */}
+        {(study.systemArchitecture || study.dbSchema) && (
+          <ArchitectureAndDBSchema
+            dbSchema={study.dbSchema}
+            systemArchitecture={study.systemArchitecture}
+          />
+        )}
 
         {/* 6. Technical Challenges */}
         {challenges.length > 0 && (
