@@ -32,21 +32,21 @@ const NODE_WIDTH = 230;
 
 // Curated layout positions for clean, non-crossing relational diagrams
 const defaultLayouts: Record<string, { x: number; y: number }> = {
-  // GridHub WMS (Estructura topológica y operativa estrictamente planar)
-  client: { x: 50, y: 140 },
-  warehouse: { x: 360, y: 140 },
-  pickertable: { x: 680, y: 50 },
-  location: { x: 680, y: 240 },
-  replenishmentrule: { x: 1000, y: 240 },
-  item: { x: 360, y: 440 },
-  lot: { x: 360, y: 640 },
-  stock: { x: 680, y: 540 },
-  stockmovement: { x: 1000, y: 540 },
-  order: { x: 1320, y: 240 },
-  orderline: { x: 1640, y: 80 },
-  task: { x: 1640, y: 240 },
-  orderfulfillment: { x: 1640, y: 400 },
-  erp_outbound_event: { x: 1960, y: 400 },
+  // GridHub WMS (Columna central: Almacén y Stock; Izquierda: Inquilino y Catálogo; Derecha: Despacho y ERP)
+  client: { x: 80, y: 70 },
+  warehouse: { x: 440, y: 70 },
+  location: { x: 440, y: 260 },
+  pickertable: { x: 800, y: 70 },
+  replenishmentrule: { x: 800, y: 260 },
+  item: { x: 80, y: 370 },
+  lot: { x: 80, y: 570 },
+  stock: { x: 440, y: 480 },
+  stockmovement: { x: 440, y: 710 },
+  order: { x: 800, y: 480 },
+  orderline: { x: 1160, y: 340 },
+  task: { x: 1160, y: 480 },
+  orderfulfillment: { x: 1160, y: 640 },
+  erp_outbound_event: { x: 1500, y: 640 },
 
   // SkillRadar (User en centro; perfil/candidato a la izquierda; simulador/reclutador a la derecha)
   JobMatch: { x: 60, y: 70 },
