@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Lock } from 'lucide-react';
+import { ArrowLeft, ExternalLink, CheckCircle2, AlertTriangle, Layers, Image as ImageIcon, X, ArrowRight, HelpCircle, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Lock, Database, Cpu, ShieldCheck, Code2 } from 'lucide-react';
 import { FiGithub } from 'react-icons/fi';
 import { useTheme } from '../../hooks/useTheme';
 import { useLanguage } from '../../hooks/useLanguage';
@@ -125,6 +125,52 @@ export function CaseStudyView() {
           </div>
         </motion.div>
 
+        {/* Recruiter Technical Snapshot */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 p-4 rounded-xl border mb-10" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+          <div className="flex flex-col">
+            <span className="text-[10px] font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5" style={{ color: c.textMuted }}>
+              <Cpu size={12} style={{ color: c.accent }} />
+              {locale === 'es' ? 'Rol y Liderazgo' : 'Role & Ownership'}
+            </span>
+            <span className="text-xs font-semibold" style={{ color: c.textPrimary }}>
+              {project.roles[locale as Locale].join(' · ')}
+            </span>
+          </div>
+
+          <div className="flex flex-col">
+            <span className="text-[10px] font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5" style={{ color: c.textMuted }}>
+              <Code2 size={12} style={{ color: c.accent }} />
+              {locale === 'es' ? 'Modalidad y Alcance' : 'Project Scope'}
+            </span>
+            <span className="text-xs font-semibold flex items-center gap-1.5" style={{ color: c.textPrimary }}>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: project.type === 'group' ? '#38bdf8' : c.accent }} />
+              {project.type === 'group'
+                ? (locale === 'es' ? 'Grupal (Scrum / Agile)' : 'Team (Scrum / Agile)')
+                : (locale === 'es' ? 'Individual (End-to-End)' : 'Solo (End-to-End)')}
+            </span>
+          </div>
+
+          <div className="flex flex-col">
+            <span className="text-[10px] font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5" style={{ color: c.textMuted }}>
+              <Database size={12} style={{ color: c.accent }} />
+              {locale === 'es' ? 'Persistencia y Motor' : 'Database & Engine'}
+            </span>
+            <span className="text-xs font-semibold truncate" style={{ color: c.textPrimary }}>
+              {study.dbSchema ? study.dbSchema.engine.split(' · ')[0] : (project.stack.find(s => s.toLowerCase().includes('sql') || s.toLowerCase().includes('mongo') || s.toLowerCase().includes('indexeddb') || s.toLowerCase().includes('firebase')) || 'Client State')}
+            </span>
+          </div>
+
+          <div className="flex flex-col">
+            <span className="text-[10px] font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5" style={{ color: c.textMuted }}>
+              <ShieldCheck size={12} style={{ color: c.accent }} />
+              {locale === 'es' ? 'Calidad y Pruebas' : 'Quality & Testing'}
+            </span>
+            <span className="text-xs font-semibold truncate" style={{ color: c.textPrimary }}>
+              {project.stack.filter(s => s.includes('Playwright') || s.includes('Vitest') || s.includes('Pytest') || s.includes('Actions')).join(' + ') || (locale === 'es' ? 'Linting y Verificación' : 'Linting & Verification')}
+            </span>
+          </div>
+        </div>
+
         {/* 1. Overview */}
         <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
           <h3 className="font-bold text-lg mb-3 flex items-center gap-2" style={{ color: c.textPrimary }}>
@@ -152,14 +198,112 @@ export function CaseStudyView() {
           </ul>
         </section>
 
-        {/* 3. Architecture C4 Diagram (if present) */}
+        {/* 3. Architecture & PostgreSQL Relational Schema Explorer */}
+        {(study.systemArchitecture || study.dbSchema) && (
+          <ArchitectureAndDBSchema
+            dbSchema={study.dbSchema}
+            systemArchitecture={study.systemArchitecture}
+          />
+        )}
+
+        {/* 3.1 Container Interconnect & Transaction Protocol Diagram */}
         {study.c4Diagram && (
           <section className="mb-10">
             <ArchitectureDiagram diagram={study.c4Diagram} />
           </section>
         )}
 
-        {/* 4. Screenshots Gallery (if present) */}
+        {/* 3.2 Domains Breakdown (DDD) */}
+        {study.domainsBreakdown && (
+          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+              <Layers size={18} style={{ color: c.accent }} />
+              {study.domainsBreakdown.title[locale as Locale] || t.caseStudy.domainsTitle}
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {study.domainsBreakdown.items.map((item, idx) => (
+                <div key={idx} className="p-3.5 rounded-lg border flex flex-col justify-between" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
+                  <span className="font-semibold text-xs mb-1" style={{ color: c.accent }}>{item.name}</span>
+                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>{item.desc[locale as Locale]}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 3.3 Architecture Highlights */}
+        <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+          <h3 className="font-bold text-lg mb-4" style={{ color: c.textPrimary }}>
+            {t.caseStudy.architectureTitle}
+          </h3>
+          <ul className="space-y-2 text-sm">
+            {study.architectureHighlights[locale as Locale].map((highlight, idx) => (
+              <li key={idx} className="flex items-start gap-2.5" style={{ color: c.textSecondary }}>
+                <span className="mt-1 flex-shrink-0" style={{ color: c.accent }}>›</span>
+                <span className="leading-relaxed">{highlight}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* 3.4 Key Architecture Decisions (ADRs) */}
+        {study.adrs && (
+          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+              <HelpCircle size={18} style={{ color: c.accent }} />
+              {study.adrs.title[locale as Locale] || t.caseStudy.adrsTitle}
+            </h3>
+            <div className="space-y-4">
+              {study.adrs.items.map((adr, idx) => (
+                <div key={idx} className="p-4 rounded-lg border" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
+                  <p className="text-xs font-semibold mb-1.5" style={{ color: c.textPrimary }}>
+                    {adr.question[locale as Locale]}
+                  </p>
+                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
+                    {adr.decision[locale as Locale]}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 4. Technical Challenges & Engineering Solutions */}
+        {challenges.length > 0 && (
+          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
+            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
+              <AlertTriangle size={18} style={{ color: c.accent }} />
+              {t.caseStudy.technicalChallengesTitle}
+            </h3>
+            <div className="space-y-4">
+              {challenges.map((challenge, idx) => (
+                <div key={idx} className="p-4 rounded-lg border" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
+                  <p className="text-xs font-semibold mb-1" style={{ color: '#f87171' }}>
+                    {t.caseStudy.problemLabel}
+                  </p>
+                  <p className="text-xs mb-3 font-medium" style={{ color: c.textPrimary }}>
+                    {challenge.problem}
+                  </p>
+                  <p className="text-xs font-semibold mb-1" style={{ color: '#4ade80' }}>
+                    {t.caseStudy.solutionLabel}
+                  </p>
+                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
+                    {challenge.solution}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 5. Video Demo (if present) */}
+        {study.videoData && (
+          <section className="mb-10">
+            <VideoTimestampPlayer src={study.videoData.src} timestamps={study.videoData.timestamps} />
+          </section>
+        )}
+
+        {/* 5.1 Interface & Showcase Gallery */}
         {study.screenshots && study.screenshots.length > 0 && (
           <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
             <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
@@ -301,104 +445,6 @@ export function CaseStudyView() {
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* 5. Architecture Highlights */}
-        <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
-          <h3 className="font-bold text-lg mb-4" style={{ color: c.textPrimary }}>
-            {t.caseStudy.architectureTitle}
-          </h3>
-          <ul className="space-y-2 text-sm">
-            {study.architectureHighlights[locale as Locale].map((highlight, idx) => (
-              <li key={idx} className="flex items-start gap-2.5" style={{ color: c.textSecondary }}>
-                <span className="mt-1 flex-shrink-0" style={{ color: c.accent }}>›</span>
-                <span className="leading-relaxed">{highlight}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* 5.1 Architecture & PostgreSQL Relational Schema Explorer */}
-        {(study.systemArchitecture || study.dbSchema) && (
-          <ArchitectureAndDBSchema
-            dbSchema={study.dbSchema}
-            systemArchitecture={study.systemArchitecture}
-          />
-        )}
-
-        {/* 6. Technical Challenges */}
-        {challenges.length > 0 && (
-          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
-              <AlertTriangle size={18} style={{ color: c.accent }} />
-              {t.caseStudy.technicalChallengesTitle}
-            </h3>
-            <div className="space-y-4">
-              {challenges.map((challenge, idx) => (
-                <div key={idx} className="p-4 rounded-lg border" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
-                  <p className="text-xs font-semibold mb-1" style={{ color: '#f87171' }}>
-                    {t.caseStudy.problemLabel}
-                  </p>
-                  <p className="text-xs mb-3 font-medium" style={{ color: c.textPrimary }}>
-                    {challenge.problem}
-                  </p>
-                  <p className="text-xs font-semibold mb-1" style={{ color: '#4ade80' }}>
-                    {t.caseStudy.solutionLabel}
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
-                    {challenge.solution}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* 7. Video Demo (Pochocleando) */}
-        {study.videoData && (
-          <section className="mb-10">
-            <VideoTimestampPlayer src={study.videoData.src} timestamps={study.videoData.timestamps} />
-          </section>
-        )}
-
-        {/* 8. Domains Breakdown (DDD) */}
-        {study.domainsBreakdown && (
-          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
-              <Layers size={18} style={{ color: c.accent }} />
-              {study.domainsBreakdown.title[locale as Locale] || t.caseStudy.domainsTitle}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {study.domainsBreakdown.items.map((item, idx) => (
-                <div key={idx} className="p-3.5 rounded-lg border flex flex-col justify-between" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
-                  <span className="font-semibold text-xs mb-1" style={{ color: c.accent }}>{item.name}</span>
-                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>{item.desc[locale as Locale]}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* 9. Key Architecture Decisions (ADRs) */}
-        {study.adrs && (
-          <section className="mb-10 rounded-xl p-6 border" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
-            <h3 className="font-bold text-lg mb-4 flex items-center gap-2" style={{ color: c.textPrimary }}>
-              <HelpCircle size={18} style={{ color: c.accent }} />
-              {study.adrs.title[locale as Locale] || t.caseStudy.adrsTitle}
-            </h3>
-            <div className="space-y-4">
-              {study.adrs.items.map((adr, idx) => (
-                <div key={idx} className="p-4 rounded-lg border" style={{ backgroundColor: c.bgElevated, borderColor: c.border }}>
-                  <p className="text-xs font-semibold mb-1.5" style={{ color: c.textPrimary }}>
-                    {adr.question[locale as Locale]}
-                  </p>
-                  <p className="text-xs leading-relaxed" style={{ color: c.textSecondary }}>
-                    {adr.decision[locale as Locale]}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* 10. Bottom Action Card (CTA) */}
         <section className="mb-10 rounded-xl p-6 border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4" style={{ backgroundColor: c.bgSurface, borderColor: c.border }}>
