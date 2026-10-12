@@ -208,49 +208,52 @@ export function CaseStudyView() {
         )}
 
         {/* Quick Section Anchor Navigation */}
-        <div className="sticky top-16 z-20 py-2.5 mb-8 backdrop-blur-md bg-opacity-90 flex items-center gap-2 overflow-x-auto border-y" style={{ borderColor: `${c.border}70`, backgroundColor: `${c.bgBase}e6` }}>
-          <span className="text-[11px] font-mono uppercase tracking-wider mr-1 text-muted hidden sm:inline" style={{ color: c.textMuted }}>
+        <div
+          className="sticky top-16 z-20 py-2.5 mb-8 backdrop-blur-md flex flex-wrap items-center gap-2 border-y"
+          style={{ borderColor: `${c.border}70`, backgroundColor: `${c.bgBase}f0` }}
+        >
+          <span className="text-[11px] font-mono uppercase tracking-wider mr-1" style={{ color: c.textMuted }}>
             {locale === 'es' ? 'Saltar a:' : 'Jump to:'}
           </span>
           <a
             href="#overview"
-            className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+            className="text-xs px-3 py-1 rounded-lg border font-medium transition-colors hover:border-accent"
             style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
           >
-            {t.caseStudy.overviewTitle}
+            {locale === 'es' ? 'Resumen' : 'Overview'}
           </a>
           <a
             href="#my-role"
-            className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+            className="text-xs px-3 py-1 rounded-lg border font-medium transition-colors hover:border-accent"
             style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
           >
-            {t.caseStudy.myRoleTitle}
+            {locale === 'es' ? 'Mi Rol' : 'My Role'}
           </a>
           {challenges.length > 0 && (
             <a
               href="#challenges"
-              className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+              className="text-xs px-3 py-1 rounded-lg border font-medium transition-colors hover:border-accent"
               style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
             >
-              {t.caseStudy.technicalChallengesTitle}
+              {locale === 'es' ? 'Desafíos' : 'Challenges'}
             </a>
           )}
           {(study.systemArchitecture || study.dbSchema || study.c4Diagram) && (
             <a
               href="#architecture"
-              className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+              className="text-xs px-3 py-1 rounded-lg border font-medium transition-colors hover:border-accent"
               style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
             >
-              {t.caseStudy.architectureTitle}
+              {locale === 'es' ? 'Arquitectura & DB' : 'Architecture & DB'}
             </a>
           )}
           {study.screenshots && study.screenshots.length > 0 && (
             <a
               href="#gallery"
-              className="text-xs px-3 py-1 rounded-lg border font-medium whitespace-nowrap transition-colors"
+              className="text-xs px-3 py-1 rounded-lg border font-medium transition-colors hover:border-accent"
               style={{ backgroundColor: c.bgSurface, borderColor: c.border, color: c.textSecondary }}
             >
-              {t.caseStudy.galleryTitle}
+              {locale === 'es' ? 'Galería' : 'Gallery'}
             </a>
           )}
         </div>
