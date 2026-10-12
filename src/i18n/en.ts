@@ -20,7 +20,7 @@ export const en: Translations = {
   about: {
     title: 'Professional Profile',
     bio: 'Software Development Technician and current B.Sc. Data Science student, with a primary focus on backend development and data modeling. Experience working with multi-tenant systems, data synchronization, and AI-integrated SaaS products using Python (FastAPI), Node.js, Next.js, React, and TypeScript. Focused on API design, problem-solving, and building scalable solutions following software engineering best practices.',
-    badges: ['Backend Development', 'Data Modeling & Analytics', 'API Design', 'Multi-tenant Systems', 'Local-First & Wasm Architecture', 'AI & LLM Integrations'],
+    badges: ['Backend Development', 'Data Modeling & Analytics', 'API Design', 'Multi-tenant Systems', 'AI & LLM Integrations'],
   },
   skills: {
     title: 'Skills',

@@ -20,7 +20,7 @@ export const es: Translations = {
   about: {
     title: 'Perfil Profesional',
     bio: 'Técnico Superior en Desarrollo de Software y actual estudiante de Licenciatura en Ciencia de Datos, con orientación principal en backend y modelado de datos. Experiencia trabajando en sistemas multi-tenant, sincronización de datos y productos SaaS con integración de IA, utilizando Python (FastAPI), Node.js, Next.js, React y TypeScript. Con foco en diseño de APIs, resolución de problemas y desarrollo de soluciones escalables con buenas prácticas.',
-    badges: ['Desarrollo Backend', 'Modelado de Datos & Analítica', 'Diseño de APIs', 'Sistemas Multi-tenant', 'Arquitectura Local-First & Wasm', 'Integraciones de IA (LLMs)'],
+    badges: ['Desarrollo Backend', 'Modelado de Datos y Analítica', 'Diseño de APIs', 'Sistemas Multi-tenant', 'Integraciones de IA (LLMs)'],
   },
   skills: {
     title: 'Tecnologías',
